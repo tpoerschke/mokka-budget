@@ -2,6 +2,10 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -14,75 +18,104 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timkodiert.budgetbook.view.MonthlyOverviewView">
-   <center>
-      <TableView fx:id="dataTable" editable="true" styleClass="monthly-table" BorderPane.alignment="CENTER">
-         <columns>
-            <TableColumn fx:id="buttonCol" editable="false" minWidth="55.0" prefWidth="55.0" resizable="false" sortable="false" />
-            <TableColumn fx:id="positionCol" minWidth="-1.0" prefWidth="300.0" text="%monthlyOverview.dataTable.column.position" />
-            <TableColumn fx:id="valueCol" minWidth="120.0" prefWidth="120.0" styleClass="value-col, border-right" text="%monthlyOverview.dataTable.column.amount"/>
-            <TableColumn fx:id="dateCol" minWidth="90.0" prefWidth="90.0" styleClass="border-right" text="%monthlyOverview.dataTable.column.date"/>
-            <TableColumn fx:id="iconCol" minWidth="50.9" prefWidth="50.0" text=""/>
-            <TableColumn fx:id="categoriesCol" minWidth="300.0" prefWidth="-1.0" text="%monthlyOverview.dataTable.column.categories"/>
-         </columns>
-      </TableView>
-   </center>
-   <bottom>
-     <TableView fx:id="sumTable" prefHeight="128.0" BorderPane.alignment="CENTER">
-         <columns>
-            <TableColumn fx:id="sumTableCol0" prefWidth="75.0" text="%monthlyOverview.sumTable.column.columnX" />
-            <TableColumn fx:id="sumTableCol1" minWidth="-1.0" prefWidth="-1.0" text="%monthlyOverview.sumTable.column.c1" />
-            <TableColumn fx:id="sumTableCol2" minWidth="-1.0" prefWidth="-1.0" styleClass="value-col" text="%monthlyOverview.sumTable.column.c2" />
-         </columns>
-         <styleClass>
-            <String fx:value="noheader" />
-            <String fx:value="monthly-table" />
-         </styleClass>
-      </TableView>
-   </bottom>
-   <top>
-      <VBox spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label styleClass="text-bold" text="%monthlyOverview.label.monthlyView">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Label>
-            <GridPane>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" />
-                  <ColumnConstraints hgrow="SOMETIMES" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <Button fx:id="prevMonthBtn" mnemonicParsing="false"
-                           styleClass="button-icon" text="&lt;" />
-                        <ComboBox fx:id="selectedMonthBox" prefWidth="120.0" />
-                        <ComboBox fx:id="selectedYearBox" prefWidth="90.0" />
-                        <Button fx:id="nextMonthBtn" mnemonicParsing="false"
-                           styleClass="button-icon" text="&gt;" />
-                        <!-- <CheckBox mnemonicParsing="false" text="Unterpositionen anzeigen" /> -->
-                     </children>
-                  </HBox>
-               </children>
-            </GridPane>
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
+<GridPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timkodiert.budgetbook.view.MonthlyOverviewView"
+          GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" hgap="10" vgap="10">
+  <BorderPane GridPane.rowSpan="2">
+    <top>
+      <VBox spacing="10.0">
+        <BorderPane.margin>
+          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        </BorderPane.margin>
+        <Label styleClass="text-bold" text="%monthlyOverview.label.monthlyView">
+          <VBox.margin>
+            <Insets/>
+          </VBox.margin>
+        </Label>
+        <GridPane>
+          <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Button fx:id="prevMonthBtn" mnemonicParsing="false" styleClass="button-icon" text="&lt;"/>
+            <ComboBox fx:id="selectedMonthBox" prefWidth="120.0"/>
+            <ComboBox fx:id="selectedYearBox" prefWidth="90.0"/>
+            <Button fx:id="nextMonthBtn" mnemonicParsing="false" styleClass="button-icon" text="&gt;"/>
+          </HBox>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES"/>
+            <ColumnConstraints hgrow="SOMETIMES"/>
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+          </rowConstraints>
+        </GridPane>
       </VBox>
-   </top>
-   <right>
-      <ScrollPane styleClass="border-default" hbarPolicy="NEVER" minWidth="280">
-         <VBox fx:id="budgetBox" spacing="15">
-            <padding>
-               <Insets top="15" left="10" right="10" bottom="15"/>
-            </padding>
-         </VBox>
-      </ScrollPane>
-   </right>
-</BorderPane>
+    </top>
+    <center>
+      <TableView fx:id="dataTable" editable="true" styleClass="monthly-table, bordered" BorderPane.alignment="CENTER" minWidth="915.0">
+        <columns>
+          <TableColumn fx:id="buttonCol" editable="false" minWidth="55.0" prefWidth="55.0" resizable="false" sortable="false"/>
+          <TableColumn fx:id="positionCol" minWidth="-1.0" prefWidth="300.0" text="%monthlyOverview.dataTable.column.position"/>
+          <TableColumn fx:id="valueCol" minWidth="120.0" prefWidth="120.0" styleClass="value-col" text="%monthlyOverview.dataTable.column.amount"/>
+          <TableColumn fx:id="dateCol" minWidth="90.0" prefWidth="90.0" text="%monthlyOverview.dataTable.column.date"/>
+          <TableColumn fx:id="iconCol" minWidth="50.0" prefWidth="50.0" text=""/>
+          <TableColumn fx:id="categoriesCol" minWidth="290.0" maxWidth="290.0" text="%monthlyOverview.dataTable.column.categories"/>
+        </columns>
+      </TableView>
+    </center>
+    <bottom>
+      <TableView fx:id="sumTable" prefHeight="128.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="sumTableCol0" prefWidth="75.0" text="%monthlyOverview.sumTable.column.columnX"/>
+          <TableColumn fx:id="sumTableCol1" minWidth="-1.0" prefWidth="-1.0" text="%monthlyOverview.sumTable.column.c1"/>
+          <TableColumn fx:id="sumTableCol2" minWidth="-1.0" prefWidth="-1.0" styleClass="value-col" text="%monthlyOverview.sumTable.column.c2"/>
+        </columns>
+        <styleClass>
+          <String fx:value="noheader"/>
+          <String fx:value="monthly-table"/>
+        </styleClass>
+      </TableView>
+    </bottom>
+  </BorderPane>
+  <VBox GridPane.columnIndex="1">
+    <Label text="%monthlyOverview.label.expenseBreakdown" styleClass="text-bold">
+      <VBox.margin>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+      </VBox.margin>
+    </Label>
+    <PieChart fx:id="expenseBreakdownChart" legendSide="LEFT" labelsVisible="false"/>
+  </VBox>
+  <VBox GridPane.rowIndex="1" GridPane.columnIndex="1">
+    <Label text="%monthlyOverview.label.expenseTrend" styleClass="text-bold">
+      <VBox.margin>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+      </VBox.margin>
+    </Label>
+    <BarChart fx:id="expenseTrendChart" legendVisible="false">
+      <xAxis>
+        <CategoryAxis label="%label.month"/>
+      </xAxis>
+      <yAxis>
+        <NumberAxis label="%monthlyOverview.label.amount"/>
+      </yAxis>
+    </BarChart>
+  </VBox>
+  <ScrollPane styleClass="border-default" hbarPolicy="NEVER" GridPane.columnIndex="2" GridPane.rowSpan="2">
+    <VBox fx:id="budgetBox" spacing="15">
+      <Label text="Budgets" styleClass="text-bold">
+        <VBox.margin>
+          <Insets bottom="10.0"/>
+        </VBox.margin>
+      </Label>
+      <padding>
+        <Insets top="15" left="10" right="10" bottom="15"/>
+      </padding>
+    </VBox>
+  </ScrollPane>
+  <rowConstraints>
+    <RowConstraints vgrow="ALWAYS"/>
+    <RowConstraints/>
+  </rowConstraints>
+  <columnConstraints>
+    <ColumnConstraints/>
+    <ColumnConstraints hgrow="ALWAYS"/>
+    <ColumnConstraints minWidth="280"/>
+  </columnConstraints>
+</GridPane>

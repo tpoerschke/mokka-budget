@@ -22,6 +22,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -40,6 +42,8 @@ import timkodiert.budgetbook.table.cell.DateTableCell;
 import timkodiert.budgetbook.table.cell.GroupTableCell;
 import timkodiert.budgetbook.table.row.BoldTableRow;
 import timkodiert.budgetbook.table.row.ShortcutTableRow;
+import timkodiert.budgetbook.view.monthly_overview.ExpenseBreakdownWidgetFactory;
+import timkodiert.budgetbook.view.monthly_overview.ExpenseTrendWidgetFactory;
 import timkodiert.budgetbook.view.monthly_overview.IconTableCell;
 import timkodiert.budgetbook.view.monthly_overview.MonthlyOverviewCurrencyTableCell;
 import timkodiert.budgetbook.view.widget.BudgetWidget;
@@ -83,6 +87,12 @@ public class MonthlyOverviewView implements Initializable, View {
     @FXML
     private TableColumn<TableRowData, TableRowData> iconCol;
 
+    // CHARTS
+    @FXML
+    private PieChart expenseBreakdownChart;
+    @FXML
+    private BarChart<String, Double> expenseTrendChart;
+
     // BUDGETS
     @FXML
     private VBox budgetBox;
@@ -95,6 +105,8 @@ public class MonthlyOverviewView implements Initializable, View {
     private final BudgetService budgetService;
     private final Provider<ShortcutTableRow> shortcutTableRowProvider;
     private final MonthFilterFactory monthFilterFactory;
+    private final ExpenseBreakdownWidgetFactory expenseBreakdownWidgetFactory;
+    private final ExpenseTrendWidgetFactory expenseTrendWidgetFactory;
 
     @Inject
     public MonthlyOverviewView(Provider<FXMLLoader> fxmlLoader,
@@ -102,13 +114,17 @@ public class MonthlyOverviewView implements Initializable, View {
                                MonthlyOverviewService monthlyOverviewService,
                                BudgetService budgetService,
                                Provider<ShortcutTableRow> shortcutTableRowProvider,
-                               MonthFilterFactory monthFilterFactory) {
+                               MonthFilterFactory monthFilterFactory,
+                               ExpenseBreakdownWidgetFactory expenseBreakdownWidgetFactory,
+                               ExpenseTrendWidgetFactory expenseTrendWidgetFactory) {
         this.fxmlLoader = fxmlLoader;
         this.languageManager = languageManager;
         this.monthlyOverviewService = monthlyOverviewService;
         this.budgetService = budgetService;
         this.shortcutTableRowProvider = shortcutTableRowProvider;
         this.monthFilterFactory = monthFilterFactory;
+        this.expenseBreakdownWidgetFactory = expenseBreakdownWidgetFactory;
+        this.expenseTrendWidgetFactory = expenseTrendWidgetFactory;
     }
 
     @Override
@@ -169,6 +185,12 @@ public class MonthlyOverviewView implements Initializable, View {
         // INIT FILTER
         //
         monthFilter.addListener((observable, oldValue, newValue) -> loadAndDisplayViewData(newValue));
+
+        //
+        // INIT CHARTS
+        //
+        expenseBreakdownWidgetFactory.create(expenseBreakdownChart, monthFilter);
+        expenseTrendWidgetFactory.create(expenseTrendChart, monthFilter);
 
         //
         // INIT BUDGETS
