@@ -8,6 +8,7 @@ import org.jspecify.annotations.Nullable;
 
 import timkodiert.budgetbook.domain.PaymentType;
 import timkodiert.budgetbook.domain.TurnoverDirection;
+import timkodiert.budgetbook.domain.model.Category;
 import timkodiert.budgetbook.domain.model.FixedTurnover;
 import timkodiert.budgetbook.domain.model.MonthYear;
 import timkodiert.budgetbook.domain.model.PaymentInformation;
@@ -27,6 +28,14 @@ public class TestDataProvider {
         return turnover;
     }
 
+    public static UniqueTurnover createUniqueTurnoverWithCategory(LocalDate date, String receiver, int amount, Category category) {
+        UniqueTurnover turnover = createUniqueTurnover(date, receiver, amount);
+        UniqueTurnoverInformation info = turnover.getPaymentInformations().getFirst();
+        info.setCategory(category);
+        category.getUniqueTurnoverInformation().add(info);
+        return turnover;
+    }
+
     public static FixedTurnover createFixedTurnover(String position, int value, MonthYear start, @Nullable MonthYear end) {
         PaymentInformation info = new PaymentInformation();
         info.setType(PaymentType.MONTHLY);
@@ -38,6 +47,13 @@ public class TestDataProvider {
         turnover.setPosition(position);
         turnover.setDirection(value > 0 ? TurnoverDirection.IN : TurnoverDirection.OUT);
         turnover.getPaymentInformations().add(info);
+        return turnover;
+    }
+
+    public static FixedTurnover createFixedTurnoverWithCategory(String position, int value, MonthYear start, @Nullable MonthYear end, Category category) {
+        FixedTurnover turnover = createFixedTurnover(position, value, start, end);
+        turnover.setCategory(category);
+        category.getFixedExpenses().add(turnover);
         return turnover;
     }
 }

@@ -16,6 +16,10 @@ import timkodiert.budgetbook.annual_overview.AnnualOverviewService;
 import timkodiert.budgetbook.annual_overview.AnnualOverviewServiceImpl;
 import timkodiert.budgetbook.budget.BudgetService;
 import timkodiert.budgetbook.budget.BudgetServiceImpl;
+import timkodiert.budgetbook.chart.ExpenseBreakdownService;
+import timkodiert.budgetbook.chart.ExpenseBreakdownServiceImpl;
+import timkodiert.budgetbook.chart.ExpenseTrendService;
+import timkodiert.budgetbook.chart.ExpenseTrendServiceImpl;
 import timkodiert.budgetbook.crud.BillingCrudServiceImpl;
 import timkodiert.budgetbook.crud.CategoryCrudServiceImpl;
 import timkodiert.budgetbook.crud.CategoryGroupCrudServiceImpl;
@@ -62,6 +66,8 @@ public interface ServiceModule {
 
     @Binds MonthlyOverviewService bindMonthlyOverviewService(MonthlyOverviewServiceImpl impl);
     @Binds BudgetService bindBudgetService(BudgetServiceImpl impl);
+    @Binds ExpenseBreakdownService bindExpenseBreakdownService(ExpenseBreakdownServiceImpl impl);
+    @Binds ExpenseTrendService bindExpenseTrendService(ExpenseTrendServiceImpl impl);
     @Binds AnnualOverviewService bindAnnualOverviewService(AnnualOverviewServiceImpl impl);
     @Binds AnalysisService bindAnalysisService(AnalysisServiceImpl impl);
 }

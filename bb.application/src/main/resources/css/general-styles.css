@@ -63,3 +63,7 @@
 .budget-widget:danger .progress-bar {
     -color-progress-bar-fill: -color-danger-emphasis;
 }
+
+.chart-bar.bar-default {
+    -fx-bar-fill: -color-accent-emphasis;
+}
