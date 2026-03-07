@@ -75,7 +75,7 @@
     </bottom>
   </BorderPane>
   <VBox GridPane.columnIndex="1">
-    <Label text="Aufschlüsselung der Ausgaben" styleClass="text-bold">
+    <Label text="%monthlyOverview.label.expenseBreakdown" styleClass="text-bold">
       <VBox.margin>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
       </VBox.margin>
@@ -83,17 +83,17 @@
     <PieChart fx:id="expenseBreakdownChart" legendSide="LEFT" labelsVisible="false"/>
   </VBox>
   <VBox GridPane.rowIndex="1" GridPane.columnIndex="1">
-    <Label text="Entwicklung der Ausgaben" styleClass="text-bold">
+    <Label text="%monthlyOverview.label.expenseTrend" styleClass="text-bold">
       <VBox.margin>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
       </VBox.margin>
     </Label>
     <BarChart fx:id="expenseTrendChart" legendVisible="false">
       <xAxis>
-        <CategoryAxis label="Monat"/>
+        <CategoryAxis label="%label.month"/>
       </xAxis>
       <yAxis>
-        <NumberAxis label="Höhe"/>
+        <NumberAxis label="%monthlyOverview.label.amount"/>
       </yAxis>
     </BarChart>
   </VBox>
