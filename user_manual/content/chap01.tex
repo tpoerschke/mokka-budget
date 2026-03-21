@@ -155,7 +155,21 @@ Betrag & Realer Betrag des Umsatzes wie er in der Quelle (Konto) des Umsatzes au
 
 Zur Kategorisierung von Umsätzen können Kategorien herangezogen werden, die nochmal zu Gruppen zusammengefasst werden können. An Kategorien kann jeweils ein Budget konfiguriert werden, welches in der Monats- uns Analyseansicht angezeigt wird. 
 
-Die Kategoriegruppen sind aktuell nur als Datenmodell implementiert und finden innerhalb des Systems keine Anwendung in den Ansichten zur Auswertung der Umsätze. 
+Die Kategoriegruppen sind aktuell nur als Datenmodell implementiert und finden innerhalb des Systems keine Anwendung in den Ansichten zur Auswertung der Umsätze.
+
+\section{Abrechnungen}
+
+Abrechnungen ermöglichen die Gruppierung von Umsätzen, die sich auf ein gemeinsames Ereignis beziehen. Ein Beispiel wäre eine Urlaubsreise, bei der verschiedene Ausgaben (bspw. Flug, Hotel, Mietwagen) anfallen.
+
+Abrechnungen bestehen aus einer Bezeichnung, einem optionalen Beschreibung und einer Liste an Umsätzen. Über diese Umsätze wird eine Summe gebildet. Die Umsätze werden mittels eines Dialogs, der eine Suche über die letzten 100 Umsätze ermöglicht, zur Abrechnung hinzugefügt.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=\textwidth]{img/Screenshot-Billings-MDV}
+	\vspace{-2em}
+	\caption{Listen- \& Detailansicht der Abbrechnungen}
+	\label{fig:mdvBillings}
+\end{figure}
 
 \section{Datenmodell} 
 
