@@ -1,16 +1,21 @@
 \chapter{Ansichten}
 
-Neben den Verwaltungsansichten, die eingehend erwähnt wurden, existieren drei Ansichten zur Auswertung der Ein- und Ausnahmen:
-
-\begin{itemize}[nosep]
-	\item Monatsansicht (Startansicht)
-	\item Jahresansicht
-	\item Analyseansicht
-\end{itemize}
+Neben den Verwaltungsansichten, die eingehend erwähnt wurden, existieren drei Ansichten zur Auswertung der Ein- und Ausnahmen, die nachfolgend beschrieben werden.
 
 \section{Monatsansicht}
 
 Die Monatsansicht ermöglicht einen schnellen Überblick über alle Ausgaben eines Monats. Importierte Umsätze werden mit einem Icon gekennzeichnet, was somit anzeigt, dass eine Ausgabe bereits erfolgt ist. Das ist vor allem bei wiederkehrenden Ausgaben interessant, da dann der importierte Betrag in der Ansicht angezeigt wird -- gilt für alle Ansichten -- und nicht die geplante Ausgabe, wie sie im Tab "`Zahlungen"' in der Verwaltungsansicht der wiederkehrenden Ausgabe vorgemerkt ist (s. Abschnitt \ref{sec:fixedExpenses}).
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=\textwidth]{img/Screenshot-MonthlyOverview}
+	\vspace{-2em}
+	\caption{Monatsansicht / Dashboard (aktueller Monat: August 2025)}
+	\label{fig:MonthlyOverview}
+\end{figure}
+
+Neben der Tabelle auf der linken Seite, findet sich in der Mitte eine detailliertere Aufschlüsselung der Ausgaben pro Kategorie in dem angezeigten Monat.
+Außerdem zeigt ein Diagramm die Entwicklung der Ausgaben in den letzten 12 Monaten an -- ausgehend von dem angezeigten Monat. So können Trends einfach erkannt werden.
 
 Auf der rechten Seite werden alle aktiven Budgets mit deren Füllstand angezeigt. Sollte ein Budget zu 90\% oder mehr aufgebraucht sein, wird der Balken rot eingefärbt.
 
@@ -23,13 +28,6 @@ Die obere Tabelle stellt die Ein- und Ausgaben eines jeden Monats gegenüber, so
 
 Während die Einnahmen nicht weiter aufgeschlüsselt werden, werden die wiederkehrenden Ausgaben gruppiert nach Kategorien in der unteren Tabelle detaillierter dargestellt. Eine Zelle enthält jeweils die Höhe einer wiederkehrenden Ausgabe pro Monat und ganz rechts in der Spalte "`Jahr"' die Gesamtsumme der Ausgabe (also bspw. wie viel Geld für Tanken fällig wurde). Alle anderen -- also einzigartige -- Ausgaben, die keinem wiederkehrenden Umsatz zugeordnet sind, werden pro Kategorie als "`Sonstige"' zusammengefasst.
 
-\subsection*{Beispiel: Wocheneinkauf}
-
-In Abbildung \ref{fig:AnnualOverview} kann erkannt werden, dass die geplanten Ausgaben für den Wocheneinkauf pro Monat überschritten werden. Ab August 2025 werden 350 Euro bis zum Ende des Jahres aufgeführt, das ist das Planungselement, welches bei dem wiederkehrenden Umsatz "`Wocheneinkauf"' unter "`Zahlungen"' hinterlegt ist (s. Abschnitt \ref{sec:fixedExpenses}). Hier könnte jetzt genauer in die Analyse gegangen werden, weshalb die Ausgaben höher als erwartet sind oder das Planungselement nach oben korrigiert werden. Dann würden bspw. 400 Euro in Zukunft geplant werden und bspw. im Jahr 2026 pro Monat für Wocheneinkäufe angezeigt werden. Somit kann Ende des Jahres bpsw. in das nächste Jahr geschaut werden, um herauszufinden, wie hoch die Fixkosten pro Monat voraussichtlich sein werden.
-
-\textit{Anmerkung}: Es gibt aktuell keine Ansicht, die eine Auflistung aller Ausgaben (inkl. einzigartiger Ausgaben) pro Monat oder Jahr ermöglicht und dabei eine Summe bildet. Sollte eine solche Ansicht benötigt werden, kann etwas ähnliches über die Analyseansicht erreicht werden, indem eine Kategorie ausgewählt und im Diagramm auf den Balken des entsprechenden Monats geklickt wird. So kann -- etwas umständlich -- eine Aufschlüsselung aller Ausgaben eines Monats mit dazugehöriger Summe vorgenommen werden.
-
-
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=\textwidth]{img/Screenshot-AnnualOverview}
@@ -37,6 +35,12 @@ In Abbildung \ref{fig:AnnualOverview} kann erkannt werden, dass die geplanten Au
 	\caption{Jahresansicht (aktueller Monat: August 2025)}
 	\label{fig:AnnualOverview}
 \end{figure}
+
+\subsection*{Beispiel: Wocheneinkauf}
+
+In Abbildung \ref{fig:AnnualOverview} kann erkannt werden, dass die geplanten Ausgaben für den Wocheneinkauf pro Monat überschritten werden. Ab August 2025 werden 350 Euro bis zum Ende des Jahres aufgeführt, das ist das Planungselement, welches bei dem wiederkehrenden Umsatz "`Wocheneinkauf"' unter "`Zahlungen"' hinterlegt ist (s. Abschnitt \ref{sec:fixedExpenses}). Hier könnte jetzt genauer in die Analyse gegangen werden, weshalb die Ausgaben höher als erwartet sind oder das Planungselement nach oben korrigiert werden. Dann würden bspw. 400 Euro in Zukunft geplant werden und bspw. im Jahr 2026 pro Monat für Wocheneinkäufe angezeigt werden. Somit kann Ende des Jahres bpsw. in das nächste Jahr geschaut werden, um herauszufinden, wie hoch die Fixkosten pro Monat voraussichtlich sein werden.
+
+\textit{Anmerkung}: Es gibt aktuell keine Ansicht, die eine Auflistung aller Ausgaben (inkl. einzigartiger Ausgaben) pro Monat oder Jahr ermöglicht und dabei eine Summe bildet. Sollte eine solche Ansicht benötigt werden, kann etwas ähnliches über die Analyseansicht erreicht werden, indem eine Kategorie ausgewählt und im Diagramm auf den Balken des entsprechenden Monats geklickt wird. So kann -- etwas umständlich -- eine Aufschlüsselung aller Ausgaben eines Monats mit dazugehöriger Summe vorgenommen werden.
 
 \section{Analyseansicht}
 
