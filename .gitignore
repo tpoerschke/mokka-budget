@@ -1,5 +1,6 @@
 .DS_Store
 target/
+/BUILD
 *.log
 *.db
 *.app
@@ -15,7 +16,10 @@ BB-THIRD-PARTY.txt
 release.properties
 pom.xml.*
 
-.idea/ClojureProjectResolveSettings.xml
-.idea/sonarlint.xml
-.idea/copilot.*
-/BUILD
+# IntelliJ IDEA
+.idea/
+!.idea/codeStyles
+!.idea/inspectionProfiles
+!.idea/runConfigurations
+!.idea/misc.xml
+*.iml

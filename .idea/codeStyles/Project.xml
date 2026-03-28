@@ -18,9 +18,9 @@
           <emptyLine />
           <package name="" withSubpackages="true" static="true" />
           <emptyLine />
-          <package name="timkodiert" withSubpackages="true" static="false" />
+          <package name="de.timkodiert" withSubpackages="true" static="false" />
           <emptyLine />
-          <package name="timkodiert" withSubpackages="true" static="true" />
+          <package name="de.timkodiert" withSubpackages="true" static="true" />
         </value>
       </option>
     </JavaCodeStyleSettings>
