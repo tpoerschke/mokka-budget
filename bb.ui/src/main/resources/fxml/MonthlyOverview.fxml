@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<GridPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timkodiert.budgetbook.view.MonthlyOverviewView"
+<GridPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.timkodiert.mokka.view.MonthlyOverviewView"
           GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" hgap="10" vgap="10">
   <BorderPane GridPane.rowSpan="2">
     <top>

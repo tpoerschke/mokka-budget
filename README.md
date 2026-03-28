@@ -22,14 +22,14 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/tpoerschke/BudgetBook">
-    <img src="images/JBudgetBook-Logo.png" alt="Logo" width="140" height="140">
+  <a href="https://github.com/tpoerschke/mokka-budget">
+    <img src="images/MOKKA-Budget-Logo.png" alt="Logo" width="140" height="140">
   </a>
 
-<h3 align="center">JBudgetBook</h3>
+<h3 align="center">MOKKA Budget</h3>
 
   <p align="center">
-    Nachverfolgen, Planen & Analysieren – JBudgetBook verwandelt Zahlen in Klarheit und gibt dir die Kontrolle über deine Finanzen zurück.
+    Monitoring, Organisierung, Kontrolle, Kategorisierung & Analyse  – MOKKA Budget verwandelt Zahlen in Klarheit und gibt dir die Kontrolle über deine Finanzen zurück.
     <!--
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
@@ -81,7 +81,7 @@
 
 ## Über das Projekt
 
-[![JBudgetBook-MainView][product-screenshot-1]](https://github.com/tpoerschke/BudgetBook)
+[![MOKKA-Budget-MainView][product-screenshot-1]](https://github.com/tpoerschke/mokka-budget)
 
 In Zeiten vieler Abonnements und weitverbreiteter Kartenzahlung kann man schnell die Übersicht über seine Ausgaben verlieren.
 Dabei unterstützt dich dieses Haushaltsbuch, indem es die Nachverfolgung – via Import oder manueller Pflege –, Planung und Analyse deiner Ausgaben ermöglicht.
@@ -97,8 +97,8 @@ Features:
 
 ### Screenshots
 
-[![JBudgetBook-AnnualOverview][product-screenshot-2]](https://github.com/tpoerschke/BudgetBook)
-[![JBudgetBook-AnalysisView][product-screenshot-3]](https://github.com/tpoerschke/BudgetBook)
+[![MOKKA-Budget-AnnualOverview][product-screenshot-2]](https://github.com/tpoerschke/mokka-budget)
+[![MOKKA-Budget-AnalysisView][product-screenshot-3]](https://github.com/tpoerschke/mokka-budget)
 
 ### Built With
 
@@ -119,7 +119,7 @@ Features:
 
 ## Installation
 
-Die Anwendung steht beim aktuellen Release zum Download bereit: https://github.com/tpoerschke/BudgetBook/releases
+Die Anwendung steht beim aktuellen Release zum Download bereit: https://github.com/tpoerschke/mokka-budget/releases
 
 Anleitung für Mac:
 
@@ -139,7 +139,7 @@ Das Projekt kann lokal wie folgt aufgesetzt werden:
 
 1. Repo klonen
    ```sh
-   git clone https://github.com/tpoerschke/BudgetBook
+   git clone https://github.com/tpoerschke/mokka-budget.git
    ```
 2. Starten
 
@@ -221,7 +221,7 @@ Distributed under the GNU General Public License v3.0. See `LICENSE` for more in
 
 Tim Poerschke - post@timkodiert.de
 
-Project Link: [https://github.com/tpoerschke/BudgetBook](https://github.com/tpoerschke/BudgetBook)
+Project Link: [https://github.com/tpoerschke/mokka-budget](https://github.com/tpoerschke/mokka-budget)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -242,14 +242,13 @@ Project Link: [https://github.com/tpoerschke/BudgetBook](https://github.com/tpoe
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
+<!-- @formatter:off -->
 [product-screenshot-1]: images/Screenshot-MonthlyOverview.png
-
 [product-screenshot-2]: images/Screenshot-AnnualOverview.png
-
 [product-screenshot-3]: images/Screenshot-AnalysisView.png
 
 [OpenJDK-shield]: https://img.shields.io/badge/OpenJDK-222?style=for-the-badge&logo=OpenJDK
-[OpenJDK-url]: https://aws.amazon.com/corretto/
+[OpenJDK-url]: https://adoptium.net/de/temurin
 [Maven-shield]: https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=Apache%20Maven
 [Maven-url]: https://maven.apache.org/
 [Hibernate-shield]: https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate
@@ -262,3 +261,4 @@ Project Link: [https://github.com/tpoerschke/BudgetBook](https://github.com/tpoe
 [Dagger-url]: https://dagger.dev/
 [SonarQube-shield]: https://img.shields.io/badge/SonarQube-222?style=for-the-badge&logo=SonarCloud
 [SonarQube-url]:https://sonarcloud.io/
+<!-- @formatter:on -->

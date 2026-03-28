@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="timkodiert.budgetbook.view.about.AboutView">
+          fx:controller="de.timkodiert.mokka.view.about.AboutView">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="40.0"/>
   </padding>
@@ -26,7 +26,7 @@
     <Hyperlink text="%aboutView.hyperlink.userManuel" onAction="#openUserManualLink" GridPane.halignment="CENTER"/>
     <Hyperlink text="Github" onAction="#openGithubLink" GridPane.halignment="CENTER"/>
   </HBox>
-  <Label text="%aboutView.label.ideaAndDev" GridPane.rowIndex="5" GridPane.halignment="CENTER"/>
+  <Label text="%aboutView.label.ideaAndDev" GridPane.rowIndex="5" GridPane.halignment="CENTER" wrapText="true"/>
 
   <Label text="%aboutView.label.licenses" GridPane.rowIndex="7"/>
   <TextArea fx:id="licensesArea" editable="false" maxHeight="Infinity" GridPane.vgrow="ALWAYS" GridPane.rowIndex="8"/>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="timkodiert.budgetbook.view.AnnualOverviewView">
+<BorderPane xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="de.timkodiert.mokka.view.AnnualOverviewView">
   <top>
     <HBox alignment="CENTER_LEFT" spacing="10.0">
       <Label styleClass="text-bold" text="%menuItem.showAnnualOverview"/>

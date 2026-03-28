@@ -8,8 +8,6 @@ target/
 _output.csv
 
 dependency-reduced-pom.xml
-JBudgetBook.app.zip
-JBudgetBook.tar.gz
 env.tex
 BB-THIRD-PARTY.txt
 

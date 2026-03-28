@@ -5,10 +5,10 @@
     </encoder>
   </appender>
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${user.home}/.budgetbook/bb-application.log</file>
+    <file>${user.home}/.mokkabudget/mokka-application.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
-      <fileNamePattern>${user.home}/.budgetbook/bb-application-%d{yyyy-MM-dd}.log</fileNamePattern>
+      <fileNamePattern>${user.home}/.mokkabudget/mokka-application-%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>3</maxHistory>
       <totalSizeCap>1GB</totalSizeCap>
     </rollingPolicy>

@@ -12,10 +12,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
-<?import timkodiert.budgetbook.ui.control.MoneyTextField?>
+<?import de.timkodiert.mokka.ui.control.MoneyTextField?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="timkodiert.budgetbook.view.importer.FixedTurnoverWizardView"
+            fx:controller="de.timkodiert.mokka.view.importer.FixedTurnoverWizardView"
             prefHeight="400.0">
 
     <top>

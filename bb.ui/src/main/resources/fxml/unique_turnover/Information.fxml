@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import timkodiert.budgetbook.ui.control.AutoCompleteTextField?>
-<?import timkodiert.budgetbook.ui.control.MoneyTextField?>
+<?import de.timkodiert.mokka.ui.control.AutoCompleteTextField?>
+<?import de.timkodiert.mokka.ui.control.MoneyTextField?>
 <BorderPane stylesheets="@../../../../../../src/main/resources/css/general-styles.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/">
    <center>
       <VBox prefWidth="300.0" spacing="20.0">

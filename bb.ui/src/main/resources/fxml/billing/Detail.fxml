@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="timkodiert.budgetbook.view.billing.BillingDetailView">
+            fx:controller="de.timkodiert.mokka.view.billing.BillingDetailView">
     <center>
         <VBox spacing="10.0" BorderPane.alignment="CENTER">
             <GridPane hgap="10.0" vgap="10.0">

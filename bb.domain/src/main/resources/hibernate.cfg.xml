@@ -32,15 +32,15 @@
             org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="timkodiert.budgetbook.domain.model.FixedTurnover" />
-        <mapping class="timkodiert.budgetbook.domain.model.PaymentInformation" />
-        <mapping class="timkodiert.budgetbook.domain.model.Category" />
-        <mapping class="timkodiert.budgetbook.domain.model.CategoryGroup"/>
-        <mapping class="timkodiert.budgetbook.domain.model.UniqueTurnover" />
-        <mapping class="timkodiert.budgetbook.domain.model.UniqueTurnoverInformation" />
-        <mapping class="timkodiert.budgetbook.domain.model.Billing"/>
-        <mapping class="timkodiert.budgetbook.domain.model.AccountTurnover"/>
-        <mapping class="timkodiert.budgetbook.domain.model.ImportRule"/>
+        <mapping class="de.timkodiert.mokka.domain.model.FixedTurnover" />
+        <mapping class="de.timkodiert.mokka.domain.model.PaymentInformation" />
+        <mapping class="de.timkodiert.mokka.domain.model.Category" />
+        <mapping class="de.timkodiert.mokka.domain.model.CategoryGroup"/>
+        <mapping class="de.timkodiert.mokka.domain.model.UniqueTurnover" />
+        <mapping class="de.timkodiert.mokka.domain.model.UniqueTurnoverInformation" />
+        <mapping class="de.timkodiert.mokka.domain.model.Billing"/>
+        <mapping class="de.timkodiert.mokka.domain.model.AccountTurnover"/>
+        <mapping class="de.timkodiert.mokka.domain.model.ImportRule"/>
 
     </session-factory>
 

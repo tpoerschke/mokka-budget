@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane fx:id="root" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="timkodiert.budgetbook.view.analysis.AnalysisView">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="de.timkodiert.mokka.view.analysis.AnalysisView">
     <top>
         <VBox spacing="10.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>

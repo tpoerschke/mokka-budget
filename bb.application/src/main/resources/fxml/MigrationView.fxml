@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.StackPane?>
-<GridPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timkodiert.budgetbook.db.MigrationView" vgap="10">
+<GridPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.timkodiert.mokka.db.MigrationView" vgap="10">
 
     <Label text="%migration.label.title" alignment="CENTER" maxWidth="Infinity" styleClass="text-bold"
            GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2" />

@@ -13,8 +13,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import timkodiert.budgetbook.ui.control.MoneyTextField?>
-<?import timkodiert.budgetbook.ui.control.MonthYearPicker?>
+<?import de.timkodiert.mokka.ui.control.MoneyTextField?>
+<?import de.timkodiert.mokka.ui.control.MonthYearPicker?>
 <BorderPane minWidth="400.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/">
    <center>
       <VBox prefWidth="300.0" spacing="20.0">
