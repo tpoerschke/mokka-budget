@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="timkodiert.budgetbook.view.fixed_turnover.FixedTurnoverDetailView">
+            fx:controller="de.timkodiert.mokka.view.fixed_turnover.FixedTurnoverDetailView">
    <center>
       <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <Tab text="%editExpense.tab.information">

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="timkodiert.budgetbook.view.widget.BudgetWidget" fx:id="root" spacing="5"
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="de.timkodiert.mokka.view.widget.BudgetWidget" fx:id="root" spacing="5"
       prefWidth="250" styleClass="budget-widget">
     <Label fx:id="budgetLabel" />
     <StackPane>

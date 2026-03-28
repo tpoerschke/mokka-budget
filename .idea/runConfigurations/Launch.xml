@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Launch" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="timkodiert.budgetbook.Launch" />
+    <option name="MAIN_CLASS_NAME" value="de.timkodiert.mokka.Launch" />
     <module name="bb.application" />
     <option name="PROGRAM_PARAMETERS" value="--mode=DEV" />
     <method v="2">

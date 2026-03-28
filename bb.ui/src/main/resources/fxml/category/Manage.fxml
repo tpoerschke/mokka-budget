@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <SplitPane dividerPositions="0.5" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="timkodiert.budgetbook.view.category.CategoriesManageView">
+           fx:controller="de.timkodiert.mokka.view.category.CategoriesManageView">
     <BorderPane>
         <top>
             <HBox alignment="CENTER_LEFT" spacing="10.0" BorderPane.alignment="CENTER">

@@ -21,11 +21,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import timkodiert.budgetbook.ui.control.AutoCompleteTextField?>
+<?import de.timkodiert.mokka.ui.control.AutoCompleteTextField?>
 <BorderPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="700.0"
             stylesheets="@../../../../../../src/main/resources/css/general-styles.css"
             xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="timkodiert.budgetbook.view.unique_turnover.UniqueTurnoverDetailView">
+            fx:controller="de.timkodiert.mokka.view.unique_turnover.UniqueTurnoverDetailView">
    <center>
      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
        <Tab text="%detail.tab.information">

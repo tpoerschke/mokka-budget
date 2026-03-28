@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <SplitPane dividerPositions="0.6" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="timkodiert.budgetbook.view.unique_turnover.UniqueTurnoverManageView">
+           fx:controller="de.timkodiert.mokka.view.unique_turnover.UniqueTurnoverManageView">
    <items>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>

@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import timkodiert.budgetbook.ui.control.MoneyTextField?>
+<?import de.timkodiert.mokka.ui.control.MoneyTextField?>
 <BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="timkodiert.budgetbook.view.category.CategoryDetailView">
+            fx:controller="de.timkodiert.mokka.view.category.CategoryDetailView">
     <center>
         <GridPane BorderPane.alignment="CENTER" hgap="10.0" vgap="10.0">
             <VBox>

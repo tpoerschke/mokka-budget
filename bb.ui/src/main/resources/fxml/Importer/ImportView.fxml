@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<StackPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timkodiert.budgetbook.view.importer.ImportView">
+<StackPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.timkodiert.mokka.view.importer.ImportView">
     <BorderPane>
         <top>
             <Label text="%stageTitle.importView" BorderPane.alignment="CENTER_LEFT" styleClass="text-bold">
