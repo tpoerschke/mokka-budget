@@ -26,7 +26,7 @@
     <Hyperlink text="%aboutView.hyperlink.userManuel" onAction="#openUserManualLink" GridPane.halignment="CENTER"/>
     <Hyperlink text="Github" onAction="#openGithubLink" GridPane.halignment="CENTER"/>
   </HBox>
-  <Label text="%aboutView.label.ideaAndDev" GridPane.rowIndex="5" GridPane.halignment="CENTER"/>
+  <Label text="%aboutView.label.ideaAndDev" GridPane.rowIndex="5" GridPane.halignment="CENTER" wrapText="true"/>
 
   <Label text="%aboutView.label.licenses" GridPane.rowIndex="7"/>
   <TextArea fx:id="licensesArea" editable="false" maxHeight="Infinity" GridPane.vgrow="ALWAYS" GridPane.rowIndex="8"/>

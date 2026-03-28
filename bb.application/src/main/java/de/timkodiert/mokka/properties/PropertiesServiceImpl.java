@@ -11,6 +11,8 @@ import java.util.Properties;
 import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
 import atlantafx.base.theme.Theme;
+import de.timkodiert.mokka.Constants;
+import de.timkodiert.mokka.i18n.LanguageManager;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
@@ -30,9 +32,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
-
-import de.timkodiert.mokka.Constants;
-import de.timkodiert.mokka.i18n.LanguageManager;
 
 @Singleton
 public class PropertiesServiceImpl implements PropertiesService {
@@ -144,7 +143,7 @@ public class PropertiesServiceImpl implements PropertiesService {
                 // Speichern
                 File propsFile = Path.of(getPropertiesPath()).toFile();
                 this.properties = newProps;
-                this.properties.store(new FileWriter(propsFile), "JBudgetBook properties");
+                this.properties.store(new FileWriter(propsFile), "MOKKA Budget properties");
                 Alert alert = new Alert(AlertType.INFORMATION, languageManager.get().get("settings.alert.savedPleaseRestart"));
                 alert.showAndWait();
             } catch (Exception e) {

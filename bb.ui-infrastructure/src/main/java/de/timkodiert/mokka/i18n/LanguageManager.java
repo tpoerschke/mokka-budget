@@ -7,14 +7,13 @@ import java.util.Set;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 
+import de.timkodiert.mokka.properties.PropertiesService;
 import de.timkodiert.mokka.validation.ValidationWrapper;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.Getter;
 import org.hibernate.validator.spi.messageinterpolation.LocaleResolver;
 import org.hibernate.validator.spi.messageinterpolation.LocaleResolverContext;
-
-import de.timkodiert.mokka.properties.PropertiesService;
 
 @Getter
 @Singleton
@@ -74,10 +73,11 @@ public class LanguageManager implements LocaleResolver {
     }
 
     public String getLocString(String key) {
+        ResourceBundle rb = getFallbackRB();
         if (resourceBundleContainsKey(key)) {
-            return this.getResourceBundle().getString(key);
+            rb = getResourceBundle();
         }
-        return this.getFallbackRB().getString(key);
+        return rb.getString(key).replace("\\n", "\n");
     }
 
 

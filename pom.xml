@@ -61,7 +61,7 @@
   </modules>
 
   <scm>
-    <connection>scm:git:git@github.com:tpoerschke/BudgetBook.git</connection>
+    <connection>scm:git:git@github.com:tpoerschke/mokka-budget.git</connection>
     <tag>HEAD</tag>
   </scm>
 

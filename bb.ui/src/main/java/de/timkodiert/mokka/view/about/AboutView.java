@@ -10,6 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import de.timkodiert.mokka.exception.TechnicalException;
+import de.timkodiert.mokka.view.View;
 import jakarta.inject.Inject;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
@@ -17,9 +19,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import lombok.RequiredArgsConstructor;
-
-import de.timkodiert.mokka.exception.TechnicalException;
-import de.timkodiert.mokka.view.View;
 
 @RequiredArgsConstructor(onConstructor_ = {@Inject})
 public class AboutView implements View, Initializable {
@@ -47,12 +46,12 @@ public class AboutView implements View, Initializable {
 
     @FXML
     private void openUserManualLink() {
-        hostServices.showDocument("https://timkodiert.de/project/budgetbook");
+        hostServices.showDocument("https://timkodiert.de/project/mokka-budget");
     }
 
     @FXML
     private void openGithubLink() {
-        hostServices.showDocument("https://github.com/tpoerschke/BudgetBook");
+        hostServices.showDocument("https://github.com/tpoerschke/mokka-budget");
     }
 
     private String processLicenseContent(String content) {
