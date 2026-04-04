@@ -9,17 +9,17 @@ import jakarta.inject.Inject;
 import de.timkodiert.mokka.domain.model.MonthYear;
 import de.timkodiert.mokka.domain.model.UniqueTurnover;
 import de.timkodiert.mokka.domain.repository.FixedExpensesRepository;
-import de.timkodiert.mokka.domain.repository.UniqueExpensesRepository;
+import de.timkodiert.mokka.domain.repository.UniqueTurnoverRepository;
 
 public class ExpenseTrendServiceImpl implements ExpenseTrendService {
 
     private final FixedExpensesRepository fixedExpensesRepository;
-    private final UniqueExpensesRepository uniqueExpensesRepository;
+    private final UniqueTurnoverRepository uniqueTurnoverRepository;
 
     @Inject
-    public ExpenseTrendServiceImpl(FixedExpensesRepository fixedExpensesRepository, UniqueExpensesRepository uniqueExpensesRepository) {
+    public ExpenseTrendServiceImpl(FixedExpensesRepository fixedExpensesRepository, UniqueTurnoverRepository uniqueTurnoverRepository) {
         this.fixedExpensesRepository = fixedExpensesRepository;
-        this.uniqueExpensesRepository = uniqueExpensesRepository;
+        this.uniqueTurnoverRepository = uniqueTurnoverRepository;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ExpenseTrendServiceImpl implements ExpenseTrendService {
                                                       .filter(val -> val < 0)
                                                       .sum();
 
-        int uniqueExpensesSum = uniqueExpensesRepository.findAllWithoutFixedExpense(monthYear)
+        int uniqueExpensesSum = uniqueTurnoverRepository.findAllWithoutFixedExpense(monthYear)
                                                         .stream()
                                                         .mapToInt(UniqueTurnover::getTotalValue)
                                                         .filter(val -> val < 0)

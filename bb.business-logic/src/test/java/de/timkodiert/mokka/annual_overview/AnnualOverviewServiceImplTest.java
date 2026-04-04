@@ -18,7 +18,7 @@ import de.timkodiert.mokka.domain.model.FixedTurnover;
 import de.timkodiert.mokka.domain.model.MonthYear;
 import de.timkodiert.mokka.domain.model.UniqueTurnover;
 import de.timkodiert.mokka.domain.repository.FixedExpensesRepository;
-import de.timkodiert.mokka.domain.repository.UniqueExpensesRepository;
+import de.timkodiert.mokka.domain.repository.UniqueTurnoverRepository;
 
 @ExtendWith(MockitoExtension.class)
 class AnnualOverviewServiceImplTest {
@@ -34,7 +34,7 @@ class AnnualOverviewServiceImplTest {
     @Mock
     private FixedExpensesRepository fixedTurnoverRepository;
     @Mock
-    private UniqueExpensesRepository uniqueTurnoverRepository;
+    private UniqueTurnoverRepository uniqueTurnoverRepository;
 
     @BeforeEach
     void setUp() {

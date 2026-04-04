@@ -19,7 +19,7 @@ import de.timkodiert.mokka.domain.model.MonthYear;
 import de.timkodiert.mokka.domain.model.UniqueTurnover;
 import de.timkodiert.mokka.domain.model.UniqueTurnoverInformation;
 import de.timkodiert.mokka.domain.repository.FixedExpensesRepository;
-import de.timkodiert.mokka.domain.repository.UniqueExpensesRepository;
+import de.timkodiert.mokka.domain.repository.UniqueTurnoverRepository;
 import de.timkodiert.mokka.representation.RowType;
 
 public class AnnualOverviewServiceImpl implements AnnualOverviewService {
@@ -30,10 +30,10 @@ public class AnnualOverviewServiceImpl implements AnnualOverviewService {
     private static final String LABEL_TOTAL = "annualOverview.label.total";
 
     private final FixedExpensesRepository fixedTurnoverRepository;
-    private final UniqueExpensesRepository uniqueTurnoverRepository;
+    private final UniqueTurnoverRepository uniqueTurnoverRepository;
 
     @Inject
-    public AnnualOverviewServiceImpl(FixedExpensesRepository fixedTurnoverRepository, UniqueExpensesRepository uniqueTurnoverRepository) {
+    public AnnualOverviewServiceImpl(FixedExpensesRepository fixedTurnoverRepository, UniqueTurnoverRepository uniqueTurnoverRepository) {
         this.fixedTurnoverRepository = fixedTurnoverRepository;
         this.uniqueTurnoverRepository = uniqueTurnoverRepository;
     }

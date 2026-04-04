@@ -1,23 +1,22 @@
 package de.timkodiert.mokka.crud;
 
 import java.util.List;
-import java.util.Objects;
 
 import jakarta.inject.Inject;
 import org.jspecify.annotations.Nullable;
 import org.mapstruct.factory.Mappers;
 
 import de.timkodiert.mokka.domain.FixedTurnoverDTO;
+import de.timkodiert.mokka.domain.ManageViewContainer;
 import de.timkodiert.mokka.domain.Reference;
 import de.timkodiert.mokka.domain.SimplifiedUniqueTurnoverDTO;
 import de.timkodiert.mokka.domain.UniqueTurnoverCrudService;
 import de.timkodiert.mokka.domain.UniqueTurnoverDTO;
-import de.timkodiert.mokka.domain.model.BaseEntity;
 import de.timkodiert.mokka.domain.model.Category;
 import de.timkodiert.mokka.domain.model.UniqueTurnover;
 import de.timkodiert.mokka.domain.model.UniqueTurnoverInformation;
 import de.timkodiert.mokka.domain.repository.UniqueExpenseInformationRepository;
-import de.timkodiert.mokka.domain.repository.UniqueExpensesRepository;
+import de.timkodiert.mokka.domain.repository.UniqueTurnoverRepository;
 import de.timkodiert.mokka.representation.RowType;
 
 import static de.timkodiert.mokka.util.ObjectUtils.nvl;
@@ -25,12 +24,12 @@ import static de.timkodiert.mokka.util.ObjectUtils.nvl;
 public class UniqueTurnoverCrudServiceImpl implements UniqueTurnoverCrudService {
 
     private final ReferenceResolver referenceResolver;
-    private final UniqueExpensesRepository uniqueTurnoverRepository;
+    private final UniqueTurnoverRepository uniqueTurnoverRepository;
     private final UniqueExpenseInformationRepository uniqueTurnoverInformationRepository;
 
     @Inject
     public UniqueTurnoverCrudServiceImpl(ReferenceResolver referenceResolver,
-                                         UniqueExpensesRepository uniqueTurnoverRepository,
+                                         UniqueTurnoverRepository uniqueTurnoverRepository,
                                          UniqueExpenseInformationRepository uniqueTurnoverInformationRepository) {
         this.referenceResolver = referenceResolver;
         this.uniqueTurnoverRepository = uniqueTurnoverRepository;
@@ -38,13 +37,15 @@ public class UniqueTurnoverCrudServiceImpl implements UniqueTurnoverCrudService 
     }
 
     @Override
-    public List<UniqueTurnoverDTO> readAll(@Nullable Reference<FixedTurnoverDTO> fixedTurnoverRef) {
+    public ManageViewContainer<UniqueTurnoverDTO> readAll(int page, @Nullable Reference<FixedTurnoverDTO> fixedTurnoverRef) {
+        Integer fixedTurnoverId = nvl(fixedTurnoverRef, Reference::id);
         UniqueTurnoverMapper mapper = Mappers.getMapper(UniqueTurnoverMapper.class);
-        return uniqueTurnoverRepository.findAll()
-                                       .stream()
-                                       .filter(uq -> Objects.equals(nvl(uq.getFixedTurnover(), BaseEntity::getId), nvl(fixedTurnoverRef, Reference::id)))
-                                       .map(mapper::uniqueTurnoverToUniqueTurnoverDto)
-                                       .toList();
+        List<UniqueTurnoverDTO> turnovers = uniqueTurnoverRepository.findPageSortedByDateDesc(page, fixedTurnoverId)
+                                                                    .stream()
+                                                                    .map(mapper::uniqueTurnoverToUniqueTurnoverDto)
+                                                                    .toList();
+        int numberOfPages = uniqueTurnoverRepository.getNumberOfPages(fixedTurnoverId);
+        return new ManageViewContainer<>(turnovers, numberOfPages);
     }
 
     @Override

@@ -19,7 +19,7 @@ import de.timkodiert.mokka.domain.model.FixedTurnover;
 import de.timkodiert.mokka.domain.model.MonthYear;
 import de.timkodiert.mokka.domain.model.UniqueTurnover;
 import de.timkodiert.mokka.domain.repository.FixedExpensesRepository;
-import de.timkodiert.mokka.domain.repository.UniqueExpensesRepository;
+import de.timkodiert.mokka.domain.repository.UniqueTurnoverRepository;
 
 @ExtendWith(MockitoExtension.class)
 class ExpenseTrendServiceImplTest {
@@ -32,7 +32,7 @@ class ExpenseTrendServiceImplTest {
     @Mock
     private FixedExpensesRepository fixedExpensesRepository;
     @Mock
-    private UniqueExpensesRepository uniqueExpensesRepository;
+    private UniqueTurnoverRepository uniqueTurnoverRepository;
 
     @BeforeEach
     void setUp() {
@@ -43,19 +43,19 @@ class ExpenseTrendServiceImplTest {
         // Setup unique expenses for each month
         UniqueTurnover uniqueTurnover1 = TestDataProvider.createUniqueTurnover(YEAR_MONTH.atDay(15), "UT1", UNIQUE_EXPENSE_VALUE);
         UniqueTurnover uniqueTurnover2 = TestDataProvider.createUniqueTurnover(YEAR_MONTH.minusMonths(1).atDay(10), "UT2", UNIQUE_EXPENSE_VALUE);
-        Mockito.when(uniqueExpensesRepository.findAllWithoutFixedExpense(any())).thenReturn(List.of(uniqueTurnover1, uniqueTurnover2));
+        Mockito.when(uniqueTurnoverRepository.findAllWithoutFixedExpense(any())).thenReturn(List.of(uniqueTurnover1, uniqueTurnover2));
     }
 
     @Test
     void getExpenseTrendLast12Months_ReturnsCorrectNumberOfMonths() {
-        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueExpensesRepository);
+        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueTurnoverRepository);
         List<ExpenseTrend> result = sut.getExpenseTrendLast12Months(YEAR_MONTH);
         assertEquals(12, result.size());
     }
 
     @Test
     void getExpenseTrendLast12Months_ReturnedInChronologicalOrder() {
-        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueExpensesRepository);
+        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueTurnoverRepository);
         List<ExpenseTrend> result = sut.getExpenseTrendLast12Months(YEAR_MONTH);
 
         for (int i = 0; i < result.size() - 1; i++) {
@@ -65,7 +65,7 @@ class ExpenseTrendServiceImplTest {
 
     @Test
     void getExpenseTrendLast12Months_IncludesSelectedMonth() {
-        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueExpensesRepository);
+        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueTurnoverRepository);
         List<ExpenseTrend> result = sut.getExpenseTrendLast12Months(YEAR_MONTH);
 
         // The last month in the list should be the selected month
@@ -74,7 +74,7 @@ class ExpenseTrendServiceImplTest {
 
     @Test
     void getExpenseTrendLast12Months_Includes12MonthsBackward() {
-        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueExpensesRepository);
+        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueTurnoverRepository);
         List<ExpenseTrend> result = sut.getExpenseTrendLast12Months(YEAR_MONTH);
 
         // The first month should be 12 months before the selected month
@@ -83,7 +83,7 @@ class ExpenseTrendServiceImplTest {
 
     @Test
     void getExpenseTrendLast12Months_AllValuesArePositive() {
-        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueExpensesRepository);
+        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueTurnoverRepository);
         List<ExpenseTrend> result = sut.getExpenseTrendLast12Months(YEAR_MONTH);
 
         // All expense values should be positive (Math.abs is applied)
@@ -92,7 +92,7 @@ class ExpenseTrendServiceImplTest {
 
     @Test
     void getExpenseTrendLast12Months_ContainsExpenseData() {
-        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueExpensesRepository);
+        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueTurnoverRepository);
         List<ExpenseTrend> result = sut.getExpenseTrendLast12Months(YEAR_MONTH);
 
         ExpenseTrend currentMonthTrend = result.stream()
@@ -107,7 +107,7 @@ class ExpenseTrendServiceImplTest {
     void getExpenseTrendLast12Months_DifferentSelectedMonth() {
         YearMonth differentMonth = YearMonth.of(2024, 6);
 
-        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueExpensesRepository);
+        ExpenseTrendServiceImpl sut = new ExpenseTrendServiceImpl(fixedExpensesRepository, uniqueTurnoverRepository);
         List<ExpenseTrend> result = sut.getExpenseTrendLast12Months(differentMonth);
 
         // Should return 12 months
