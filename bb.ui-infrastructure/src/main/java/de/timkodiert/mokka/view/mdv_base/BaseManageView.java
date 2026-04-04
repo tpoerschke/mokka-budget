@@ -30,8 +30,6 @@ public abstract class BaseManageView<B> implements View, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        reloadTable(null);
-
         fxmlLoader.setLocation(getClass().getResource(getDetailViewFxmlLocation()));
         try {
             detailViewContainer.getChildren().add(fxmlLoader.load());
@@ -44,6 +42,7 @@ public abstract class BaseManageView<B> implements View, Initializable {
         detailView.setOnUpdate(this::reloadTable);
 
         initControls();
+        reloadTable(null);
     }
 
     public abstract void displayEntityById(int id);

@@ -29,7 +29,7 @@ public interface RepositoryModule {
     Repository<PaymentInformation> providePaymentInformationsRepository(PaymentInformationsRepository impl);
 
     @Binds
-    Repository<UniqueTurnover> provideUniqueExpensesRepository(UniqueExpensesRepository impl);
+    Repository<UniqueTurnover> provideUniqueExpensesRepository(UniqueTurnoverRepository impl);
 
     @Binds
     Repository<UniqueTurnoverInformation> provideUniqueExpenseInformationRepository(UniqueExpenseInformationRepository impl);

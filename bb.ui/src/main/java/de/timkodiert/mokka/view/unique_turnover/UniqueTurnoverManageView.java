@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.jspecify.annotations.Nullable;
@@ -18,6 +19,7 @@ import de.timkodiert.mokka.converter.ReferenceStringConverter;
 import de.timkodiert.mokka.dialog.DialogFactory;
 import de.timkodiert.mokka.domain.FixedTurnoverCrudService;
 import de.timkodiert.mokka.domain.FixedTurnoverDTO;
+import de.timkodiert.mokka.domain.ManageViewContainer;
 import de.timkodiert.mokka.domain.Reference;
 import de.timkodiert.mokka.domain.UniqueTurnoverCrudService;
 import de.timkodiert.mokka.domain.UniqueTurnoverDTO;
@@ -39,6 +41,9 @@ public class UniqueTurnoverManageView extends BaseListManageView<UniqueTurnoverD
 
     @FXML
     private ComboBox<Reference<FixedTurnoverDTO>> fixedTurnoverComboBox;
+
+    @FXML
+    private Pagination pagination;
 
     private final UniqueTurnoverCrudService crudService;
     private final FixedTurnoverCrudService fixedTurnoverCrudService;
@@ -63,6 +68,9 @@ public class UniqueTurnoverManageView extends BaseListManageView<UniqueTurnoverD
 
     @Override
     public void initControls() {
+        pagination.setCurrentPageIndex(0);
+        pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> reloadTable(null));
+
         billerCol.setCellValueFactory(new PropertyValueFactory<>("biller"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateCol.setCellFactory(col -> new DateTableCell<>());
@@ -73,7 +81,7 @@ public class UniqueTurnoverManageView extends BaseListManageView<UniqueTurnoverD
         fixedTurnoverComboBox.getItems().addAll(fixedTurnoverCrudService.findAllAsReference());
         fixedTurnoverComboBox.setConverter(new ReferenceStringConverter<>());
         selectedReference.bind(fixedTurnoverComboBox.getSelectionModel().selectedItemProperty());
-        selectedReference.addListener((observable, oldValue, newValue) -> reloadTable(null));
+        selectedReference.addListener((observable, oldValue, newValue) -> pagination.setCurrentPageIndex(0)); // Triggert das Neuladen
 
         entityTable.getSortOrder().add(dateCol);
     }
@@ -85,7 +93,9 @@ public class UniqueTurnoverManageView extends BaseListManageView<UniqueTurnoverD
 
     @Override
     protected void reloadTable(@Nullable UniqueTurnoverDTO updatedBean) {
-        entityTable.getItems().setAll(crudService.readAll(selectedReference.get()));
+        ManageViewContainer<UniqueTurnoverDTO> container = crudService.readAll(pagination.getCurrentPageIndex(), selectedReference.get());
+        pagination.setPageCount(container.numberOfPages());
+        entityTable.getItems().setAll(container.items());
         entityTable.sort();
     }
 

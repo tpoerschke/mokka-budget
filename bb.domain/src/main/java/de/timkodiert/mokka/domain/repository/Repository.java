@@ -62,4 +62,8 @@ public abstract class Repository<T> {
     protected List<T> executeQuery(CriteriaQuery<T> criteriaQuery, int limit) {
         return entityManager.getSession().createQuery(criteriaQuery).setMaxResults(limit).getResultList();
     }
+
+    protected List<T> executeQuery(CriteriaQuery<T> criteriaQuery, int firstResult, int limit) {
+        return entityManager.getSession().createQuery(criteriaQuery).setFirstResult(firstResult).setMaxResults(limit).getResultList();
+    }
 }

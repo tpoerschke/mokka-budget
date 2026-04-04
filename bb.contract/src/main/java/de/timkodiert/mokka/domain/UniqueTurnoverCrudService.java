@@ -6,7 +6,7 @@ import org.jspecify.annotations.Nullable;
 
 public interface UniqueTurnoverCrudService {
 
-    List<UniqueTurnoverDTO> readAll(@Nullable Reference<FixedTurnoverDTO> fixedTurnoverRef);
+    ManageViewContainer<UniqueTurnoverDTO> readAll(int page, @Nullable Reference<FixedTurnoverDTO> fixedTurnoverRef);
     List<SimplifiedUniqueTurnoverDTO> readSortedByDateDesc(int limit);
     UniqueTurnoverDTO readById(int id);
 

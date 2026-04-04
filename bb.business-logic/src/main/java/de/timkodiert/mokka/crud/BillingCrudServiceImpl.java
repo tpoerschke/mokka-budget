@@ -9,15 +9,15 @@ import de.timkodiert.mokka.domain.BillingCrudService;
 import de.timkodiert.mokka.domain.BillingDTO;
 import de.timkodiert.mokka.domain.model.Billing;
 import de.timkodiert.mokka.domain.repository.Repository;
-import de.timkodiert.mokka.domain.repository.UniqueExpensesRepository;
+import de.timkodiert.mokka.domain.repository.UniqueTurnoverRepository;
 
 public class BillingCrudServiceImpl implements BillingCrudService {
 
     private final Repository<Billing> billingRepository;
-    private final UniqueExpensesRepository uniqueTurnoverRepository;
+    private final UniqueTurnoverRepository uniqueTurnoverRepository;
 
     @Inject
-    public BillingCrudServiceImpl(Repository<Billing> billingRepository, UniqueExpensesRepository uniqueTurnoverRepository) {
+    public BillingCrudServiceImpl(Repository<Billing> billingRepository, UniqueTurnoverRepository uniqueTurnoverRepository) {
         this.billingRepository = billingRepository;
         this.uniqueTurnoverRepository = uniqueTurnoverRepository;
     }
