@@ -29,7 +29,7 @@
 <h3 align="center">MOKKA Budget</h3>
 
   <p align="center">
-    Monitoring, Organisierung, Kontrolle, Kategorisierung & Analyse  – MOKKA Budget verwandelt Zahlen in Klarheit und gibt dir die Kontrolle über deine Finanzen zurück.
+    Monitoring, Organisierung, Kontrolle, Kategorisierung & Analyse  – Das Haushaltsbuch für volle Finanzkontrolle!
     <!--
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
@@ -68,7 +68,14 @@
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li>
+        <a href="#contributing">Contributing</a>
+        <ul>
+            <li><a href="#entwickeln">Entwickeln</a></li>
+            <li><a href="#bauen">Bauen</a></li>
+            <li><a href="#your-feature-or-enhancement">Your feature or enhancement</a></li>
+        </ul>
+    </li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <!--<li><a href="#acknowledgments">Acknowledgments</a></li>-->
@@ -89,9 +96,11 @@ Dabei unterstützt dich dieses Haushaltsbuch, indem es die Nachverfolgung – vi
 Features:
 - **Planung** von wiederkehrenden Ausgaben (und Einnahmen) (**Fixkosten**)
 - **Nachverfolgung realer Ausgaben** (und Einnahmen) durch Import oder manueller Pflege
-- **Kategoriesierung** von Ausgaben (und Einnahmen)
+- **Kategorisierung** von Ausgaben (und Einnahmen)
 - Verwaltung von **Budgets je Kategorie**
 - **Analyse**, die Entwicklung einer Ausgabenkategorie darstellt
+
+Und das beste: **Keine Cloud** und keine amerikanischen Dienste. **Deine Daten** werden lokal **auf deinem Rechner** verarbeitet und gespeichert.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -131,40 +140,6 @@ Hinweis: Ggf. muss man die Ausführung explizit erlauben, wenn MacOS meldet, das
 In den Systemeinstelllungen (Systemeinstellungen > Datenschutz & Sicherheit) kann die Ausführung der App erlaubt werden, sobald ein Versuch unternommen wurde, sie
 auszuführen.
 
-## Contributing
-
-### Entwickeln
-
-Das Projekt kann lokal wie folgt aufgesetzt werden: 
-
-1. Repo klonen
-   ```sh
-   git clone https://github.com/tpoerschke/mokka-budget.git
-   ```
-2. Starten
-
-   VS Code: `mvn clean javafx:run` oder `mvn clean javafx:run@debug` und per Visual Studio Code attachen (`.vscode/launch.json`)
-
-   IntelliJ: Run Configuration `Launch`
-
-3. Los entwickeln :)
-
-### Bauen 
-
-Mithilfe des Shell-Skripts `build_app.sh` kann die Applikation für das vorliegende Betriebssystem gebaut werden. Unterstützt werden Windows, MacOS und Linux.
-
-#### Windows
-
-Um einen Windows-Installer lokal bauen zu können, werden folgende Packages vorausgesetzt:
-
-- Wix-Toolset
-
-#### Linux (RPM)
-
-Um eine rpm-Datei lokal bauen zu können, werden folgende Packages vorausgesetzt:
-
-- `rpmbuild`
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -193,6 +168,40 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+### Entwickeln
+
+Das Projekt kann lokal wie folgt aufgesetzt werden:
+
+1. Repo klonen
+   ```sh
+   git clone https://github.com/tpoerschke/mokka-budget.git
+   ```
+2. Starten
+
+   VS Code: `mvn clean javafx:run` oder `mvn clean javafx:run@debug` und per Visual Studio Code attachen (`.vscode/launch.json`)
+
+   IntelliJ: Run Configuration `Launch`
+
+3. Los entwickeln :)
+
+### Bauen
+
+Mithilfe des Shell-Skripts `build_app.sh` kann die Applikation für das vorliegende Betriebssystem gebaut werden. Unterstützt werden Windows, MacOS und Linux.
+
+#### Windows
+
+Um einen Windows-Installer lokal bauen zu können, werden folgende Packages vorausgesetzt:
+
+- Wix-Toolset
+
+#### Linux (RPM)
+
+Um eine rpm-Datei lokal bauen zu können, werden folgende Packages vorausgesetzt:
+
+- `rpmbuild`
+
+## Your feature or enhancement
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
