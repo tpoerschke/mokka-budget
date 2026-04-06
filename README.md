@@ -60,13 +60,6 @@
     <li>
       <a href="#installation">Installation</a>
     </li>
-    <li>
-      <a href="#contributing">Contributing</a>
-      <ul>
-        <li><a href="#entwickeln">Entwickeln</a></li>
-        <li><a href="#bauen">Bauen</a></li>
-      </ul>
-    </li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li>
         <a href="#contributing">Contributing</a>
@@ -95,10 +88,10 @@ Dabei unterstützt dich dieses Haushaltsbuch, indem es die Nachverfolgung – vi
 
 Features:
 - **Planung** von wiederkehrenden Ausgaben (und Einnahmen) (**Fixkosten**)
-- **Nachverfolgung realer Ausgaben** (und Einnahmen) durch Import oder manueller Pflege
+- **Nachverfolgung realer Ausgaben** (und Einnahmen) durch Import oder manuelle Pflege
 - **Kategorisierung** von Ausgaben (und Einnahmen)
 - Verwaltung von **Budgets je Kategorie**
-- **Analyse**, die Entwicklung einer Ausgabenkategorie darstellt
+- **Analyse**, die die Entwicklung einer Ausgabenkategorie darstellt
 
 Und das beste: **Keine Cloud** und keine amerikanischen Dienste. **Deine Daten** werden lokal **auf deinem Rechner** verarbeitet und gespeichert.
 
@@ -154,8 +147,9 @@ auszuführen.
 - [x] Import von Umsätzen
 - [x] Budgets
 - [x] Grundlegende Analyse (Balkendiagramm pro Kategorie)
-- [ ] Burn-Up-Diagramm pro Kategorie / Budget
+- [ ] Import physischer Kassenbons (bspw. via OCR)
 - [ ] Import digitaler Kassenbons (bspw. Lidl oder Globus)
+- [ ] Burn-Up-Diagramm pro Kategorie / Budget
 - [ ] (Weitere Meilensteine in Planung)
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
@@ -201,7 +195,7 @@ Um eine rpm-Datei lokal bauen zu können, werden folgende Packages vorausgesetzt
 
 - `rpmbuild`
 
-## Your feature or enhancement
+### Your feature or enhancement
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!

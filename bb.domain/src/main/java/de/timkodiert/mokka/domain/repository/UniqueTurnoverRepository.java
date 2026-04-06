@@ -7,7 +7,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.jspecify.annotations.Nullable;
 
-import de.timkodiert.mokka.domain.model.FixedTurnover_;
+import de.timkodiert.mokka.domain.model.BaseEntity_;
 import de.timkodiert.mokka.domain.model.MonthYear;
 import de.timkodiert.mokka.domain.model.UniqueTurnover;
 import de.timkodiert.mokka.domain.model.UniqueTurnover_;
@@ -63,8 +63,8 @@ public class UniqueTurnoverRepository extends Repository<UniqueTurnover> {
     }
 
     private Predicate getFixedTurnoverPredicate(Integer fixedTurnoverId, Root<UniqueTurnover> root) {
-        var withoutFixedTurnover = root.get(UniqueTurnover_.fixedTurnover).get(FixedTurnover_.id).isNull();
-        var withFixedTurnover = entityManager.getSession().getCriteriaBuilder().equal(root.get(UniqueTurnover_.fixedTurnover).get(FixedTurnover_.id), fixedTurnoverId);
+        var withoutFixedTurnover = root.get(UniqueTurnover_.fixedTurnover).get(BaseEntity_.id).isNull();
+        var withFixedTurnover = entityManager.getSession().getCriteriaBuilder().equal(root.get(UniqueTurnover_.fixedTurnover).get(BaseEntity_.id), fixedTurnoverId);
         return fixedTurnoverId == null ? withoutFixedTurnover : withFixedTurnover;
     }
 }
