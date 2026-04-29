@@ -1,5 +1,6 @@
 package de.timkodiert.mokka.view.mdv_base;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class BeanAdapter<B> {
     @Getter
     private B bean;
 
-    private ReadOnlyBooleanWrapper dirtyProperty = new ReadOnlyBooleanWrapper(false);
+    private final ReadOnlyBooleanWrapper dirtyProperty = new ReadOnlyBooleanWrapper(false);
 
     public void setBean(B bean) {
         settingNewBean = true;
@@ -65,27 +66,23 @@ public class BeanAdapter<B> {
 
     @SuppressWarnings("unchecked")
     public <T> ObjectProperty<T> getProperty(ReflectionUtils.SerializableFunction<B, T> getter, BiConsumer<B, T> setter) {
-
         String getterName;
         try {
             getterName = ReflectionUtils.resolveMethodName(getter);
         } catch (ReflectiveOperationException e) {
-            throw TechnicalException.forProgrammingError(e.getMessage(), e);
+            throw TechnicalException.forProgrammingError(e);
         }
-
         return (ObjectProperty<T>) propertyMap.computeIfAbsent(getterName, k -> createProperty(getter, setter)).property();
     }
 
     @SuppressWarnings("unchecked")
     public <T> ListProperty<T> getListProperty(ReflectionUtils.SerializableFunction<B, List<T>> getter, BiConsumer<B, List<T>> setter) {
-
         String getterName;
         try {
             getterName = ReflectionUtils.resolveMethodName(getter);
         } catch (ReflectiveOperationException e) {
-            throw TechnicalException.forProgrammingError(e.getMessage(), e);
+            throw TechnicalException.forProgrammingError(e);
         }
-
         return (ListProperty<T>) listPropertyMap.computeIfAbsent(getterName, k -> createListProperty(getter, setter)).property();
     }
 
@@ -116,7 +113,7 @@ public class BeanAdapter<B> {
             if (!Objects.equals(oldVal, newVal)) {
                 dirtyProperty.setValue(true);
             }
-            setter.accept(bean, newVal);
+            setter.accept(bean, new ArrayList<>(newVal));
         });
         BeanListPropertyContainer<B, T> propContainer = new BeanListPropertyContainer<>(property, getter, setter);
         if (bean != null) {

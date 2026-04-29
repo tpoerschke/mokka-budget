@@ -110,8 +110,8 @@ public class BillingDetailView extends EntityBaseDetailView<BillingDTO> implemen
         // Bindings
         titleTextField.textProperty().bindBidirectional(beanAdapter.getProperty(BillingDTO::getTitle, BillingDTO::setTitle));
         descriptionTextArea.textProperty().bindBidirectional(beanAdapter.getProperty(BillingDTO::getDescription, BillingDTO::setDescription));
-        Bindings.bindContentBidirectional(turnoverTable.getItems(),
-                                          beanAdapter.getListProperty(BillingDTO::getUniqueTurnovers, BillingDTO::setUniqueTurnovers));
+        Bindings.bindContentBidirectional(turnoverTable.getItems(), beanAdapter.getListProperty(BillingDTO::getUniqueTurnovers,
+                                                                                                BillingDTO::setUniqueTurnovers));
 
         // Validierungen
         validationMap.put("title", titleTextField);
