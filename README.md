@@ -3,11 +3,7 @@
 
 <!-- PROJECT SHIELDS -->
 <!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 <!--
 [![Contributors][contributors-shield]][contributors-url]
@@ -93,7 +89,7 @@ Features:
 - Verwaltung von **Budgets je Kategorie**
 - **Analyse**, die die Entwicklung einer Ausgabenkategorie darstellt
 
-Und das beste: **Keine Cloud** und keine amerikanischen Dienste. **Deine Daten** werden lokal **auf deinem Rechner** verarbeitet und gespeichert.
+Und das beste: **Keine Cloud** oder sonstige Datenkraken. **Deine Daten** werden lokal **auf deinem Rechner** verarbeitet und gespeichert.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -125,7 +121,7 @@ Die Anwendung steht beim aktuellen Release zum Download bereit: https://github.c
 
 Anleitung für Mac:
 
-1. Das aktuelle Release als ZIP herunterladen und entpacken
+1. Das aktuelle Release (.dmg) herunterladen und entpacken
 2. Die App ins Programme-Verzeichnis verschieben
 3. App starten
 
