@@ -4,8 +4,10 @@ import dagger.Component;
 import jakarta.inject.Singleton;
 
 import de.timkodiert.mokka.converter.Converters;
-import de.timkodiert.mokka.db.MigrationService;
-import de.timkodiert.mokka.db.MigrationView;
+import de.timkodiert.mokka.db.gatekeeper.GatekeeperService;
+import de.timkodiert.mokka.db.gatekeeper.GatekeeperView;
+import de.timkodiert.mokka.db.migration.MigrationService;
+import de.timkodiert.mokka.db.migration.MigrationView;
 import de.timkodiert.mokka.domain.repository.RepositoryModule;
 import de.timkodiert.mokka.exception.BbUncaughtExceptionHandler;
 import de.timkodiert.mokka.properties.PropertiesServiceImpl;
@@ -87,6 +89,8 @@ public interface ViewComponent {
     // -----------------------------------
     MigrationService getMigrationService();
     MigrationView getMigrationView();
+    GatekeeperService getGatekeeperService();
+    GatekeeperView getGatekeeperView();
 
     PropertiesServiceImpl getPropertiesService();
 

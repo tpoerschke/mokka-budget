@@ -1,4 +1,4 @@
-package de.timkodiert.mokka.db;
+package de.timkodiert.mokka.db.migration;
 
 import java.util.Set;
 

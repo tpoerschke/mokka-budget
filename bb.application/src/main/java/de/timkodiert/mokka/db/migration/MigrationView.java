@@ -1,4 +1,4 @@
-package de.timkodiert.mokka.db;
+package de.timkodiert.mokka.db.migration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
