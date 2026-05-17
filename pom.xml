@@ -36,7 +36,7 @@
     <version.atlantafx>2.1.0</version.atlantafx>
     <version.xchart>3.8.8</version.xchart>
     <!-- Database -->
-    <version.sqlite-jdbc>3.49.0.0</version.sqlite-jdbc>
+    <version.sqlite-jdbc>3.51.2.0</version.sqlite-jdbc>
     <version.hibernate>6.6.6.Final</version.hibernate>
     <version.flyway>11.3.1</version.flyway>
     <!-- Data Handling -->
@@ -306,7 +306,7 @@
         <version>${version.hibernate}</version>
       </dependency>
       <dependency>
-        <groupId>org.xerial</groupId>
+        <groupId>io.github.willena</groupId>
         <artifactId>sqlite-jdbc</artifactId>
         <version>${version.sqlite-jdbc}</version>
       </dependency>

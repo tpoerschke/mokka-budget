@@ -3,8 +3,6 @@
     <option name="MAIN_CLASS_NAME" value="de.timkodiert.mokka.Launch" />
     <module name="bb.application" />
     <option name="PROGRAM_PARAMETERS" value="--mode=DEV" />
-    <method v="2">
-      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="clean compile" />
-    </method>
+    <method v="2" />
   </configuration>
 </component>

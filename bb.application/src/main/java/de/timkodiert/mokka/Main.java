@@ -33,6 +33,7 @@ public class Main extends Application {
             propsService.setOperationMode(operationMode);
         }
         try {
+            LOG.info("Loading properties");
             propsService.load();
         } catch (Exception e) {
             StackTraceAlert.createAndLog("Error loading properties file!", e).showAndWait();

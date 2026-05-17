@@ -26,7 +26,6 @@ public class EntityManager {
                 .configure() // configures settings from hibernate.cfg.xml
                 .applySetting("hibernate.connection.url", dbPath)
                 .build();
-
         SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         this.session = sessionFactory.openSession();
     }
