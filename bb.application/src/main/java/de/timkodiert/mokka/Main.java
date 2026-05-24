@@ -50,9 +50,9 @@ public class Main extends Application {
         converters.register();
 
         GatekeeperService gatekeeperService = viewComponent.getGatekeeperService();
-        gatekeeperService.show();
+        gatekeeperService.getDatabaseInformation();
+        gatekeeperService.showAndGetDbPassphraseIfRequired();
 
-        // Migration
         MigrationService migrationService = viewComponent.getMigrationService();
         if (migrationService.hasPendingMigrations()) {
             migrationService.show();

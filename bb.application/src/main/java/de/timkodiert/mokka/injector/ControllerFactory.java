@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.function.Supplier;
 import javax.inject.Inject;
 
-import de.timkodiert.mokka.db.gatekeeper.GatekeeperView;
+import de.timkodiert.mokka.db.gatekeeper.EncryptionSetupView;
+import de.timkodiert.mokka.db.gatekeeper.PasswordPromptView;
 import de.timkodiert.mokka.db.migration.MigrationView;
 import de.timkodiert.mokka.view.AnnualOverviewView;
 import de.timkodiert.mokka.view.MonthlyOverviewView;
@@ -59,7 +60,8 @@ public class ControllerFactory {
         viewControllerMap.put(BillingDetailView.class, viewComponent::getBillingDetailView);
         // Technische Ansichten
         viewControllerMap.put(MigrationView.class, viewComponent::getMigrationView);
-        viewControllerMap.put(GatekeeperView.class, viewComponent::getGatekeeperView);
+        viewControllerMap.put(EncryptionSetupView.class, viewComponent::getGatekeeperView);
+        viewControllerMap.put(PasswordPromptView.class, viewComponent::getPasswordPromptView);
         // Sonstige Ansichten
         viewControllerMap.put(AboutView.class, viewComponent::getAboutView);
     }

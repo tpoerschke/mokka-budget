@@ -35,6 +35,7 @@ import de.timkodiert.mokka.importer.TurnoverImporter;
 import de.timkodiert.mokka.importer.TurnoverImporterImpl;
 import de.timkodiert.mokka.monthly_overview.MonthlyOverviewService;
 import de.timkodiert.mokka.monthly_overview.MonthlyOverviewServiceImpl;
+import de.timkodiert.mokka.properties.DatabasePropertiesProvider;
 import de.timkodiert.mokka.properties.PropertiesService;
 import de.timkodiert.mokka.properties.PropertiesServiceImpl;
 import de.timkodiert.mokka.view.BbFxmlLoader;
@@ -47,6 +48,7 @@ public interface ServiceModule {
     @Binds @Singleton MainView bindMainView(MainViewImpl impl);
 
     @Binds @Singleton PropertiesService bindPropertiesService(PropertiesServiceImpl impl);
+    @Binds @Singleton DatabasePropertiesProvider bindDatabasePropertiesProvider(PropertiesServiceImpl impl);
 
     @Binds FXMLLoader bindFXMLLoader(BbFxmlLoader impl);
 

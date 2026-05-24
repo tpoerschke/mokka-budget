@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import de.timkodiert.mokka.dialog.StackTraceAlert;
 import de.timkodiert.mokka.i18n.LanguageManager;
 import de.timkodiert.mokka.injector.ControllerFactory;
-import de.timkodiert.mokka.properties.PropertiesService;
+import de.timkodiert.mokka.properties.DatabasePropertiesProvider;
 
 @Singleton
 public class MigrationService {
@@ -45,12 +45,11 @@ public class MigrationService {
     private final BooleanProperty migrationError = new SimpleBooleanProperty();
 
     @Inject
-    public MigrationService(LanguageManager languageManager, PropertiesService propertiesService, ControllerFactory controllerFactory) {
+    public MigrationService(LanguageManager languageManager, DatabasePropertiesProvider dbPropertiesProvider, ControllerFactory controllerFactory) {
         this.languageManager = languageManager;
         this.controllerFactory = controllerFactory;
         flyway = Flyway.configure()
-                       //.dataSource(propertiesService.getDbPath() + "?cipher=SQLCipher&key=mySecurePassword123", "bb", "")
-                       .dataSource(propertiesService.getDbPath(), "bb", "")
+                       .dataSource(dbPropertiesProvider.getFullDbPath(), "bb", "")
                        .callbacks(new NotifierCallback())
                        .load();
         pendingCount = flyway.info().pending().length;

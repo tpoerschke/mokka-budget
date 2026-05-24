@@ -11,8 +11,6 @@ import java.util.Properties;
 import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
 import atlantafx.base.theme.Theme;
-import de.timkodiert.mokka.Constants;
-import de.timkodiert.mokka.i18n.LanguageManager;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
@@ -32,14 +30,23 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import org.jspecify.annotations.Nullable;
+
+import de.timkodiert.mokka.Constants;
+import de.timkodiert.mokka.i18n.LanguageManager;
 
 @Singleton
 public class PropertiesServiceImpl implements PropertiesService {
+
+    private static final String PROPS_COMMENT = "MOKKA Budget properties";
 
     private final Provider<LanguageManager> languageManager; // Provider, da sonst eine zyklische Abhängigkeit entsteht
 
     @Getter
     private Properties properties;
+
+    // Nicht in Properties, damit es nicht persistiert wird
+    private @Nullable String dbPassphrase;
 
     @Getter
     @Setter
@@ -51,6 +58,13 @@ public class PropertiesServiceImpl implements PropertiesService {
     public PropertiesServiceImpl(Provider<LanguageManager> languageManager) {
         this.languageManager = languageManager;
         this.properties = new Properties();
+    }
+
+    @Override
+    public void store() throws IOException {
+        try (FileWriter writer = new FileWriter(getPropertiesPath())) {
+            this.properties.store(writer, PROPS_COMMENT);
+        }
     }
 
     @Override
@@ -143,7 +157,7 @@ public class PropertiesServiceImpl implements PropertiesService {
                 // Speichern
                 File propsFile = Path.of(getPropertiesPath()).toFile();
                 this.properties = newProps;
-                this.properties.store(new FileWriter(propsFile), "MOKKA Budget properties");
+                this.properties.store(new FileWriter(propsFile), PROPS_COMMENT);
                 Alert alert = new Alert(AlertType.INFORMATION, languageManager.get().get("settings.alert.savedPleaseRestart"));
                 alert.showAndWait();
             } catch (Exception e) {
@@ -189,6 +203,24 @@ public class PropertiesServiceImpl implements PropertiesService {
 
     private String getPropertiesPath() {
         return String.format(Constants.PROPERTIES_PATH_TEMPLATE, operationMode.getPropertiesPostfix());
+    }
+
+    @Override
+    public String getFullDbPath() {
+        if (dbPassphrase == null) {
+            return getDbPath();
+        }
+        return getFullDbPath(dbPassphrase);
+    }
+
+    @Override
+    public String getFullDbPath(String dbPassword) {
+        return getDbPath() + "?cipher=ChaCha20&key=" + dbPassword;
+    }
+
+    @Override
+    public void setDbPassphrase(@Nullable String dbPassphrase) {
+        this.dbPassphrase = dbPassphrase;
     }
 }
 
