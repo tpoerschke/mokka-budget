@@ -1,0 +1,20 @@
+---
+description: MOKKA Budget – Projektkontext und Tech-Stack
+alwaysApply: true
+---
+
+# MOKKA Budget
+
+Lokales Haushaltsbuch ohne Cloud. Daten werden ausschließlich lokal verarbeitet und gespeichert.
+
+**Stack:** Java 21, JavaFX 21, Maven (Multi-Module), Dagger 2, Hibernate 6, SQLite, Flyway, Lombok, MapStruct, Atlantafx, JUnit 5 + Mockito
+
+**Starten:** `mvn clean javafx:run` oder IntelliJ Run Config `Launch`  
+**Bauen:** `./build_app.sh`  
+**Repo:** `tpoerschke/mokka-budget`
+
+**Branch-Konvention:**
+
+- `feature/#<issue>/<kurzbeschreibung>`
+- `task/#<issue>/<kurzbeschreibung>`
+- `bug/#<issue>/<kurzbeschreibung>`

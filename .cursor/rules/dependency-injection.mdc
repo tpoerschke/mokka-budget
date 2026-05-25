@@ -1,0 +1,31 @@
+---
+description: Dependency Injection mit Dagger 2 – Registrierung neuer Komponenten
+globs: "**/injector/**,**/*Module.java"
+alwaysApply: false
+---
+
+# Dependency Injection (Dagger 2)
+
+## Service / Interface-Bindung
+
+```java
+// ServiceModule.java
+@Binds @Singleton SomeService bindSomeService(SomeServiceImpl impl);
+```
+
+Interface in `bb.contract`, Implementierung in `bb.business-logic`.
+
+## View-Registrierung
+
+1. `@Singleton` + `@Inject`-Konstruktor am Controller
+2. `ViewComponent`: `SomeView getSomeView();`
+3. `ControllerFactory.registerController()`: `viewControllerMap.put(SomeView.class, viewComponent::getSomeView);`
+
+FXML-Loader wird zentral über `BbFxmlLoader`/`ServiceModule` bereitgestellt – nicht pro View neu erfinden.
+
+## Repository
+
+- `@Module` in `RepositoryModule` (`bb.domain`)
+- Repositories per `@Inject`-Konstruktor, `@Singleton`
+
+Nach DI-Änderungen: Maven-Build ausführen (Dagger-Code-Generierung).

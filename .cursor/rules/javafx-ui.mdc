@@ -1,0 +1,35 @@
+---
+description: JavaFX-Views, FXML und UI-Konventionen
+globs: "**/*View*.java,**/*.fxml,**/view/**"
+alwaysApply: false
+---
+
+# JavaFX & FXML
+
+## View-Pattern
+
+- Controller implementieren `View` (ggf. `Initializable`).
+- `@FXML`-Felder und `-Handler`; UI-Logik im Controller, Geschäftslogik in Services.
+- Konstruktor-Injection via `@Inject` – keine `new` für Services/Dialoge.
+- MDV-Views: von `BaseManageView` / `BaseListManageView` erben, Detail-FXML über `getDetailViewFxmlLocation()`.
+
+## FXML
+
+- Liegen unter `bb.application/src/main/resources/fxml/` (Gatekeeper/Migration) oder modulintern.
+- Neue Hauptansichten: Eintrag in `FxmlResource`-Enum und ggf. `MainViewImpl`.
+- Sub-Views/modale Dialoge: Pfad-Konstante in `FxmlResource` oder statischer Import.
+
+## Neue View registrieren (Checkliste)
+
+1. FXML + Controller-Klasse
+2. `@Inject`-Konstruktor, Dagger `@Singleton` falls nötig
+3. Provider-Methode in `ViewComponent`
+4. Eintrag in `ControllerFactory.registerController()`
+5. i18n-Keys in `messages_de.properties` **und** `messages_en.properties`
+
+## UI-Hilfsmittel
+
+- Dialoge: `DialogFactory` / `StackTraceAlert`
+- Texte: `LanguageManager.get("key")` – keine hardcodierten UI-Strings
+- Styling: Atlantafx (`Styles.*`), Icons via Ikonli (`FontIcon`)
+- Fehler beim Laden: `StackTraceAlert.createAndLog(...)`

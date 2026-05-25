@@ -1,0 +1,24 @@
+---
+description: Internationalisierung – DE und EN immer gemeinsam pflegen
+globs: "**/messages_*.properties,**/i18n/**"
+alwaysApply: false
+---
+
+# i18n
+
+Zwei Resource-Bundles, immer synchron halten:
+
+- `bb.ui-infrastructure/src/main/resources/i18n/messages_de.properties`
+- `bb.ui-infrastructure/src/main/resources/i18n/messages_en.properties`
+
+## Key-Konvention
+
+`<viewOrFeature>.<element>=Text` – z. B. `encryptionSetupView.label.password`
+
+Bestehende Gruppen wiederverwenden: `button.*`, `label.*`, `alert.*`, `stageTitle.*`
+
+## Regeln
+
+- Jeder neue Key in **beiden** Dateien anlegen.
+- Keine UI-Texte hardcoden in Java/FXML (`text="%key"` in FXML bevorzugt).
+- Platzhalter und Sonderzeichen konsistent zu bestehenden Einträgen halten.

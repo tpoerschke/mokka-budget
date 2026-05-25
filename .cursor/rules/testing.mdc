@@ -1,0 +1,20 @@
+---
+description: Tests – JUnit 5 und Mockito
+globs: "**/*Test.java,**/test/**"
+alwaysApply: false
+---
+
+# Tests
+
+## Konventionen
+
+- JUnit 5 (`@Test`, `@BeforeEach`), Mockito (`@ExtendWith(MockitoExtension.class)`, `@Mock`)
+- Testklasse neben Implementierung: `bb.business-logic/src/test/java/...`
+- SUT benennen: `MonthlyOverviewServiceImpl sut = new ...`
+- Testdaten: `TestDataProvider` wiederverwenden statt duplizieren, bei Bedarf erweitern
+
+## Scope
+
+- Fokus auf Business-Logic (`bb.business-logic`) – UI-Tests sind unüblich.
+- Keine Tests schreiben, die nur Getter/Setter oder Framework-Verhalten prüfen.
+- Nach Logik-Änderungen: `mvn test -pl bb.business-logic` (oder betroffenes Modul).

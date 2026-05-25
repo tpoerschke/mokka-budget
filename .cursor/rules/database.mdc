@@ -1,0 +1,28 @@
+---
+description: Datenbank – Flyway, Hibernate, Repositories
+globs: "**/db/**,**/domain/**,**/repository/**,**/*Repository*.java"
+alwaysApply: false
+---
+
+# Datenbank
+
+## Schema-Änderungen
+
+- Flyway-Skripte: `bb.application/src/main/resources/db/migration/`
+- Naming: `V####__KURZ_BESCHREIBUNG.sql` (fortlaufende Nummer)
+- Bestehende Migrationen **nicht** ändern – immer neues Skript anlegen.
+
+## Persistenz
+
+- Entities in `bb.domain/.../domain/model/`
+- Repositories erweitern `Repository<T>` oder folgen bestehendem Muster
+- `RepositoryModule` für neue Repositories ergänzen
+
+## DB-Pfad & Verschlüsselung
+
+- Konfiguration über `PropertiesService` / `DatabasePropertiesProvider`
+- Verschlüsselte DB: Suffix `.enc.db`, Gatekeeper vor Migration (`GatekeeperService`)
+
+## Beträge
+
+Werte in **Cent** als `int` – bei UI-Konvertierung bestehende Converter/TableCells nutzen (`CurrencyTableCell`).
