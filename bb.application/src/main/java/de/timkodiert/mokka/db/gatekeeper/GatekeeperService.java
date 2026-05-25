@@ -112,6 +112,10 @@ public class GatekeeperService {
         passphraseValid = true;
     }
 
+    void proceedWithoutEncryption() {
+        passphraseValid = true;
+    }
+
     boolean checkDatabaseConnection(String password) {
         try (Connection connection = DriverManager.getConnection(propertiesService.getFullDbPath(password))) {
             return connection.isValid(5);

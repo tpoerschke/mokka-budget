@@ -61,6 +61,12 @@ public class EncryptionSetupView implements View, Initializable {
         closeDialog();
     }
 
+    @FXML
+    private void proceedWithoutEncryption() {
+        service.proceedWithoutEncryption();
+        closeDialog();
+    }
+
     private void closeDialog() {
         passwordField.getScene().getWindow().hide();
     }
