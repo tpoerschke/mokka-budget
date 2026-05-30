@@ -26,6 +26,9 @@ public class CategoryDTO {
     private @Nullable Integer budgetValue;
     private @Nullable BudgetType budgetType;
 
+    private @Nullable String icon;
+    private @Nullable String color;
+
     public boolean isNew() {
         return id <= 0;
     }

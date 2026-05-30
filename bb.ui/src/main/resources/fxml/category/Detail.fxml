@@ -15,7 +15,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import de.timkodiert.mokka.ui.control.BootstrapIconPicker?>
 <?import de.timkodiert.mokka.ui.control.MoneyTextField?>
+<?import javafx.scene.control.ColorPicker?>
 <BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="de.timkodiert.mokka.view.category.CategoryDetailView">
     <center>
@@ -32,17 +34,25 @@
                 <Label text="%manageCategories.label.group"/>
                 <ComboBox fx:id="groupComboBox" maxWidth="Infinity"/>
             </VBox>
-            <HBox GridPane.rowIndex="2" GridPane.columnSpan="2" spacing="10" alignment="CENTER_LEFT">
+            <VBox GridPane.rowIndex="2">
+                <Label text="%manageCategories.label.icon"/>
+                <BootstrapIconPicker fx:id="iconPicker" maxWidth="Infinity"/>
+            </VBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Label text="%manageCategories.label.color"/>
+                <ColorPicker fx:id="colorPicker"/>
+            </VBox>
+            <HBox GridPane.rowIndex="3" GridPane.columnSpan="2" spacing="10" alignment="CENTER_LEFT">
                 <Separator prefWidth="15" HBox.hgrow="NEVER"/>
                 <Label text="%manageCategories.label.budget"/>
                 <Separator HBox.hgrow="ALWAYS"/>
             </HBox>
-            <VBox GridPane.rowIndex="3">
+            <VBox GridPane.rowIndex="4">
               <Label text="%manageCategories.label.budget"/>
               <MoneyTextField fx:id="budgetValueTextField" nullable="true"/>
             </VBox>
-            <CheckBox fx:id="budgetActiveCheckBox" text="%manageCategories.checkbox.active" GridPane.rowIndex="4"/>
-            <VBox GridPane.rowIndex="5">
+            <CheckBox fx:id="budgetActiveCheckBox" text="%manageCategories.checkbox.active" GridPane.rowIndex="5"/>
+            <VBox GridPane.rowIndex="6">
                 <Label text="%manageCategories.label.budgetType"/>
                 <ComboBox fx:id="budgetTypeComboBox" maxWidth="150"/>
             </VBox>
@@ -52,6 +62,7 @@
                 <ColumnConstraints/>
             </columnConstraints>
             <rowConstraints>
+                <RowConstraints/>
                 <RowConstraints/>
                 <RowConstraints/>
                 <RowConstraints/>
