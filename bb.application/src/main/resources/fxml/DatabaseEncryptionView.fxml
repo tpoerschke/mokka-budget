@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import atlantafx.base.controls.PasswordTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="de.timkodiert.mokka.db.gatekeeper.DatabaseEncryptionView" hgap="10" vgap="10">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+  </padding>
+
+  <Label text="%databaseEncryptionView.label.title" styleClass="text-bold" GridPane.columnSpan="2"/>
+  <Label fx:id="statusLabel" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+
+  <VBox fx:id="enableEncryptionBox" spacing="10" GridPane.rowIndex="2" GridPane.columnSpan="2">
+    <Label text="%databaseEncryptionView.label.enableSection"/>
+    <GridPane hgap="10" vgap="10">
+      <Label text="%encryptionSetupView.label.password"/>
+      <PasswordTextField fx:id="enablePasswordField" GridPane.columnIndex="1"/>
+      <Label text="%encryptionSetupView.label.passwordRetype" GridPane.rowIndex="1"/>
+      <PasswordTextField fx:id="enablePasswordRetypeField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+      <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+      </columnConstraints>
+    </GridPane>
+    <HBox alignment="CENTER_RIGHT">
+      <Button fx:id="enableEncryptionButton" text="%databaseEncryptionView.button.enable" styleClass="accent" onAction="#enableEncryption"/>
+    </HBox>
+  </VBox>
+
+  <VBox fx:id="manageEncryptionBox" spacing="10" GridPane.rowIndex="2" GridPane.columnSpan="2">
+    <Label text="%databaseEncryptionView.label.manageSection"/>
+    <GridPane hgap="10" vgap="10">
+      <Label text="%databaseEncryptionView.label.currentPassword"/>
+      <PasswordTextField fx:id="currentPasswordField" GridPane.columnIndex="1"/>
+      <Label text="%databaseEncryptionView.label.newPassword" GridPane.rowIndex="1"/>
+      <PasswordTextField fx:id="newPasswordField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+      <Label text="%databaseEncryptionView.label.newPasswordRetype" GridPane.rowIndex="2"/>
+      <PasswordTextField fx:id="newPasswordRetypeField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+      <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+      </columnConstraints>
+    </GridPane>
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+      <Button fx:id="changePasswordButton" text="%databaseEncryptionView.button.changePassword" onAction="#changePassword"/>
+      <Button fx:id="disableEncryptionButton" text="%databaseEncryptionView.button.disable" onAction="#disableEncryption"/>
+    </HBox>
+  </VBox>
+
+  <Separator GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+
+  <Label fx:id="passwordLossLabel" text="%encryptionSetupView.label.passwordLossText" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+
+  <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="5" GridPane.columnSpan="2">
+    <Button text="%button.cancel" onAction="#closeDialog"/>
+  </HBox>
+
+  <columnConstraints>
+    <ColumnConstraints/>
+    <ColumnConstraints hgrow="ALWAYS"/>
+  </columnConstraints>
+</GridPane>

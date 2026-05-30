@@ -9,14 +9,14 @@ alwaysApply: false
 ## View-Pattern
 
 - Controller implementieren `View` (ggf. `Initializable`).
-- `@FXML`-Felder und `-Handler`; UI-Logik im Controller, Geschäftslogik in Services.
+- `@FXML`-Felder und `-Handler`; UI-Logik im Controller, Geschäftslogik in ServiceBeans.
 - Konstruktor-Injection via `@Inject` – keine `new` für Services/Dialoge.
 - MDV-Views: von `BaseManageView` / `BaseListManageView` erben, Detail-FXML über `getDetailViewFxmlLocation()`.
 
 ## FXML
 
 - Liegen unter `bb.application/src/main/resources/fxml/` (Gatekeeper/Migration) oder modulintern.
-- Neue Hauptansichten: Eintrag in `FxmlResource`-Enum und ggf. `MainViewImpl`.
+- Neue Hauptansichten (bzw. alle Anischten, die aus der MainView geöffnet werden): Eintrag in `FxmlResource`-Enum und ggf. `MainViewImpl`.
 - Sub-Views/modale Dialoge: Pfad-Konstante in `FxmlResource` oder statischer Import.
 
 ## Neue View registrieren (Checkliste)

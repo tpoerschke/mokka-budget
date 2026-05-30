@@ -58,6 +58,11 @@ class LanguageManagerTest {
         }
 
         @Override
+        public void store() throws IOException {
+            // Fake-Impl
+        }
+
+        @Override
         public String getDbPath() {
             return null;
         }
@@ -75,6 +80,21 @@ class LanguageManagerTest {
         @Override
         public Stage buildWindow() {
             return null;
+        }
+
+        @Override
+        public String getFullDbPath() {
+            return "";
+        }
+
+        @Override
+        public String getFullDbPath(String dbPassword) {
+            return "";
+        }
+
+        @Override
+        public void setDbPassphrase(String dbPassword) {
+            // Fake-Impl
         }
     }
 }

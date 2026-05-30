@@ -215,7 +215,7 @@ public class PropertiesServiceImpl implements PropertiesService {
 
     @Override
     public String getFullDbPath(String dbPassword) {
-        return getDbPath() + "?cipher=ChaCha20&key=" + dbPassword;
+        return String.format("%s?cipher=%s&key=%s", getDbPath(), CIPHER, dbPassword);
     }
 
     @Override

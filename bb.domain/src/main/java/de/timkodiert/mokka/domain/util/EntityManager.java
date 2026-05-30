@@ -18,11 +18,20 @@ import de.timkodiert.mokka.properties.DatabasePropertiesProvider;
 @Singleton
 public class EntityManager {
 
+    private final DatabasePropertiesProvider dbPropertiesProvider;
+
     @Getter
-    private final Session session;
+    private Session session;
 
     @Inject
     public EntityManager(DatabasePropertiesProvider dbPropertiesProvider) {
+        this.dbPropertiesProvider = dbPropertiesProvider;
+    }
+
+    public void openNewSession() {
+        if (this.session != null && this.session.isOpen()) {
+            this.session.close();
+        }
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
                 .applySetting("hibernate.connection.url", dbPropertiesProvider.getFullDbPath())

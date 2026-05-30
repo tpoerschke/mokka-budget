@@ -57,6 +57,9 @@ public class Main extends Application {
         if (migrationService.hasPendingMigrations()) {
             migrationService.show();
         }
+
+        viewComponent.getEntityManager().openNewSession();
+
         LOG.info("Showing MainView");
         viewComponent.getMainView().setAndShowPrimaryStage(primaryStage);
     }

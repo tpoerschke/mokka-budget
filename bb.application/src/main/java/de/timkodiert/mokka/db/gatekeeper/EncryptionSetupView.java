@@ -56,7 +56,6 @@ public class EncryptionSetupView implements View, Initializable {
             DialogFactory.buildErrorDialog(languageManager.get("encryptionSetupView.alert.passwordsNotEqual")).showAndWait();
             return;
         }
-        service.storeEncryptedDbPath();
         service.setValidDatabasePassphrase(passwordField.getPassword());
         closeDialog();
     }

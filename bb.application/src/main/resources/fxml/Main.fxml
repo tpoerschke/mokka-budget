@@ -35,11 +35,11 @@
               <SeparatorMenuItem/>
               <MenuItem mnemonicParsing="false" onAction="#openAboutView" text="%menuItem.aboutView"/>
             </Menu>
-            <Menu mnemonicParsing="false" text="%menuBar.buttonData">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#openImportView" text="%menuItem.openImportView" />
-              </items>
-            </Menu>
+          <Menu mnemonicParsing="false" text="%menuBar.buttonData">
+            <MenuItem mnemonicParsing="false" onAction="#openImportView" text="%menuItem.openImportView"/>
+            <SeparatorMenuItem/>
+            <MenuItem mnemonicParsing="false" onAction="#openDatabaseEncryptionView" text="%menuItem.databaseEncryptionView"/>
+          </Menu>
         </menus>
       </MenuBar>
    </top>

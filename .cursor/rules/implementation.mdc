@@ -8,12 +8,13 @@ alwaysApply: true
 ## Scope
 
 - Nur das ändern, was die Aufgabe verlangt. Kein Refactoring, keine Formatierung, keine „Verbesserungen“ an unberührtem Code.
-- Vor dem Schreiben: bestehende Dateien und Nachbarcode lesen. Namen, Patterns und Abstraktionsebene übernehmen.
+- Vor dem Schreiben: bestehende Dateien und verwandten Code lesen. Namen, Patterns und Abstraktionsebene übernehmen.
 - Erweiterungen an vorhandenen Klassen/Views bevorzugen; keine parallelen Implementierungen desselben Problems.
 
 ## Qualität
 
-- Die kleinstmögliche korrekte Lösung. Keine vorzeitige Abstraktion, keine Extra-Helper für Einzeiler.
+- Präzise Lösungen, die wenig doppelten Code erzeugen. Keine vorzeitige Abstraktion, keine Extra-Helper für Einzeiler.
+- Komposition gegenüber Vererbung bevorzugen.
 - Kommentare nur bei nicht-offensichtlicher Fachlogik oder technischen Fallstricken.
 - Tests nur hinzufügen, wenn angefragt oder sie echtes Verhalten absichern – keine trivialen Assertions.
 

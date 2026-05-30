@@ -4,12 +4,14 @@ import dagger.Component;
 import jakarta.inject.Singleton;
 
 import de.timkodiert.mokka.converter.Converters;
+import de.timkodiert.mokka.db.gatekeeper.DatabaseEncryptionView;
 import de.timkodiert.mokka.db.gatekeeper.EncryptionSetupView;
 import de.timkodiert.mokka.db.gatekeeper.GatekeeperService;
 import de.timkodiert.mokka.db.gatekeeper.PasswordPromptView;
 import de.timkodiert.mokka.db.migration.MigrationService;
 import de.timkodiert.mokka.db.migration.MigrationView;
 import de.timkodiert.mokka.domain.repository.RepositoryModule;
+import de.timkodiert.mokka.domain.util.EntityManager;
 import de.timkodiert.mokka.exception.BbUncaughtExceptionHandler;
 import de.timkodiert.mokka.properties.PropertiesServiceImpl;
 import de.timkodiert.mokka.view.AnnualOverviewView;
@@ -92,6 +94,7 @@ public interface ViewComponent {
     MigrationView getMigrationView();
     GatekeeperService getGatekeeperService();
     EncryptionSetupView getGatekeeperView();
+    DatabaseEncryptionView getDatabaseEncryptionView();
     PasswordPromptView getPasswordPromptView();
 
     PropertiesServiceImpl getPropertiesService();
@@ -99,6 +102,7 @@ public interface ViewComponent {
     // -----------------------------------
     // Sonstiges
     // -----------------------------------
+    EntityManager getEntityManager();
     Converters getConverters();
     BbUncaughtExceptionHandler getUncaughtExceptionHandler();
 }
