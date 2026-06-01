@@ -1,0 +1,31 @@
+\chapter{Datenbank-Verschlüsselung} \label{chap:dbEncryption}
+
+Alle Anwendungsdaten werden lokal in einer SQLite-Datenbank gespeichert. Optional kann diese Datei mit einem Passwort verschlüsselt werden, sodass die Daten ohne Kenntnis des Passworts nicht lesbar sind.
+
+\section{Erststart}
+
+Beim ersten Start der Anwendung -- solange noch keine Datenbank existiert -- kann ein Passwort festgelegt werden. Alternativ lässt sich die Verschlüsselung vorerst überspringen (Button \textit{Daten nicht verschlüsseln}). Die Verschlüsselung kann später jederzeit nachträglich aktiviert werden.
+
+\section{Anwendungsstart mit verschlüsselter Datenbank}
+
+Ist die Datenbank verschlüsselt, muss bei jedem Start das Passwort eingegeben werden. Bei falschem Passwort kann die Anwendung nicht gestartet werden. Wird der Dialog ohne gültiges Passwort geschlossen, beendet sich die Anwendung.
+
+\section{Verschlüsselung verwalten}
+
+Die Verwaltung der Verschlüsselung ist im Menü unter \textit{Daten $\rightarrow$ Datenbank-Verschlüsselung} erreichbar. Dort wird angezeigt, ob die Verschlüsselung aktiv ist.
+
+\begin{itemize}[nosep]
+	\item \textbf{Verschlüsselung aktivieren:} Für eine bisher unverschlüsselte Datenbank kann ein Passwort vergeben werden.
+	\item \textbf{Passwort ändern:} Bei aktiver Verschlüsselung kann das Passwort unter Angabe des aktuellen Passworts geändert werden.
+	\item \textbf{Verschlüsselung deaktivieren:} Die Datenbank wird wieder unverschlüsselt gespeichert. Dies erfordert eine Bestätigung.
+\end{itemize}
+
+Vor dem Aktivieren oder Deaktivieren der Verschlüsselung erstellt die Anwendung automatisch eine Sicherungskopie der Datenbankdatei (Dateiendung \texttt{.backup.db} neben der eigentlichen Datenbankdatei).
+
+\begin{infobox}
+\textbf{Wichtig -- Passwortverlust}: Das Passwort wird nicht gespeichert und kann nicht zurückgesetzt werden. Geht das Passwort verloren, sind alle Anwendungsdaten unwiederbringlich verloren.
+\end{infobox}
+
+\begin{infobox}
+\textbf{Hinweis bei Fehlern}: Schlägt das Aktivieren oder Deaktivieren der Verschlüsselung fehl, kann die Datenbank anhand der automatisch erstellten Sicherungskopie wiederhergestellt werden.
+\end{infobox}
