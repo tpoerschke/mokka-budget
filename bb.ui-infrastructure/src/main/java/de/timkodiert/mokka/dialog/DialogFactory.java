@@ -37,7 +37,7 @@ public class DialogFactory {
         return buildInformationDialog(informationStr);
     }
 
-    public Alert buildErrorDialog(String message) {
+    public static Alert buildErrorDialog(String message) {
         return new Alert(AlertType.ERROR, message);
     }
 }

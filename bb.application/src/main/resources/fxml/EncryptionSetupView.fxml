@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import atlantafx.base.controls.PasswordTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="de.timkodiert.mokka.db.gatekeeper.EncryptionSetupView" vgap="10" hgap="10">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+  </padding>
+  <ImageView preserveRatio="true" GridPane.halignment="CENTER" GridPane.columnSpan="2">
+    <Image url="@/images/logo.png" preserveRatio="true"/>
+    <fitWidth>100</fitWidth>
+  </ImageView>
+  <Label text="MOKKA Budget" styleClass="text-bold" GridPane.rowIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+    <padding>
+      <Insets bottom="10"/>
+    </padding>
+  </Label>
+  <Label text="%encryptionSetupView.label.password" GridPane.rowIndex="2"/>
+  <PasswordTextField fx:id="passwordField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+  <Label text="%encryptionSetupView.label.passwordRetype" GridPane.rowIndex="3"/>
+  <PasswordTextField fx:id="passwordRetypeField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+  <HBox GridPane.rowIndex="4" GridPane.columnSpan="2" GridPane.halignment="RIGHT" alignment="CENTER_RIGHT" spacing="10">
+    <Button fx:id="noDataEncButton" text="%encryptionSetupView.button.noDataEncryption" onAction="#proceedWithoutEncryption"/>
+    <Button text="%button.confirm" styleClass="accent" onAction="#processPassword"/>
+  </HBox>
+  <Label fx:id="passwortLossLabel" text="%encryptionSetupView.label.passwordLossText" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+
+  <columnConstraints>
+    <ColumnConstraints/>
+    <ColumnConstraints hgrow="ALWAYS"/>
+  </columnConstraints>
+</GridPane>

@@ -8,7 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.timkodiert.mokka.converter.Converters;
-import de.timkodiert.mokka.db.MigrationService;
+import de.timkodiert.mokka.db.gatekeeper.GatekeeperService;
+import de.timkodiert.mokka.db.migration.MigrationService;
 import de.timkodiert.mokka.dialog.StackTraceAlert;
 import de.timkodiert.mokka.injector.DaggerViewComponent;
 import de.timkodiert.mokka.injector.ViewComponent;
@@ -33,6 +34,7 @@ public class Main extends Application {
             propsService.setOperationMode(operationMode);
         }
         try {
+            LOG.info("Loading properties");
             propsService.load();
         } catch (Exception e) {
             StackTraceAlert.createAndLog("Error loading properties file!", e).showAndWait();
@@ -47,11 +49,17 @@ public class Main extends Application {
         Converters converters = viewComponent.getConverters();
         converters.register();
 
-        // Migration & Programmstart
+        GatekeeperService gatekeeperService = viewComponent.getGatekeeperService();
+        gatekeeperService.getDatabaseInformation();
+        gatekeeperService.showAndGetDbPassphraseIfRequired();
+
         MigrationService migrationService = viewComponent.getMigrationService();
         if (migrationService.hasPendingMigrations()) {
             migrationService.show();
         }
+
+        viewComponent.getEntityManager().openNewSession();
+
         LOG.info("Showing MainView");
         viewComponent.getMainView().setAndShowPrimaryStage(primaryStage);
     }

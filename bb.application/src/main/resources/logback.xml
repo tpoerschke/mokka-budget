@@ -1,7 +1,10 @@
 <configuration>
+  <conversionRule conversionWord="samsg" converterClass="de.timkodiert.mokka.logging.SanitizedMessageConverter"/>
+  <conversionRule conversionWord="saex" converterClass="de.timkodiert.mokka.logging.SanitizedThrowableProxyConverter"/>
+
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>%date [%thread] %-5level %logger - %msg%n</pattern>
+      <pattern>%date [%thread] %-5level %logger - %samsg%n%saex</pattern>
     </encoder>
   </appender>
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -13,7 +16,7 @@
       <totalSizeCap>1GB</totalSizeCap>
     </rollingPolicy>
     <encoder>
-      <pattern>%date [%thread] %-5level %logger - %msg%n</pattern>
+      <pattern>%date [%thread] %-5level %logger - %samsg%n%saex</pattern>
     </encoder>
   </appender>
 

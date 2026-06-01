@@ -196,6 +196,23 @@ public class MainViewImpl implements Initializable, MainView {
         }
     }
 
+    @FXML
+    private void openDatabaseEncryptionView() {
+        try {
+            stageBuilderProvider.get()
+                                .withFXMLResource("/fxml/DatabaseEncryptionView.fxml")
+                                .withOwner(primaryStage)
+                                .withModality(Modality.APPLICATION_MODAL)
+                                .withTitle(languageManager.get("databaseEncryptionView.stageTitle"))
+                                .minSize(500, 420)
+                                .build()
+                                .stage()
+                                .showAndWait();
+        } catch (IOException e) {
+            throw TechnicalException.forFxmlNotFound(e);
+        }
+    }
+
 
     @FXML
     private void onDragOver(DragEvent e) {

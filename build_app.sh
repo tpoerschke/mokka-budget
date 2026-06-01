@@ -22,7 +22,7 @@ jpackage_win() {
     --dest "${BUILD_DIR}" \
     --java-options "--module-path \$APPDIR/$LIB_DIR" \
     --java-options "--add-modules=javafx.controls,javafx.fxml,javafx.swing" \
-    --java-options "--add-reads=org.xerial.sqlitejdbc=ALL-UNNAMED" \
+    --java-options "--add-reads=io.github.willena.sqlitejdbc=ALL-UNNAMED" \
     --type msi \
     --win-dir-chooser \
     --win-menu \
@@ -40,7 +40,7 @@ jpackage_linux_rpm() {
     --dest "${BUILD_DIR}" \
     --java-options "--module-path \$APPDIR/$LIB_DIR" \
     --java-options "--add-modules=javafx.controls,javafx.fxml,javafx.swing" \
-    --java-options "--add-reads=org.xerial.sqlitejdbc=ALL-UNNAMED" \
+    --java-options "--add-reads=io.github.willena.sqlitejdbc=ALL-UNNAMED" \
     --type "rpm" \
     --linux-menu-group "Office" \
     --linux-shortcut \
@@ -57,7 +57,7 @@ jpackage_mac() {
     --dest "${BUILD_DIR}" \
     --java-options "--module-path \$APPDIR/$LIB_DIR" \
     --java-options "--add-modules=javafx.controls,javafx.fxml,javafx.swing" \
-    --java-options "--add-reads=org.xerial.sqlitejdbc=ALL-UNNAMED" \
+    --java-options "--add-reads=io.github.willena.sqlitejdbc=ALL-UNNAMED" \
     --type dmg \
     --mac-app-category "finance" \
     --verbose

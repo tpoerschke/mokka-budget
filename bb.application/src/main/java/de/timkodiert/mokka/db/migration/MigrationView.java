@@ -1,4 +1,4 @@
-package de.timkodiert.mokka.db;
+package de.timkodiert.mokka.db.migration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,13 +33,11 @@ public class MigrationView implements View, Initializable {
 
     private final MigrationService service;
     private final LanguageManager languageManager;
-    private final DialogFactory dialogFactory;
 
     @Inject
-    public MigrationView(MigrationService service, LanguageManager languageManager, DialogFactory dialogFactory) {
+    public MigrationView(MigrationService service, LanguageManager languageManager) {
         this.service = service;
         this.languageManager = languageManager;
-        this.dialogFactory = dialogFactory;
     }
 
     @FXML
@@ -66,7 +64,7 @@ public class MigrationView implements View, Initializable {
         });
 
         service.migrationErrorProperty().addListener((observableValue, oldVal, newVal) -> {
-            dialogFactory.buildErrorDialog(languageManager.get("migration.error")).showAndWait();
+            DialogFactory.buildErrorDialog(languageManager.get("migration.error")).showAndWait();
             Platform.exit();
             System.exit(1);
         });

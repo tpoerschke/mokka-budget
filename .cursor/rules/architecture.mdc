@@ -1,0 +1,32 @@
+---
+description: Modul-Schichten und Zuständigkeiten
+alwaysApply: true
+---
+
+# Architektur & Module
+
+| Modul | Zuständigkeit |
+|-------|---------------|
+| `bb.contract` | Interfaces, DTOs, gemeinsame Typen – **keine** Implementierung, **keine** technische Infrastruktur |
+| `bb.domain` | Hibernate-Entities, Repositories, DB-Zugriff |
+| `bb.business-logic` | Service-Implementierungen, CRUD, Mapper, Geschäftslogik |
+| `bb.ui-infrastructure` | Wiederverwendbare UI-Basis (`BaseManageView`, `DialogFactory`, `FxmlResource`, i18n) |
+| `bb.ui` | Feature-Views (FXML-Controller) |
+| `bb.application` | App-Einstieg, Dagger-Module, Properties, Migration, Gatekeeper, Logging, allgemein **technische Infrastruktur** |
+
+## Modul-Grenzen
+
+- **`bb.contract`:** Nur Schnittstellen und shared Types.
+- **`bb.application`:** Alles, was die lauffähige App zusammensetzt – inkl. technischer Querschnittsfunktionen unter bspw. `de.timkodiert.mokka.logging` (Log-Sanitizer, Logback-Converter), `logback.xml`, `Main`, Gatekeeper.
+
+## Abhängigkeitsrichtung
+
+UI → Business-Logic/Contract → Domain. Domain kennt keine UI.
+
+- Neue Service-Schnittstelle: Interface in `bb.contract`, `@Binds` in `ServiceModule`.
+- DB-Schema: Flyway-Skript in `bb.application/src/main/resources/db/migration/` (`V####__BESCHREIBUNG.sql`).
+- Geldbeträge: in Cents (`int`) speichern, nicht als `double`.
+
+## App-Startreihenfolge (`Main.java`)
+
+Properties laden → Gatekeeper (DB-Passphrase) → Flyway-Migration → MainView (und damit die gesamte Anwendung).

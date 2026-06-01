@@ -30,7 +30,7 @@
       <artifactId>hibernate-community-dialects</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.xerial</groupId>
+      <groupId>io.github.willena</groupId>
       <artifactId>sqlite-jdbc</artifactId>
     </dependency>
     <dependency>

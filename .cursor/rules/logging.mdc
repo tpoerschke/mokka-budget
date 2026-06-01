@@ -1,0 +1,22 @@
+---
+description: Logging mittels Logback
+globs: "**/bb.application/**,**/logback.xml"
+alwaysApply: false
+---
+
+# Logging (`bb.application`)
+
+## Package
+
+`de.timkodiert.mokka.logging` – Log-Sanitizer, Logback-Converter, weitere logging-spezifische Hilfsklassen
+
+## Konfiguration
+
+- `bb.application/src/main/resources/logback.xml` – zentrale Logback-Konfiguration
+- Custom Converter in `logback.xml` via `conversionRule` registrieren; Klassen im Package `de.timkodiert.mokka.logging`
+
+## Regeln
+
+- Keine Logback-/SLF4J-Infrastruktur in `bb.contract` anlegen
+- Sensible Daten (z. B. DB-Schlüssel in JDBC-URLs) vor dem Loggen bereinigen
+- Logback-Abhängigkeit explizit in `bb.application/pom.xml` pflegen

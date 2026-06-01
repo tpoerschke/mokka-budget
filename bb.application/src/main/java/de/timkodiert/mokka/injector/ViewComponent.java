@@ -4,9 +4,14 @@ import dagger.Component;
 import jakarta.inject.Singleton;
 
 import de.timkodiert.mokka.converter.Converters;
-import de.timkodiert.mokka.db.MigrationService;
-import de.timkodiert.mokka.db.MigrationView;
+import de.timkodiert.mokka.db.gatekeeper.DatabaseEncryptionView;
+import de.timkodiert.mokka.db.gatekeeper.EncryptionSetupView;
+import de.timkodiert.mokka.db.gatekeeper.GatekeeperService;
+import de.timkodiert.mokka.db.gatekeeper.PasswordPromptView;
+import de.timkodiert.mokka.db.migration.MigrationService;
+import de.timkodiert.mokka.db.migration.MigrationView;
 import de.timkodiert.mokka.domain.repository.RepositoryModule;
+import de.timkodiert.mokka.domain.util.EntityManager;
 import de.timkodiert.mokka.exception.BbUncaughtExceptionHandler;
 import de.timkodiert.mokka.properties.PropertiesServiceImpl;
 import de.timkodiert.mokka.view.AnnualOverviewView;
@@ -29,7 +34,7 @@ import de.timkodiert.mokka.view.unique_turnover.UniqueTurnoverManageView;
 import de.timkodiert.mokka.view.widget.BudgetWidget;
 
 @Singleton
-@Component(modules = {RepositoryModule.class, ServiceModule.class, AppModule.class, DbPathModule.class})
+@Component(modules = {RepositoryModule.class, ServiceModule.class, AppModule.class})
 public interface ViewComponent {
     MainViewImpl getMainView();
     AboutView getAboutView();
@@ -87,12 +92,17 @@ public interface ViewComponent {
     // -----------------------------------
     MigrationService getMigrationService();
     MigrationView getMigrationView();
+    GatekeeperService getGatekeeperService();
+    EncryptionSetupView getGatekeeperView();
+    DatabaseEncryptionView getDatabaseEncryptionView();
+    PasswordPromptView getPasswordPromptView();
 
     PropertiesServiceImpl getPropertiesService();
 
     // -----------------------------------
     // Sonstiges
     // -----------------------------------
+    EntityManager getEntityManager();
     Converters getConverters();
     BbUncaughtExceptionHandler getUncaughtExceptionHandler();
 }

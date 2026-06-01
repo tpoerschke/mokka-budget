@@ -1,0 +1,30 @@
+---
+description: Arbeitsweise bei Implementierungen – minimal, exakt, ohne Nebenwirkungen
+alwaysApply: true
+---
+
+# Implementierungs-Workflow
+
+## Scope
+
+- Nur das ändern, was die Aufgabe verlangt. Kein Refactoring, keine Formatierung, keine „Verbesserungen“ an unberührtem Code.
+- Vor dem Schreiben: bestehende Dateien und verwandten Code lesen. Namen, Patterns und Abstraktionsebene übernehmen.
+- Erweiterungen an vorhandenen Klassen/Views bevorzugen; keine parallelen Implementierungen desselben Problems.
+
+## Qualität
+
+- Präzise Lösungen, die wenig doppelten Code erzeugen. Keine vorzeitige Abstraktion, keine Extra-Helper für Einzeiler.
+- Komposition gegenüber Vererbung bevorzugen.
+- Kommentare nur bei nicht-offensichtlicher Fachlogik oder technischen Fallstricken.
+- Tests nur hinzufügen, wenn angefragt oder sie echtes Verhalten absichern – keine trivialen Assertions.
+
+## Git & Deliverables
+
+- **Keine Commits**, **kein Push**, **keine PRs** ohne explizite Aufforderung.
+- Keine `.env`, Credentials oder lokale Konfiguration committen.
+- Keine Markdown-Dokumentation anlegen, wenn nicht ausdrücklich gewünscht.
+
+## Verifikation
+
+- Nach Änderungen: relevante Maven-Tests oder Kompilierung ausführen, wenn sinnvoll.
+- Linter-/Compiler-Fehler in bearbeiteten Dateien beheben, nicht ignorieren.
