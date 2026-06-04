@@ -24,7 +24,7 @@
     <maven.exec.skip>false</maven.exec.skip>
 
     <!-- Infrastructure -->
-    <version.jfx>21.0.6</version.jfx>
+    <version.jfx>26</version.jfx>
     <version.dagger>2.55</version.dagger>
     <version.lombok>1.18.36</version.lombok>
     <version.commons-lang>3.18.0</version.commons-lang>
