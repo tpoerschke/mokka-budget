@@ -4,3 +4,16 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 30
+      semver-major-days: 60
+      semver-minor-days: 30
+      semver-patch-days: 30
+    groups:
+      patch-and-minor:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
