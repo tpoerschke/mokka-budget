@@ -17,3 +17,8 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    ignore:
+      - dependency-name: "hibernate*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "javafx*"
+        update-types: ["version-update:semver-major"]
