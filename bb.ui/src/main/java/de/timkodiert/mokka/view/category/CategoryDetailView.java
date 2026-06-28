@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import javax.inject.Inject;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,14 +15,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.util.StringConverter;
-import javafx.beans.binding.Bindings;
 
 import de.timkodiert.mokka.budget.BudgetType;
 import de.timkodiert.mokka.converter.Converters;
@@ -32,9 +31,7 @@ import de.timkodiert.mokka.domain.CategoryGroupCrudService;
 import de.timkodiert.mokka.domain.CategoryGroupDTO;
 import de.timkodiert.mokka.domain.Reference;
 import de.timkodiert.mokka.i18n.LanguageManager;
-import de.timkodiert.mokka.ui.control.BootstrapIconPicker;
 import de.timkodiert.mokka.ui.control.MoneyTextField;
-import de.timkodiert.mokka.ui.util.ColorUtil;
 import de.timkodiert.mokka.ui.helper.Bind;
 import de.timkodiert.mokka.validation.ValidationResult;
 import de.timkodiert.mokka.validation.ValidationWrapperFactory;
@@ -56,8 +53,6 @@ public class CategoryDetailView extends EntityBaseDetailView<CategoryDTO> implem
     private CheckBox budgetActiveCheckBox;
     @FXML
     private ComboBox<BudgetType> budgetTypeComboBox;
-    @FXML
-    private BootstrapIconPicker iconPicker;
     @FXML
     private ColorPicker colorPicker;
 
@@ -106,24 +101,14 @@ public class CategoryDetailView extends EntityBaseDetailView<CategoryDTO> implem
         budgetActiveCheckBox.selectedProperty().bindBidirectional(beanAdapter.getProperty(CategoryDTO::isBudgetActive, CategoryDTO::setBudgetActive));
         budgetValueTextField.integerValueProperty().bindBidirectional(beanAdapter.getProperty(CategoryDTO::getBudgetValue, CategoryDTO::setBudgetValue));
         Bind.comboBox(budgetTypeComboBox, beanAdapter.getProperty(CategoryDTO::getBudgetType, CategoryDTO::setBudgetType));
-        iconPicker.iconNameProperty().bindBidirectional(beanAdapter.getProperty(CategoryDTO::getIcon, CategoryDTO::setIcon));
-        Bindings.bindBidirectional(beanAdapter.getProperty(CategoryDTO::getColor, CategoryDTO::setColor),
-                                   colorPicker.valueProperty(),
-                                   new StringConverter<Color>() {
-                                       @Override
-                                       public String toString(Color color) {
-                                           return ColorUtil.toHex(color);
-                                       }
-
-                                       @Override
-                                       public Color fromString(String string) {
-                                           return ColorUtil.parse(string);
-                                       }
-                                   });
+        // Farbe
+        Bindings.bindBidirectional(beanAdapter.getProperty(CategoryDTO::getColor, CategoryDTO::setColor), colorPicker.valueProperty(), Converters.get(Color.class));
 
         // Validierungen
         validationMap.put("name", nameTextField);
+        validationMap.put("color", colorPicker);
         validationWrapper.register(beanAdapter.getProperty(CategoryDTO::getName, CategoryDTO::setName));
+        validationWrapper.register(beanAdapter.getProperty(CategoryDTO::getColor, CategoryDTO::setColor));
         validationWrapper.registerCustomValidation("budgetValueValid",
                                                    budgetValueTextField.getTextField(),
                                                    () -> budgetValueTextField.isStringFormatValid()

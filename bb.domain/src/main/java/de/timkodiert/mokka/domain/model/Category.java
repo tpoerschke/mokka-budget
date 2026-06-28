@@ -45,9 +45,7 @@ public class Category extends BaseEntity {
     private BudgetType budgetType;
 
     @Setter
-    private String icon;
-
-    @Setter
+    @Column(nullable = false)
     private String color;
 
     @OneToMany(mappedBy = "category")

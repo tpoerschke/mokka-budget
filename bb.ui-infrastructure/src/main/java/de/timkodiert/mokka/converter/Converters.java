@@ -6,6 +6,7 @@ import java.util.Map;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 
 import de.timkodiert.mokka.analysis.AnalysisPeriod;
@@ -28,6 +29,7 @@ public class Converters {
     }
 
     public void register() {
+        CONVERTER_MAP.put(Color.class, new ColorHexStringConverter());
         CONVERTER_MAP.put(LocalDate.class, new LocalDateStringConverter());
         CONVERTER_MAP.put(TurnoverDirection.class, new EnumStringConverter<>(languageManager));
         CONVERTER_MAP.put(PaymentType.class, new EnumStringConverter<>(languageManager));

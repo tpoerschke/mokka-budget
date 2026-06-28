@@ -1,21 +1,13 @@
-package de.timkodiert.mokka.ui.util;
+package de.timkodiert.mokka.converter;
 
 import javafx.scene.paint.Color;
+import javafx.util.StringConverter;
 import org.jspecify.annotations.Nullable;
 
-public final class ColorUtil {
+public class ColorHexStringConverter extends StringConverter<Color> {
 
-    private ColorUtil() {
-    }
-
-    public static @Nullable Color parse(@Nullable String colorValue) {
-        if (colorValue == null || colorValue.isBlank()) {
-            return null;
-        }
-        return Color.web(colorValue);
-    }
-
-    public static @Nullable String toHex(@Nullable Color color) {
+    @Override
+    public String toString(@Nullable Color color) {
         if (color == null) {
             return null;
         }
@@ -23,5 +15,13 @@ public final class ColorUtil {
                              (int) Math.round(color.getRed() * 255),
                              (int) Math.round(color.getGreen() * 255),
                              (int) Math.round(color.getBlue() * 255));
+    }
+
+    @Override
+    public Color fromString(@Nullable String hexStr) {
+        if (hexStr == null || hexStr.isBlank()) {
+            return null;
+        }
+        return Color.web(hexStr);
     }
 }

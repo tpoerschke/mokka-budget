@@ -1,6 +1,7 @@
 package de.timkodiert.mokka.domain;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -26,8 +27,8 @@ public class CategoryDTO {
     private @Nullable Integer budgetValue;
     private @Nullable BudgetType budgetType;
 
-    private @Nullable String icon;
-    private @Nullable String color;
+    @NotNull
+    private String color;
 
     public boolean isNew() {
         return id <= 0;
