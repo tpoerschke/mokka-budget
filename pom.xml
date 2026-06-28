@@ -25,14 +25,14 @@
 
     <!-- Infrastructure -->
     <version.jfx>21.0.6</version.jfx>
-    <version.dagger>2.55</version.dagger>
-    <version.lombok>1.18.36</version.lombok>
-    <version.commons-lang>3.18.0</version.commons-lang>
+    <version.dagger>2.59.2</version.dagger>
+    <version.lombok>1.18.46</version.lombok>
+    <version.commons-lang>3.20.0</version.commons-lang>
     <version.mapstruct>1.6.3</version.mapstruct>
-    <version.logback>1.5.20</version.logback>
+    <version.logback>1.5.32</version.logback>
     <version.jspecify>1.0.0</version.jspecify>
     <!-- UI -->
-    <version.ikonli>12.3.1</version.ikonli>
+    <version.ikonli>12.4.0</version.ikonli>
     <version.atlantafx>2.1.0</version.atlantafx>
     <version.xchart>3.8.8</version.xchart>
     <!-- Database -->
@@ -48,7 +48,7 @@
     <version.expressly>5.0.0</version.expressly>
     <!-- Testing -->
     <version.junit>5.11.4</version.junit>
-    <version.mockito>5.15.2</version.mockito>
+    <version.mockito>5.23.0</version.mockito>
   </properties>
 
   <modules>
@@ -70,7 +70,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.5.0</version>
         <configuration>
           <archive>
             <manifest>
@@ -94,7 +94,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.10.0</version>
+        <version>3.15.0</version>
         <configuration>
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
@@ -140,13 +140,13 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.1.2</version>
+        <version>3.5.5</version>
       </plugin>
       <plugin>
         <!-- mvn clean verify jacoco:report -->
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.10</version>
+        <version>0.8.14</version>
         <executions>
           <execution>
             <goals>
@@ -167,7 +167,7 @@
              später ggf. nur in einem Release-Profil machen -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>2.7.0</version>
+        <version>2.7.1</version>
         <configuration>
           <thirdPartyFilename>BB-THIRD-PARTY.txt</thirdPartyFilename>
           <addJavaLicenseAfterPackage>true</addJavaLicenseAfterPackage>
@@ -203,7 +203,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>3.0.0</version>
+            <version>3.6.3</version>
             <executions>
               <execution>
                 <phase>process-resources</phase>
