@@ -44,6 +44,10 @@ public class Category extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private BudgetType budgetType;
 
+    @Setter
+    @Column(nullable = false)
+    private String color;
+
     @OneToMany(mappedBy = "category")
     private List<FixedTurnover> fixedExpenses = new ArrayList<>();
 

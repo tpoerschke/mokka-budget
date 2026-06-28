@@ -22,7 +22,7 @@ import de.timkodiert.mokka.view.mdv_base.BaseListManageView;
 public class CategoriesManageView extends BaseListManageView<CategoryDTO> {
 
     @FXML
-    private TableColumn<CategoryDTO, String> nameColumn;
+    private TableColumn<CategoryDTO, CategoryDTO> nameColumn;
     @FXML
     private TableColumn<CategoryDTO, Reference<CategoryGroupDTO>> groupColumn;
 
@@ -41,7 +41,8 @@ public class CategoriesManageView extends BaseListManageView<CategoryDTO> {
 
     @Override
     protected void initControls() {
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameColumn.setCellValueFactory(param -> param.getValue() == null ? null : new javafx.beans.property.SimpleObjectProperty<>(param.getValue()));
+        nameColumn.setCellFactory(col -> new CategoryTableCell());
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
         groupColumn.setCellFactory(col -> new ReferenceTableCell<>());
     }

@@ -89,7 +89,7 @@ public class BeanAdapter<B> {
     private <T> BeanPropertyContainer<B, T> createProperty(Function<B, T> getter, BiConsumer<B, T> setter) {
         ObjectProperty<T> property = new SimpleObjectProperty<>();
         property.addListener((obs, oldVal, newVal) -> {
-            if (settingNewBean) {
+            if (settingNewBean || bean == null) {
                 return;
             }
             if (!Objects.equals(oldVal, newVal)) {
@@ -107,7 +107,7 @@ public class BeanAdapter<B> {
     private <T> BeanListPropertyContainer<B, T> createListProperty(Function<B, List<T>> getter, BiConsumer<B, List<T>> setter) {
         ListProperty<T> property = new SimpleListProperty<>(FXCollections.observableArrayList());
         property.addListener((obs, oldVal, newVal) -> {
-            if (settingNewBean) {
+            if (settingNewBean || bean == null) {
                 return;
             }
             if (!Objects.equals(oldVal, newVal)) {
