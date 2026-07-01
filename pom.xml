@@ -38,7 +38,7 @@
     <!-- Database -->
     <version.sqlite-jdbc>3.51.2.0</version.sqlite-jdbc>
     <version.hibernate>6.6.6.Final</version.hibernate>
-    <version.flyway>11.3.1</version.flyway>
+    <version.flyway>12.5.0</version.flyway>
     <!-- Data Handling -->
     <version.opencsv>5.12.0</version.opencsv>
     <!-- Validation -->
