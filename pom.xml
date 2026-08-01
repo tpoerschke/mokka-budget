@@ -25,11 +25,11 @@
 
     <!-- Infrastructure -->
     <version.jfx>21.0.6</version.jfx>
-    <version.dagger>2.59.2</version.dagger>
+    <version.dagger>2.60</version.dagger>
     <version.lombok>1.18.46</version.lombok>
     <version.commons-lang>3.20.0</version.commons-lang>
     <version.mapstruct>1.6.3</version.mapstruct>
-    <version.logback>1.5.34</version.logback>
+    <version.logback>1.5.37</version.logback>
     <version.jspecify>1.0.0</version.jspecify>
     <!-- UI -->
     <version.ikonli>12.4.0</version.ikonli>
@@ -146,7 +146,7 @@
         <!-- mvn clean verify jacoco:report -->
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.14</version>
+        <version>0.8.15</version>
         <executions>
           <execution>
             <goals>
