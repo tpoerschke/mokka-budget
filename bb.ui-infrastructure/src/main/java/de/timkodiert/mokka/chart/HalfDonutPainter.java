@@ -36,9 +36,13 @@ public class HalfDonutPainter {
     }
 
     void drawSegmentWithBorder(Color color, double currentAngle, double angle) {
+        drawSegmentWithBorder(color, Color.WHITE, HalfDonutChart.BORDER_WIDTH, currentAngle, angle);
+    }
+
+    void drawSegmentWithBorder(Color color, Color borderColor, double borderWidth, double currentAngle, double angle) {
         drawSegment(color, currentAngle, angle);
-        gc.setStroke(Color.WHITE);
-        gc.setLineWidth(HalfDonutChart.BORDER_WIDTH);
+        gc.setStroke(borderColor);
+        gc.setLineWidth(borderWidth);
         gc.strokeArc(
                 centerX - radius,
                 centerY - radius,

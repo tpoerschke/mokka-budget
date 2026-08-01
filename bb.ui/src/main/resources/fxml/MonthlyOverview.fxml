@@ -31,21 +31,18 @@
             <Insets/>
           </VBox.margin>
         </Label>
-        <GridPane>
+        <HBox spacing="20.0">
           <HBox alignment="CENTER_LEFT" spacing="10.0">
             <Button fx:id="prevMonthBtn" mnemonicParsing="false" styleClass="button-icon" text="&lt;"/>
             <ComboBox fx:id="selectedMonthBox" prefWidth="120.0"/>
             <ComboBox fx:id="selectedYearBox" prefWidth="90.0"/>
             <Button fx:id="nextMonthBtn" mnemonicParsing="false" styleClass="button-icon" text="&gt;"/>
           </HBox>
-          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES"/>
-            <ColumnConstraints hgrow="SOMETIMES"/>
-          </columnConstraints>
-          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-          </rowConstraints>
-        </GridPane>
+          <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="Kategorie"/>
+            <ComboBox fx:id="categoryComboBox" minWidth="150"/>
+          </HBox>
+        </HBox>
       </VBox>
     </top>
     <center>

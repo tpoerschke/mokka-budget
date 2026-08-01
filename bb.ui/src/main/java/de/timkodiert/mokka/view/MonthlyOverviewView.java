@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -31,6 +32,10 @@ import javafx.scene.layout.VBox;
 
 import de.timkodiert.mokka.budget.BudgetService;
 import de.timkodiert.mokka.chart.HalfDonutChart;
+import de.timkodiert.mokka.converter.ReferenceStringConverter;
+import de.timkodiert.mokka.domain.CategoryCrudService;
+import de.timkodiert.mokka.domain.CategoryDTO;
+import de.timkodiert.mokka.domain.Reference;
 import de.timkodiert.mokka.exception.TechnicalException;
 import de.timkodiert.mokka.i18n.LanguageManager;
 import de.timkodiert.mokka.monthly_overview.MonthlyOverviewDTO;
@@ -42,6 +47,7 @@ import de.timkodiert.mokka.table.cell.DateTableCell;
 import de.timkodiert.mokka.table.cell.GroupTableCell;
 import de.timkodiert.mokka.table.row.BoldTableRow;
 import de.timkodiert.mokka.table.row.ShortcutTableRow;
+import de.timkodiert.mokka.view.monthly_overview.ExpenseBreakdownWidget;
 import de.timkodiert.mokka.view.monthly_overview.ExpenseBreakdownWidgetFactory;
 import de.timkodiert.mokka.view.monthly_overview.ExpenseTrendWidgetFactory;
 import de.timkodiert.mokka.view.monthly_overview.IconTableCell;
@@ -59,6 +65,8 @@ public class MonthlyOverviewView implements Initializable, View {
     private ComboBox<String> selectedMonthBox;
     @FXML
     private ComboBox<Integer> selectedYearBox;
+    @FXML
+    private ComboBox<Reference<CategoryDTO>> categoryComboBox;
 
     @SuppressWarnings("java:S1450") // Damit der Filter nicht garbage-collected wird
     private MonthFilter monthFilter;
@@ -98,21 +106,27 @@ public class MonthlyOverviewView implements Initializable, View {
     private VBox budgetBox;
 
     private final ObservableList<TableRowData> tableData = FXCollections.observableArrayList();
+    private final ObjectProperty<Reference<CategoryDTO>> categoryProperty = new SimpleObjectProperty<>();
 
     private final Provider<FXMLLoader> fxmlLoader;
     private final LanguageManager languageManager;
     private final MonthlyOverviewService monthlyOverviewService;
     private final BudgetService budgetService;
+    private final CategoryCrudService categoryCrudService;
     private final Provider<ShortcutTableRow> shortcutTableRowProvider;
     private final MonthFilterFactory monthFilterFactory;
     private final ExpenseBreakdownWidgetFactory expenseBreakdownWidgetFactory;
     private final ExpenseTrendWidgetFactory expenseTrendWidgetFactory;
+
+    private ExpenseBreakdownWidget expenseBreakdownWidget;
+    private MonthlyOverviewDTO data;
 
     @Inject
     public MonthlyOverviewView(Provider<FXMLLoader> fxmlLoader,
                                LanguageManager languageManager,
                                MonthlyOverviewService monthlyOverviewService,
                                BudgetService budgetService,
+                               CategoryCrudService categoryCrudService,
                                Provider<ShortcutTableRow> shortcutTableRowProvider,
                                MonthFilterFactory monthFilterFactory,
                                ExpenseBreakdownWidgetFactory expenseBreakdownWidgetFactory,
@@ -121,6 +135,7 @@ public class MonthlyOverviewView implements Initializable, View {
         this.languageManager = languageManager;
         this.monthlyOverviewService = monthlyOverviewService;
         this.budgetService = budgetService;
+        this.categoryCrudService = categoryCrudService;
         this.shortcutTableRowProvider = shortcutTableRowProvider;
         this.monthFilterFactory = monthFilterFactory;
         this.expenseBreakdownWidgetFactory = expenseBreakdownWidgetFactory;
@@ -129,7 +144,6 @@ public class MonthlyOverviewView implements Initializable, View {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        monthFilter = monthFilterFactory.create(selectedMonthBox, selectedYearBox, nextMonthBtn, prevMonthBtn);
         //
         // INIT TABELLEN
         //
@@ -184,12 +198,22 @@ public class MonthlyOverviewView implements Initializable, View {
         //
         // INIT FILTER
         //
-        monthFilter.addListener((observable, oldValue, newValue) -> loadAndDisplayViewData(newValue));
+        monthFilter = monthFilterFactory.create(selectedMonthBox, selectedYearBox, nextMonthBtn, prevMonthBtn);
+        monthFilter.addListener((observable, oldValue, newValue) -> {
+            loadAndDisplayViewData(newValue);
+            expenseBreakdownWidget.updateFocusedIndex();
+        });
+        loadAndSetCategoryReferences();
+        categoryComboBox.valueProperty().bindBidirectional(categoryProperty);
+        categoryProperty.addListener((observable, oldValue, newValue) -> {
+            initDataGroups(data);
+            initFooterTable(data);
+        });
 
         //
         // INIT CHARTS
         //
-        expenseBreakdownWidgetFactory.create(expenseBreakdownChart, monthFilter);
+        expenseBreakdownWidget = expenseBreakdownWidgetFactory.create(expenseBreakdownChart, monthFilter, categoryProperty);
         expenseTrendWidgetFactory.create(expenseTrendChart, monthFilter);
 
         //
@@ -212,7 +236,7 @@ public class MonthlyOverviewView implements Initializable, View {
     }
 
     private void loadAndDisplayViewData(YearMonth yearMonth) {
-        MonthlyOverviewDTO data = monthlyOverviewService.generateOverview(yearMonth);
+        data = monthlyOverviewService.generateOverview(yearMonth);
         initDataGroups(data);
         initFooterTable(data);
     }
@@ -227,8 +251,9 @@ public class MonthlyOverviewView implements Initializable, View {
 
     private void initDataGroups(MonthlyOverviewDTO data) {
         tableData.clear();
-        initFixedExpenseGroup(data.fixedExpenses());
-        initUniqueExpenseGroup(data.uniqueExpenses());
+        Reference<CategoryDTO> category = categoryProperty.get();
+        initFixedExpenseGroup(data.fixedExpenses().stream().filter(e -> category == null || e.categories().contains(category.name())).toList());
+        initUniqueExpenseGroup(data.uniqueExpenses().stream().filter(e -> category == null || e.categories().contains(category.name())).toList());
     }
 
     private void initUniqueExpenseGroup(List<TableRowData> tableRowDataList) {
@@ -242,5 +267,11 @@ public class MonthlyOverviewView implements Initializable, View {
     private void initDataGroup(List<TableRowData> tableRowDataList, String groupName, RowType groupRowType) {
         tableData.add(new TableRowData(-1, groupRowType, groupName, null, tableRowDataList.stream().mapToInt(TableRowData::value).sum(), List.of(), false));
         tableData.addAll(tableRowDataList);
+    }
+
+    private void loadAndSetCategoryReferences() {
+        categoryComboBox.setConverter(new ReferenceStringConverter<>());
+        categoryComboBox.getItems().add(null);
+        categoryComboBox.getItems().addAll(categoryCrudService.readAllAsReference());
     }
 }
