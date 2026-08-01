@@ -39,7 +39,8 @@ public class ExpenseBreakdownServiceImpl implements ExpenseBreakdownService {
                                                                   .mapToInt(UniqueTurnoverInformation::getValueSigned)
                                                                   .sum();
         if (otherTurnoverSum < 0) {
-            ExpenseBreakdown otherBreakdown = new ExpenseBreakdown(new Reference<>(CategoryDTO.class, -1, "monthlyOverview.label.others"), Math.abs(otherTurnoverSum));
+            Reference<CategoryDTO> otherRef = new Reference<>(CategoryDTO.class, -1, "monthlyOverview.label.others");
+            ExpenseBreakdown otherBreakdown = new ExpenseBreakdown(otherRef, "#eee", Math.abs(otherTurnoverSum));
             return CollectionUtils.union(categoryBreakdowns, List.of(otherBreakdown));
         }
         return categoryBreakdowns;
@@ -48,6 +49,6 @@ public class ExpenseBreakdownServiceImpl implements ExpenseBreakdownService {
     private ExpenseBreakdown createBreakdown(Category category, YearMonth yearMonth) {
         Reference<CategoryDTO> catRef = new Reference<>(CategoryDTO.class, category.getId(), category.getName());
         int turnoverSum = category.sumTurnoversForMonth(MonthYear.of(yearMonth));
-        return new ExpenseBreakdown(catRef, Math.abs(Math.min(turnoverSum, 0)));
+        return new ExpenseBreakdown(catRef, category.getColor(), Math.abs(Math.min(turnoverSum, 0)));
     }
 }

@@ -23,7 +23,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -31,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
 import de.timkodiert.mokka.budget.BudgetService;
+import de.timkodiert.mokka.chart.HalfDonutChart;
 import de.timkodiert.mokka.exception.TechnicalException;
 import de.timkodiert.mokka.i18n.LanguageManager;
 import de.timkodiert.mokka.monthly_overview.MonthlyOverviewDTO;
@@ -89,7 +89,7 @@ public class MonthlyOverviewView implements Initializable, View {
 
     // CHARTS
     @FXML
-    private PieChart expenseBreakdownChart;
+    private HalfDonutChart expenseBreakdownChart;
     @FXML
     private BarChart<String, Double> expenseTrendChart;
 
