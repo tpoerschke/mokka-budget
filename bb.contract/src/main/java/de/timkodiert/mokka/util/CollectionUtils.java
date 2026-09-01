@@ -15,6 +15,25 @@ public class CollectionUtils {
     }
 
     /**
+     * Teilt {@code list} bei {@code splitIndex} in zwei Teillisten ({@code [0, splitIndex)} und {@code [splitIndex, size)}).
+     * Liegt der Index am Ende oder darüber, ist {@code secondSplit} leer.
+     *
+     * @return {@code Splits} mit den beiden Teillisten
+     * @throws IllegalArgumentException wenn {@code splitIndex} negativ ist
+     */
+    public static <T> Splits<T> split(List<T> list, int splitIndex) {
+        if (splitIndex < 0) {
+            throw new IllegalArgumentException("splitIndex must be greater than 0");
+        }
+        if (splitIndex > list.size() - 1) {
+            return new Splits<>(Collections.unmodifiableList(list), List.of());
+        }
+        return new Splits<>(list.subList(0, splitIndex), list.subList(splitIndex, list.size()));
+    }
+
+    public record Splits<T>(List<T> firstSplit, List<T> secondSplit) {}
+
+    /**
      * Zählt eine Liste beginnend mit 0 durch.
      *
      * @param list Die Liste, die durchgezählt werden soll

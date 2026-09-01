@@ -1,7 +1,10 @@
 package de.timkodiert.mokka.view.monthly_overview;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 import dagger.assisted.Assisted;
 import dagger.assisted.AssistedInject;
@@ -15,6 +18,8 @@ import de.timkodiert.mokka.chart.HalfDonutChart;
 import de.timkodiert.mokka.converter.Converters;
 import de.timkodiert.mokka.domain.CategoryDTO;
 import de.timkodiert.mokka.domain.Reference;
+import de.timkodiert.mokka.i18n.LanguageManager;
+import de.timkodiert.mokka.util.CollectionUtils.IndexValue;
 import de.timkodiert.mokka.view.MonthFilter;
 
 public class ExpenseBreakdownWidget {
@@ -30,6 +35,7 @@ public class ExpenseBreakdownWidget {
 
     @AssistedInject
     public ExpenseBreakdownWidget(ExpenseBreakdownService expenseBreakdownService,
+                                  LanguageManager languageManager,
                                   @Assisted HalfDonutChart halfDonutChart,
                                   @Assisted MonthFilter monthFilter,
                                   @Assisted ObjectProperty<Reference<CategoryDTO>> categoryProperty) {
@@ -37,6 +43,7 @@ public class ExpenseBreakdownWidget {
         this.halfDonutChart = halfDonutChart;
         this.monthFilter = monthFilter;
         this.categoryProperty = categoryProperty;
+        halfDonutChart.setLanguageManager(languageManager);
 
         halfDonutChart.focusedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (muteListener) {
@@ -47,7 +54,8 @@ public class ExpenseBreakdownWidget {
             if (newIntVal == -1) {
                 categoryProperty.setValue(null);
             } else {
-                categoryProperty.setValue(expenseBreakdownList.get(newIntVal).category());
+                Reference<CategoryDTO> selectedCategory = expenseBreakdownList.get(newIntVal).category();
+                categoryProperty.setValue(selectedCategory.id() == -1 ? null : selectedCategory);
             }
             muteListener = false;
         });
@@ -59,11 +67,11 @@ public class ExpenseBreakdownWidget {
             halfDonutChart.focusedIndexProperty().set(calculateFocusedIndex(newValue));
             muteListener = false;
         }));
-        monthFilter.addListener((observable, oldValue, newValue) -> loadData());
         loadData();
     }
 
-    public void updateFocusedIndex() {
+    public void loadDataAndUpdateFocusedIndex() {
+        loadData();
         halfDonutChart.focusedIndexProperty().set(calculateFocusedIndex(categoryProperty.getValue()));
     }
 
@@ -83,11 +91,33 @@ public class ExpenseBreakdownWidget {
             halfDonutChart.showData(List.of());
             return;
         }
-        var dataList = expenseBreakdownList.stream()
-                                           .map(b -> new HalfDonutChart.Data(b.category().name(),
-                                                                             colorConverter.fromString(b.hexColor()),
-                                                                             Math.round((float) b.value() / total * 100)))
-                                           .toList();
+        List<Integer> values = expenseBreakdownList.stream().map(ExpenseBreakdown::value).toList();
+        List<Integer> percentages = calculatePercentages(values, total);
+        var dataList = IntStream.range(0, expenseBreakdownList.size())
+                                .mapToObj(i -> {
+                                    ExpenseBreakdown breakdown = expenseBreakdownList.get(i);
+                                    return new HalfDonutChart.Data(breakdown.category().name(),
+                                                                   colorConverter.fromString(breakdown.hexColor()),
+                                                                   percentages.get(i));
+                                })
+                                .toList();
         halfDonutChart.showData(dataList);
+    }
+
+    private static List<Integer> calculatePercentages(List<Integer> values, int total) {
+        int[] percentages = new int[values.size()];
+        int sum = 0;
+        List<IndexValue<Double>> remainders = new ArrayList<>();
+        for (int i = 0; i < values.size(); i++) {
+            double exact = (double) values.get(i) / total * 100;
+            percentages[i] = (int) Math.floor(exact);
+            sum += percentages[i];
+            remainders.add(new IndexValue<>(i, exact - percentages[i]));
+        }
+        remainders.sort(Comparator.comparing(IndexValue<Double>::value).reversed());
+        for (int i = 0; i < 100 - sum; i++) {
+            percentages[remainders.get(i).i()]++;
+        }
+        return IntStream.of(percentages).boxed().toList();
     }
 }

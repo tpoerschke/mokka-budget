@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,13 +19,17 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import lombok.Setter;
 
-public class HalfDonutChart extends HBox {
+import de.timkodiert.mokka.i18n.LanguageManager;
+
+public class HalfDonutChart extends VBox {
 
     static final int START_ANGLE = 180;
     static final int BORDER_WIDTH = 5;
@@ -37,8 +42,8 @@ public class HalfDonutChart extends HBox {
     private static final double LEGEND_COLOR_SIZE = 12;
     private static final CornerRadii LEGEND_CORNER = new CornerRadii(3);
 
-    private final Canvas canvas = new Canvas(400, 300);
-    private final VBox legendContainer = new VBox(6);
+    private final Canvas canvas = new Canvas(400, 220);
+    private final GridPane legendContainer = new GridPane();
     private final Tooltip tooltip = new Tooltip();
     private final List<LegendEntry> legendEntries = new ArrayList<>();
     private final IntegerProperty focusedIndexProperty = new SimpleIntegerProperty(-1);
@@ -46,13 +51,19 @@ public class HalfDonutChart extends HBox {
     private List<Data> dataList = List.of();
     private int hoveredIndex = -1;
 
+    @Setter
+    private LanguageManager languageManager;
+
     public HalfDonutChart() {
         setSpacing(10);
+        setAlignment(Pos.TOP_CENTER);
         getChildren().addAll(canvas, legendContainer);
         canvas.minWidth(400);
-        canvas.minHeight(300);
-        legendContainer.setMinWidth(180);
+        legendContainer.setMinWidth(200);
         legendContainer.setPadding(new Insets(10, 10, 10, 0));
+        legendContainer.setVgap(5);
+        legendContainer.setHgap(10);
+        legendContainer.setAlignment(Pos.TOP_CENTER);
 
         tooltip.setShowDelay(Duration.ZERO);
         tooltip.setHideDelay(Duration.ZERO);
@@ -89,17 +100,18 @@ public class HalfDonutChart extends HBox {
             final int index = i;
             Data data = dataList.get(i);
 
-            Pane colorSwatch = createColorBox(data.color());
-            Label label = new Label(legendText(data), colorSwatch);
+            Pane colorBox = createColorBox(data.color());
+            Label label = new Label(legendText(data), colorBox);
             label.setGraphicTextGap(8);
             label.setCursor(Cursor.HAND);
 
-            HBox row = new HBox(label);
-            row.setCursor(Cursor.HAND);
-            row.setOnMouseEntered(event -> setHoveredIndex(index, event));
+            HBox legendEntryBox = new HBox(label);
+            legendEntryBox.setCursor(Cursor.HAND);
+            legendEntryBox.setOnMouseEntered(event -> setHoveredIndex(index, event));
+            legendEntryBox.setOnMouseClicked(event -> focusedIndexProperty.set(index));
 
-            legendEntries.add(new LegendEntry(row, colorSwatch, label));
-            legendContainer.getChildren().add(row);
+            legendEntries.add(new LegendEntry(legendEntryBox, colorBox, label));
+            legendContainer.add(legendEntryBox, i % 2, i / 2);
         }
         updateLegendHighlight();
     }
@@ -161,7 +173,8 @@ public class HalfDonutChart extends HBox {
     }
 
     private String legendText(Data data) {
-        return "%s (%d%%)".formatted(data.label(), data.percentage());
+        String label = languageManager.resourceBundleContainsKey(data.label()) ? languageManager.get(data.label()) : data.label();
+        return "%s (%d%%)".formatted(label, data.percentage());
     }
 
     private int findSegmentAt(double x, double y) {
@@ -230,8 +243,7 @@ public class HalfDonutChart extends HBox {
                             .drawSegmentWithBorder(focusedData.color().brighter(), Color.BLACK, 2, currentAngle, focusedAngle);
             HalfDonutPainter.of(gc, INNER_CIRCLE_RADIUS, CENTER_X, CENTER_Y).drawSegmentWithBorder(Color.WHITE, Color.BLACK, 2, currentAngle, focusedAngle);
         }
-        HalfDonutPainter.of(gc, INNER_CIRCLE_RADIUS - 1, CENTER_X, CENTER_Y).drawSegment(Color.WHITE, START_ANGLE, -180);
-        drawDebug(gc, CENTER_X, CENTER_Y);
+        HalfDonutPainter.of(gc, INNER_CIRCLE_RADIUS - 1, CENTER_X, CENTER_Y).drawSegment(Color.WHITE, START_ANGLE, -360);
     }
 
     private double segmentStartAngle(int index) {
@@ -239,14 +251,6 @@ public class HalfDonutChart extends HBox {
                        .limit(index)
                        .mapToDouble(data -> (double) data.percentage() / TOTAL_PERCENTAGE * 180)
                        .sum();
-    }
-
-    private void drawDebug(GraphicsContext gc, double centerX, double centerY) {
-        gc.setFill(Color.RED);
-        gc.fillRect(centerX - RADIUS - 2, centerY - RADIUS - 2, 4, 4);
-
-        gc.setFill(Color.GREEN);
-        gc.fillRect(centerX - 2, centerY - 2, 4, 4);
     }
 
     public record Data(String label, Color color, int percentage) {}

@@ -28,6 +28,7 @@ public class TestDataProvider {
         return turnover;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static UniqueTurnover createUniqueTurnoverWithCategory(LocalDate date, String receiver, int amount, Category category) {
         UniqueTurnover turnover = createUniqueTurnover(date, receiver, amount);
         UniqueTurnoverInformation info = turnover.getPaymentInformations().getFirst();
@@ -50,10 +51,17 @@ public class TestDataProvider {
         return turnover;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static FixedTurnover createFixedTurnoverWithCategory(String position, int value, MonthYear start, @Nullable MonthYear end, Category category) {
         FixedTurnover turnover = createFixedTurnover(position, value, start, end);
         turnover.setCategory(category);
         category.getFixedExpenses().add(turnover);
         return turnover;
+    }
+
+    public static Category createCategory(String name) {
+        Category category = new Category();
+        category.setName(name);
+        return category;
     }
 }

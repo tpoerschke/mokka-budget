@@ -62,7 +62,7 @@ class MonthlyOverviewServiceImplTest {
         assertEquals(EXPENSE_VALUE, utTrd.value());
         assertEquals("", utTrd.categoriesString());
 
-        assertEquals(EXPENSE_VALUE * 2, result.totalSumExpenses(null));
+        assertEquals(EXPENSE_VALUE * 2, result.totalSumExpenses());
         assertEquals(INCOME_VALUE * 2, result.incomeSum());
     }
 }

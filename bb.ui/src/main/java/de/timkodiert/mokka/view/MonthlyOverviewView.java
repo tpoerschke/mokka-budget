@@ -201,7 +201,7 @@ public class MonthlyOverviewView implements Initializable, View {
         monthFilter = monthFilterFactory.create(selectedMonthBox, selectedYearBox, nextMonthBtn, prevMonthBtn);
         monthFilter.addListener((observable, oldValue, newValue) -> {
             loadAndDisplayViewData(newValue);
-            expenseBreakdownWidget.updateFocusedIndex();
+            expenseBreakdownWidget.loadDataAndUpdateFocusedIndex();
         });
         loadAndSetCategoryReferences();
         categoryComboBox.valueProperty().bindBidirectional(categoryProperty);
