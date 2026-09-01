@@ -11,6 +11,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CollectionUtilsTest {
 
     @Test
+    void splitList() {
+        List<String> list = List.of("str1", "str2", "str3", "str4");
+
+        var splits = CollectionUtils.split(list, 2);
+
+        assertEquals(List.of("str1", "str2"), splits.firstSplit());
+        assertEquals(List.of("str3", "str4"), splits.secondSplit());
+    }
+
+    @Test
+    void splitListHigherThanListSize() {
+        List<String> list = List.of("str1", "str2", "str3", "str4");
+
+        var splits = CollectionUtils.split(list, 4);
+
+        assertEquals(List.of("str1", "str2", "str3", "str4"), splits.firstSplit());
+        assertTrue(splits.secondSplit().isEmpty());
+    }
+
+    @Test
     void enumerateList() {
         List<String> list = List.of("str1", "str2", "str3");
 
