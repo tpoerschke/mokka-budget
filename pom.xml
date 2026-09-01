@@ -25,18 +25,18 @@
 
     <!-- Infrastructure -->
     <version.jfx>21.0.6</version.jfx>
-    <version.dagger>2.60</version.dagger>
+    <version.dagger>2.60.1</version.dagger>
     <version.lombok>1.18.46</version.lombok>
     <version.commons-lang>3.20.0</version.commons-lang>
     <version.mapstruct>1.6.3</version.mapstruct>
-    <version.logback>1.5.37</version.logback>
-    <version.jspecify>1.0.0</version.jspecify>
+    <version.logback>1.6.1</version.logback>
+    <version.jspecify>1.0.1</version.jspecify>
     <!-- UI -->
     <version.ikonli>12.4.0</version.ikonli>
     <version.atlantafx>2.1.0</version.atlantafx>
     <version.xchart>3.9.0</version.xchart>
     <!-- Database -->
-    <version.sqlite-jdbc>3.51.2.0</version.sqlite-jdbc>
+    <version.sqlite-jdbc>3.53.4.0</version.sqlite-jdbc>
     <version.hibernate>6.6.6.Final</version.hibernate>
     <version.flyway>11.3.1</version.flyway>
     <!-- Data Handling -->
@@ -70,7 +70,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.5.0</version>
+        <version>3.5.1</version>
         <configuration>
           <archive>
             <manifest>
