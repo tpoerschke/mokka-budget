@@ -22,9 +22,8 @@ import de.timkodiert.mokka.budget.BudgetState;
 import de.timkodiert.mokka.converter.BbCurrencyStringConverter;
 import de.timkodiert.mokka.domain.CategoryDTO;
 import de.timkodiert.mokka.domain.Reference;
+import de.timkodiert.mokka.util.ObjectUtils;
 import de.timkodiert.mokka.view.View;
-
-import static de.timkodiert.mokka.util.ObjectUtils.nvl;
 
 public class BudgetWidget implements Initializable, View {
 
@@ -58,7 +57,7 @@ public class BudgetWidget implements Initializable, View {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         budgetStateProperty.bind(Bindings.createObjectBinding(this::loadBudgetState, categoryProperty, selectedYearMonthProperty));
-        budgetLabel.textProperty().bind(Bindings.createStringBinding(() -> nvl(categoryProperty.get(), Reference::name), categoryProperty));
+        budgetLabel.textProperty().bind(Bindings.createStringBinding(() -> ObjectUtils.ifNull(categoryProperty.get(), Reference::name), categoryProperty));
         budgetProgressBar.progressProperty().addListener((observable, oldVal, newVal) -> {
             boolean criticalLimitReached = newVal.doubleValue() >= CRITICAL_BUDGET_LIMIT_FACTOR;
             root.pseudoClassStateChanged(Styles.STATE_DANGER, criticalLimitReached);

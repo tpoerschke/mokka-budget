@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Getter;
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.MigrationInfo;
 import org.flywaydb.core.api.callback.Callback;
 import org.flywaydb.core.api.callback.Context;
 import org.flywaydb.core.api.callback.Event;
@@ -26,6 +27,8 @@ import de.timkodiert.mokka.dialog.StackTraceAlert;
 import de.timkodiert.mokka.i18n.LanguageManager;
 import de.timkodiert.mokka.injector.ControllerFactory;
 import de.timkodiert.mokka.properties.DatabasePropertiesProvider;
+
+import static de.timkodiert.mokka.util.ObjectUtils.ifNull;
 
 @Singleton
 public class MigrationService {
@@ -117,14 +120,15 @@ public class MigrationService {
 
         @Override
         public void handle(Event event, Context context) {
+            String script = ifNull(context.getMigrationInfo(), MigrationInfo::getScript, "???");
             switch (event) {
                 case BEFORE_EACH_MIGRATE -> {
-                    LOG.info("Migrate with {}", context.getMigrationInfo().getScript());
+                    LOG.info("Migrate with {}", script);
                     currentScript.set(context.getMigrationInfo().getScript());
                 }
                 case AFTER_EACH_MIGRATE -> numMigrated.set(numMigrated.get() + 1);
                 case AFTER_MIGRATE_ERROR -> {
-                    LOG.error("Migrate with {} failed", context.getMigrationInfo().getScript());
+                    LOG.error("Migrate with {} failed", script);
                     migrationError.set(true);
                 }
                 case AFTER_MIGRATE_OPERATION_FINISH -> migrationFinished.set(true);

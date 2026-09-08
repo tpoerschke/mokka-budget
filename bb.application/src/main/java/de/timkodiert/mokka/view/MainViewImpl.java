@@ -34,6 +34,7 @@ import de.timkodiert.mokka.util.StageBuilder;
 import de.timkodiert.mokka.view.importer.ImportView;
 
 import static de.timkodiert.mokka.properties.PropertiesService.USE_SYSTEM_MENU_BAR;
+import static de.timkodiert.mokka.util.ObjectUtils.ifNull;
 import static de.timkodiert.mokka.view.FxmlResource.ANALYSIS_VIEW;
 import static de.timkodiert.mokka.view.FxmlResource.ANNUAL_OVERVIEW;
 import static de.timkodiert.mokka.view.FxmlResource.IMPORT_VIEW;
@@ -106,7 +107,7 @@ public class MainViewImpl implements Initializable, MainView {
     }
 
     private String getVersion() {
-        return "Version " + getClass().getPackage().getImplementationVersion();
+        return "Version " + ifNull(getClass().getPackage().getImplementationVersion(), "DEVELOPMENT-SNAPSHOT");
     }
 
     @Override

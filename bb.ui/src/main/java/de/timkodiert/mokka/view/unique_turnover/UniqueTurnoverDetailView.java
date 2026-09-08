@@ -50,11 +50,11 @@ import de.timkodiert.mokka.domain.UniqueTurnoverInformationDTO;
 import de.timkodiert.mokka.i18n.LanguageManager;
 import de.timkodiert.mokka.ui.control.AutoCompleteTextField;
 import de.timkodiert.mokka.ui.helper.Bind;
+import de.timkodiert.mokka.util.ObjectUtils;
 import de.timkodiert.mokka.util.StageBuilder;
 import de.timkodiert.mokka.validation.ValidationWrapperFactory;
 import de.timkodiert.mokka.view.mdv_base.EntityBaseDetailView;
 
-import static de.timkodiert.mokka.util.ObjectUtils.nvl;
 import static de.timkodiert.mokka.view.FxmlResource.IMAGE_VIEW;
 import static de.timkodiert.mokka.view.FxmlResource.UNIQUE_TURNOVER_INFORMATION_VIEW;
 
@@ -182,7 +182,7 @@ public class UniqueTurnoverDetailView extends EntityBaseDetailView<UniqueTurnove
             return new ReadOnlyStringWrapper(converter.toString(cellData.getValue().getValueSigned()));
         });
         expenseInfoCategoriesCol.setCellValueFactory(cellData ->
-                                                             new ReadOnlyStringWrapper(nvl(cellData.getValue().getCategory(), Reference::name)));
+                                                             new ReadOnlyStringWrapper(ObjectUtils.ifNull(cellData.getValue().getCategory(), Reference::name)));
 
         billerTextField.getAvailableEntries().addAll(crudService.getUniqueTurnoverLabels());
 
@@ -210,11 +210,11 @@ public class UniqueTurnoverDetailView extends EntityBaseDetailView<UniqueTurnove
 
     @Override
     protected void beanSet() {
-        AccountTurnoverDTO accountTurnover = nvl(beanAdapter.getBean(), UniqueTurnoverDTO::getAccountTurnover);
-        importReceiverTextField.setText(nvl(accountTurnover, AccountTurnoverDTO::getReceiver));
-        importReferenceTextField.setText(nvl(accountTurnover, AccountTurnoverDTO::getReference));
-        importPostingTextTextField.setText(nvl(accountTurnover, AccountTurnoverDTO::getPostingText));
-        importAmountTextField.setText(bbCurrencyStringConverter.toString(nvl(accountTurnover, AccountTurnoverDTO::getAmount)));
+        AccountTurnoverDTO accountTurnover = ObjectUtils.ifNull(beanAdapter.getBean(), UniqueTurnoverDTO::getAccountTurnover);
+        importReceiverTextField.setText(ObjectUtils.ifNull(accountTurnover, AccountTurnoverDTO::getReceiver));
+        importReferenceTextField.setText(ObjectUtils.ifNull(accountTurnover, AccountTurnoverDTO::getReference));
+        importPostingTextTextField.setText(ObjectUtils.ifNull(accountTurnover, AccountTurnoverDTO::getPostingText));
+        importAmountTextField.setText(bbCurrencyStringConverter.toString(ObjectUtils.ifNull(accountTurnover, AccountTurnoverDTO::getAmount)));
         updateImportAmountWarning();
     }
 

@@ -17,11 +17,11 @@ import org.jspecify.annotations.Nullable;
 
 import de.timkodiert.mokka.exception.TechnicalException;
 import de.timkodiert.mokka.util.MoneyEssentials;
+import de.timkodiert.mokka.util.ObjectUtils;
 
 import static de.timkodiert.mokka.util.MoneyEssentials.ROUNDING_MODE;
 import static de.timkodiert.mokka.util.MoneyEssentials.ZERO;
 import static de.timkodiert.mokka.util.MoneyEssentials.asBigDecimal;
-import static de.timkodiert.mokka.util.ObjectUtils.nvl;
 
 class MoneyTextFieldController {
 
@@ -45,7 +45,7 @@ class MoneyTextFieldController {
                 return;
             }
             mute = true;
-            integerValue.setValue(nvl(getValue(), v -> v.multiply(MoneyEssentials.FACTOR_100).intValueExact()));
+            integerValue.setValue(ObjectUtils.ifNull(getValue(), v -> v.multiply(MoneyEssentials.FACTOR_100).intValueExact()));
             mute = false;
         });
 

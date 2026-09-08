@@ -18,8 +18,7 @@ import de.timkodiert.mokka.domain.model.UniqueTurnoverInformation;
 import de.timkodiert.mokka.domain.repository.UniqueExpenseInformationRepository;
 import de.timkodiert.mokka.domain.repository.UniqueTurnoverRepository;
 import de.timkodiert.mokka.representation.RowType;
-
-import static de.timkodiert.mokka.util.ObjectUtils.nvl;
+import de.timkodiert.mokka.util.ObjectUtils;
 
 public class UniqueTurnoverCrudServiceImpl implements UniqueTurnoverCrudService {
 
@@ -38,7 +37,7 @@ public class UniqueTurnoverCrudServiceImpl implements UniqueTurnoverCrudService 
 
     @Override
     public ManageViewContainer<UniqueTurnoverDTO> readAll(int page, @Nullable Reference<FixedTurnoverDTO> fixedTurnoverRef) {
-        Integer fixedTurnoverId = nvl(fixedTurnoverRef, Reference::id);
+        Integer fixedTurnoverId = ObjectUtils.ifNull(fixedTurnoverRef, Reference::id);
         UniqueTurnoverMapper mapper = Mappers.getMapper(UniqueTurnoverMapper.class);
         List<UniqueTurnoverDTO> turnovers = uniqueTurnoverRepository.findPageSortedByDateDesc(page, fixedTurnoverId)
                                                                     .stream()

@@ -19,9 +19,10 @@ import de.timkodiert.mokka.domain.model.ImportRule;
 import de.timkodiert.mokka.domain.repository.AccountTurnoverRepository;
 import de.timkodiert.mokka.domain.repository.FixedExpensesRepository;
 import de.timkodiert.mokka.domain.repository.ImportRulesRepository;
+import de.timkodiert.mokka.util.ObjectUtils;
 
 import static de.timkodiert.mokka.importer.AccountCsvRow.SKIP_LINES;
-import static de.timkodiert.mokka.util.ObjectUtils.nvl;
+import static de.timkodiert.mokka.util.ObjectUtils.ifNull;
 
 public class TurnoverImporterImpl implements TurnoverImporter {
 
@@ -55,7 +56,8 @@ public class TurnoverImporterImpl implements TurnoverImporter {
         importInformationList.forEach(info -> rules.stream()
                                                    .filter(filterRule(info))
                                                    .findAny()
-                                                   .ifPresent(rule -> info.fixedExpenseProperty().set(nvl(rule.getLinkedFixedExpense(), FixedTurnover::toReference))));
+                                                   .ifPresent(rule -> info.fixedExpenseProperty()
+                                                                          .set(ObjectUtils.ifNull(rule.getLinkedFixedExpense(), FixedTurnover::toReference))));
         return this;
     }
 
@@ -101,12 +103,12 @@ public class TurnoverImporterImpl implements TurnoverImporter {
                 return false;
             }
 
-            boolean receiverContains = nvl(rule.getReceiverContains(),
+            boolean receiverContains = ifNull(rule.getReceiverContains(),
                                            contains -> importInformation.receiverProperty().get().contains(contains),
-                                           true);
-            boolean referenceContains = nvl(rule.getReferenceContains(),
+                                              true);
+            boolean referenceContains = ifNull(rule.getReferenceContains(),
                                             contains -> importInformation.referenceProperty().get().contains(contains),
-                                            true);
+                                               true);
             return receiverContains && referenceContains;
         };
     }

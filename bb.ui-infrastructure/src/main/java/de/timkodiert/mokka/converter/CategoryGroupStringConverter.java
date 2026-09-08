@@ -4,13 +4,13 @@ import javafx.util.StringConverter;
 
 import de.timkodiert.mokka.domain.CategoryGroupDTO;
 
-import static de.timkodiert.mokka.util.ObjectUtils.nvl;
+import static de.timkodiert.mokka.util.ObjectUtils.ifNull;
 
 public class CategoryGroupStringConverter extends StringConverter<CategoryGroupDTO> {
 
     @Override
     public String toString(CategoryGroupDTO categoryGroup) {
-        return nvl(categoryGroup, CategoryGroupDTO::getName, ConverterConstants.NULL_STRING);
+        return ifNull(categoryGroup, CategoryGroupDTO::getName, ConverterConstants.NULL_STRING);
     }
 
     @Override
