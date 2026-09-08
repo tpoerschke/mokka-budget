@@ -89,7 +89,8 @@ Features:
 - Verwaltung von **Budgets je Kategorie**
 - **Analyse**, die die Entwicklung einer Ausgabenkategorie darstellt
 
-Und das beste: **Keine Cloud** oder sonstige Datenkraken. **Deine Daten** werden lokal **auf deinem Rechner** verarbeitet und gespeichert.
+Und das Beste: **Keine Cloud** oder Datenkraken. **Deine Daten** werden lokal **auf deinem Rechner** verarbeitet und **verschlüsselt** gespeichert.
+Die Verschlüsselung erfolgt ab Version 1.1.0 und ist deaktivierbar.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
