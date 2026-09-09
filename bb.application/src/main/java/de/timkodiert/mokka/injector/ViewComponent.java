@@ -27,6 +27,8 @@ import de.timkodiert.mokka.view.category_group.CategoryGroupDetailView;
 import de.timkodiert.mokka.view.category_group.CategoryGroupManageView;
 import de.timkodiert.mokka.view.fixed_turnover.FixedTurnoverDetailView;
 import de.timkodiert.mokka.view.fixed_turnover.FixedTurnoverManageView;
+import de.timkodiert.mokka.view.import_configuration.ImportConfigurationDetailView;
+import de.timkodiert.mokka.view.import_configuration.ImportConfigurationManageView;
 import de.timkodiert.mokka.view.importer.FixedTurnoverWizardView;
 import de.timkodiert.mokka.view.importer.ImportView;
 import de.timkodiert.mokka.view.unique_turnover.UniqueTurnoverDetailView;
@@ -80,6 +82,12 @@ public interface ViewComponent {
     // -----------------------------------
     BillingManageView getBillingManageView();
     BillingDetailView getBillingDetailView();
+
+    // -----------------------------------
+    // Importkonfigurationen
+    // -----------------------------------
+    ImportConfigurationManageView getImportConfigurationManageView();
+    ImportConfigurationDetailView getImportConfigurationDetailView();
 
     // -----------------------------------
     // Umsätze importieren
