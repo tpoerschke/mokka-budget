@@ -23,11 +23,13 @@ import de.timkodiert.mokka.chart.ExpenseTrendServiceImpl;
 import de.timkodiert.mokka.crud.BillingCrudServiceImpl;
 import de.timkodiert.mokka.crud.CategoryCrudServiceImpl;
 import de.timkodiert.mokka.crud.CategoryGroupCrudServiceImpl;
+import de.timkodiert.mokka.crud.ImportConfigurationCrudServiceImpl;
 import de.timkodiert.mokka.crud.FixedTurnoverCrudServiceImpl;
 import de.timkodiert.mokka.crud.UniqueTurnoverCrudServiceImpl;
 import de.timkodiert.mokka.domain.BillingCrudService;
 import de.timkodiert.mokka.domain.CategoryCrudService;
 import de.timkodiert.mokka.domain.CategoryGroupCrudService;
+import de.timkodiert.mokka.domain.ImportConfigurationCrudService;
 import de.timkodiert.mokka.domain.FixedTurnoverCrudService;
 import de.timkodiert.mokka.domain.UniqueTurnoverCrudService;
 import de.timkodiert.mokka.i18n.LanguageManager;
@@ -65,6 +67,7 @@ public interface ServiceModule {
     @Binds CategoryCrudService bindCategoryCrudService(CategoryCrudServiceImpl impl);
     @Binds CategoryGroupCrudService bindCategoryGroupCrudService(CategoryGroupCrudServiceImpl impl);
     @Binds BillingCrudService bindBillingCrudService(BillingCrudServiceImpl impl);
+    @Binds ImportConfigurationCrudService bindImportConfigurationCrudService(ImportConfigurationCrudServiceImpl impl);
 
     @Binds MonthlyOverviewService bindMonthlyOverviewService(MonthlyOverviewServiceImpl impl);
     @Binds BudgetService bindBudgetService(BudgetServiceImpl impl);

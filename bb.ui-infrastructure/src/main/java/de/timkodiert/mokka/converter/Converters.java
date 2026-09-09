@@ -14,6 +14,7 @@ import de.timkodiert.mokka.budget.BudgetType;
 import de.timkodiert.mokka.domain.CategoryGroupDTO;
 import de.timkodiert.mokka.domain.PaymentType;
 import de.timkodiert.mokka.domain.TurnoverDirection;
+import de.timkodiert.mokka.importer.CsvEncoding;
 import de.timkodiert.mokka.i18n.LanguageManager;
 
 @Singleton
@@ -36,6 +37,7 @@ public class Converters {
         CONVERTER_MAP.put(CategoryGroupDTO.class, new CategoryGroupStringConverter());
         CONVERTER_MAP.put(BudgetType.class, new EnumStringConverter<>(languageManager));
         CONVERTER_MAP.put(AnalysisPeriod.class, new EnumStringConverter<>(languageManager));
+        CONVERTER_MAP.put(CsvEncoding.class, new EnumStringConverter<>(languageManager));
     }
 
     public static <T> StringConverter<T> get(Class<T> type) {
