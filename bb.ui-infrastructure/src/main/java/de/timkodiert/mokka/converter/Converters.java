@@ -8,14 +8,15 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
 
 import de.timkodiert.mokka.analysis.AnalysisPeriod;
 import de.timkodiert.mokka.budget.BudgetType;
 import de.timkodiert.mokka.domain.CategoryGroupDTO;
 import de.timkodiert.mokka.domain.PaymentType;
 import de.timkodiert.mokka.domain.TurnoverDirection;
-import de.timkodiert.mokka.importer.CsvEncoding;
 import de.timkodiert.mokka.i18n.LanguageManager;
+import de.timkodiert.mokka.importer.CsvEncoding;
 
 @Singleton
 public class Converters {
@@ -38,6 +39,8 @@ public class Converters {
         CONVERTER_MAP.put(BudgetType.class, new EnumStringConverter<>(languageManager));
         CONVERTER_MAP.put(AnalysisPeriod.class, new EnumStringConverter<>(languageManager));
         CONVERTER_MAP.put(CsvEncoding.class, new EnumStringConverter<>(languageManager));
+        // Standard-Converter
+        CONVERTER_MAP.put(Integer.class, new IntegerStringConverter());
     }
 
     public static <T> StringConverter<T> get(Class<T> type) {

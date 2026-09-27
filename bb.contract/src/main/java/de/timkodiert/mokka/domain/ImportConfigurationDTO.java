@@ -11,31 +11,21 @@ import de.timkodiert.mokka.importer.CsvEncoding;
 @Getter
 public class ImportConfigurationDTO {
 
-    private int id = 0;
+    private int id;
 
     @NotBlank(message = "{importConfiguration.name.notBlank}")
     private String name;
 
-    @NotNull(message = "{attribute.notNull}")
-    private Integer skipLines;
+    private int skipLines;
 
     @NotNull(message = "{attribute.notNull}")
     private CsvEncoding encoding;
 
-    @NotNull(message = "{attribute.notNull}")
-    private Integer columnDate;
-
-    @NotNull(message = "{attribute.notNull}")
-    private Integer columnReceiver;
-
-    @NotNull(message = "{attribute.notNull}")
-    private Integer columnPostingText;
-
-    @NotNull(message = "{attribute.notNull}")
-    private Integer columnReference;
-
-    @NotNull(message = "{attribute.notNull}")
-    private Integer columnAmount;
+    private int columnDate;
+    private int columnReceiver;
+    private int columnPostingText;
+    private int columnReference;
+    private int columnAmount;
 
     public boolean isNew() {
         return id <= 0;

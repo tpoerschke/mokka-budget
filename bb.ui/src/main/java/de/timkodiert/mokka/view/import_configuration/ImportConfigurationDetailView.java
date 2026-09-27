@@ -6,22 +6,24 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import jakarta.inject.Inject;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.util.converter.IntegerStringConverter;
 
 import de.timkodiert.mokka.domain.ImportConfigurationCrudService;
 import de.timkodiert.mokka.domain.ImportConfigurationDTO;
+import de.timkodiert.mokka.i18n.LanguageManager;
 import de.timkodiert.mokka.importer.CsvEncoding;
 import de.timkodiert.mokka.ui.helper.Bind;
+import de.timkodiert.mokka.validation.ValidationResult;
 import de.timkodiert.mokka.validation.ValidationWrapperFactory;
 import de.timkodiert.mokka.view.mdv_base.EntityBaseDetailView;
 
@@ -32,31 +34,34 @@ public class ImportConfigurationDetailView extends EntityBaseDetailView<ImportCo
     @FXML
     private TextField nameTextField;
     @FXML
-    private TextField skipLinesTextField;
+    private Spinner<Integer> skipLinesTextField;
     @FXML
     private ComboBox<CsvEncoding> encodingComboBox;
     @FXML
-    private TextField columnDateTextField;
+    private Spinner<Integer> columnDateSpinner;
     @FXML
-    private TextField columnReceiverTextField;
+    private Spinner<Integer> columnReceiverSpinner;
     @FXML
-    private TextField columnPostingTextTextField;
+    private Spinner<Integer> columnPostingTextSpinner;
     @FXML
-    private TextField columnReferenceTextField;
+    private Spinner<Integer> columnReferenceSpinner;
     @FXML
-    private TextField columnAmountTextField;
+    private Spinner<Integer> columnAmountSpinner;
 
     @FXML
     private Button saveButton;
     @FXML
     private Button discardButton;
 
+    private final LanguageManager languageManager;
     private final ImportConfigurationCrudService crudService;
 
     @Inject
     public ImportConfigurationDetailView(ValidationWrapperFactory<ImportConfigurationDTO> validationWrapperFactory,
+                                         LanguageManager languageManager,
                                          ImportConfigurationCrudService crudService) {
         super(validationWrapperFactory);
+        this.languageManager = languageManager;
         this.crudService = crudService;
     }
 
@@ -72,41 +77,52 @@ public class ImportConfigurationDetailView extends EntityBaseDetailView<ImportCo
                       List.of(CsvEncoding.values()),
                       CsvEncoding.class);
 
-        Bindings.bindBidirectional(skipLinesTextField.textProperty(),
-                                   beanAdapter.getProperty(ImportConfigurationDTO::getSkipLines, ImportConfigurationDTO::setSkipLines),
-                                   new IntegerStringConverter());
-        Bindings.bindBidirectional(columnDateTextField.textProperty(),
-                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnDate, ImportConfigurationDTO::setColumnDate),
-                                   new IntegerStringConverter());
-        Bindings.bindBidirectional(columnReceiverTextField.textProperty(),
-                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnReceiver, ImportConfigurationDTO::setColumnReceiver),
-                                   new IntegerStringConverter());
-        Bindings.bindBidirectional(columnPostingTextTextField.textProperty(),
-                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnPostingText, ImportConfigurationDTO::setColumnPostingText),
-                                   new IntegerStringConverter());
-        Bindings.bindBidirectional(columnReferenceTextField.textProperty(),
-                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnReference, ImportConfigurationDTO::setColumnReference),
-                                   new IntegerStringConverter());
-        Bindings.bindBidirectional(columnAmountTextField.textProperty(),
-                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnAmount, ImportConfigurationDTO::setColumnAmount),
-                                   new IntegerStringConverter());
+        Bind.spinner(skipLinesTextField, beanAdapter.getProperty(ImportConfigurationDTO::getSkipLines, ImportConfigurationDTO::setSkipLines));
+        Bind.spinner(columnDateSpinner, beanAdapter.getProperty(ImportConfigurationDTO::getColumnDate, ImportConfigurationDTO::setColumnDate));
+        Bind.spinner(columnReceiverSpinner, beanAdapter.getProperty(ImportConfigurationDTO::getColumnReceiver, ImportConfigurationDTO::setColumnReceiver));
+        Bind.spinner(columnPostingTextSpinner, beanAdapter.getProperty(ImportConfigurationDTO::getColumnPostingText, ImportConfigurationDTO::setColumnPostingText));
+        Bind.spinner(columnReferenceSpinner, beanAdapter.getProperty(ImportConfigurationDTO::getColumnReference, ImportConfigurationDTO::setColumnReference));
+        Bind.spinner(columnAmountSpinner, beanAdapter.getProperty(ImportConfigurationDTO::getColumnAmount, ImportConfigurationDTO::setColumnAmount));
+        unbindSpinnerTooltips();
 
         validationMap.put("name", nameTextField);
-        validationMap.put("skipLines", skipLinesTextField);
         validationMap.put("encoding", encodingComboBox);
-        validationMap.put("columnDate", columnDateTextField);
-        validationMap.put("columnReceiver", columnReceiverTextField);
-        validationMap.put("columnPostingText", columnPostingTextTextField);
-        validationMap.put("columnReference", columnReferenceTextField);
-        validationMap.put("columnAmount", columnAmountTextField);
         validationWrapper.register(beanAdapter.getProperty(ImportConfigurationDTO::getName, ImportConfigurationDTO::setName));
-        validationWrapper.register(beanAdapter.getProperty(ImportConfigurationDTO::getSkipLines, ImportConfigurationDTO::setSkipLines));
         validationWrapper.register(beanAdapter.getProperty(ImportConfigurationDTO::getEncoding, ImportConfigurationDTO::setEncoding));
-        validationWrapper.register(beanAdapter.getProperty(ImportConfigurationDTO::getColumnDate, ImportConfigurationDTO::setColumnDate));
-        validationWrapper.register(beanAdapter.getProperty(ImportConfigurationDTO::getColumnReceiver, ImportConfigurationDTO::setColumnReceiver));
-        validationWrapper.register(beanAdapter.getProperty(ImportConfigurationDTO::getColumnPostingText, ImportConfigurationDTO::setColumnPostingText));
-        validationWrapper.register(beanAdapter.getProperty(ImportConfigurationDTO::getColumnReference, ImportConfigurationDTO::setColumnReference));
-        validationWrapper.register(beanAdapter.getProperty(ImportConfigurationDTO::getColumnAmount, ImportConfigurationDTO::setColumnAmount));
+        validateNotSameColumnMappingValue("columnMappingValuesDate", columnDateSpinner);
+        validateNotSameColumnMappingValue("columnMappingValuesReceiver", columnReceiverSpinner);
+        validateNotSameColumnMappingValue("columnMappingValuesPostingText", columnPostingTextSpinner);
+        validateNotSameColumnMappingValue("columnMappingValuesReference", columnReferenceSpinner);
+        validateNotSameColumnMappingValue("columnMappingValuesAmount", columnAmountSpinner);
+    }
+
+    private void unbindSpinnerTooltips() {
+        columnDateSpinner.getEditor().tooltipProperty().unbind();
+        columnReceiverSpinner.getEditor().tooltipProperty().unbind();
+        columnPostingTextSpinner.getEditor().tooltipProperty().unbind();
+        columnReferenceSpinner.getEditor().tooltipProperty().unbind();
+        columnAmountSpinner.getEditor().tooltipProperty().unbind();
+    }
+
+    private void validateNotSameColumnMappingValue(String name, Spinner<Integer> spinner) {
+        validationWrapper.registerCustomValidation(name,
+                                                   spinner.getEditor(),
+                                                   () -> fiveDistinctColumnMappingValues()
+                                                           ? ValidationResult.valid()
+                                                           : ValidationResult.error(languageManager.get("ImportConfigurationDV.validation.columnMappingsNotDistinct")),
+                                                   columnDateSpinner.valueProperty(),
+                                                   columnReceiverSpinner.valueProperty(),
+                                                   columnPostingTextSpinner.valueProperty(),
+                                                   columnReferenceSpinner.valueProperty(),
+                                                   columnAmountSpinner.valueProperty());
+    }
+
+    private boolean fiveDistinctColumnMappingValues() {
+        return Stream.of(columnDateSpinner.getValue(),
+                         columnReceiverSpinner.getValue(),
+                         columnPostingTextSpinner.getValue(),
+                         columnReferenceSpinner.getValue(),
+                         columnAmountSpinner.getValue()).distinct().count() == 5;
     }
 
     @Override
