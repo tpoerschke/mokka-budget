@@ -29,7 +29,7 @@
     <version.lombok>1.18.46</version.lombok>
     <version.commons-lang>3.20.0</version.commons-lang>
     <version.mapstruct>1.6.3</version.mapstruct>
-    <version.logback>1.6.1</version.logback>
+    <version.logback>1.6.3</version.logback>
     <version.jspecify>1.0.1</version.jspecify>
     <!-- UI -->
     <version.ikonli>12.4.0</version.ikonli>
@@ -37,7 +37,7 @@
     <version.xchart>3.9.0</version.xchart>
     <!-- Database -->
     <version.sqlite-jdbc>3.53.4.0</version.sqlite-jdbc>
-    <version.hibernate>6.6.55.Final</version.hibernate>
+    <version.hibernate>6.6.56.Final</version.hibernate>
     <version.flyway>11.20.3</version.flyway>
     <!-- Data Handling -->
     <version.opencsv>5.12.0</version.opencsv>
@@ -94,7 +94,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.15.0</version>
+        <version>3.16.0</version>
         <configuration>
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
@@ -140,7 +140,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.6</version>
+        <version>3.6.0</version>
       </plugin>
       <plugin>
         <!-- mvn clean verify jacoco:report -->
