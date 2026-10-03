@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
@@ -37,6 +38,8 @@ public class ImportConfigurationDetailView extends EntityBaseDetailView<ImportCo
     private Spinner<Integer> skipLinesTextField;
     @FXML
     private ComboBox<CsvEncoding> encodingComboBox;
+    @FXML
+    private CheckBox defaultCheckBox;
     @FXML
     private Spinner<Integer> columnDateSpinner;
     @FXML
@@ -76,6 +79,7 @@ public class ImportConfigurationDetailView extends EntityBaseDetailView<ImportCo
                       beanAdapter.getProperty(ImportConfigurationDTO::getEncoding, ImportConfigurationDTO::setEncoding),
                       List.of(CsvEncoding.values()),
                       CsvEncoding.class);
+        defaultCheckBox.selectedProperty().bindBidirectional(beanAdapter.getProperty(ImportConfigurationDTO::isDefault, ImportConfigurationDTO::setDefault));
 
         Bind.spinner(skipLinesTextField, beanAdapter.getProperty(ImportConfigurationDTO::getSkipLines, ImportConfigurationDTO::setSkipLines));
         Bind.spinner(columnDateSpinner, beanAdapter.getProperty(ImportConfigurationDTO::getColumnDate, ImportConfigurationDTO::setColumnDate));
@@ -94,6 +98,12 @@ public class ImportConfigurationDetailView extends EntityBaseDetailView<ImportCo
         validateNotSameColumnMappingValue("columnMappingValuesPostingText", columnPostingTextSpinner);
         validateNotSameColumnMappingValue("columnMappingValuesReference", columnReferenceSpinner);
         validateNotSameColumnMappingValue("columnMappingValuesAmount", columnAmountSpinner);
+        validationWrapper.registerCustomValidation("defaultUnique",
+                                                   defaultCheckBox,
+                                                   () -> defaultConfigIsUnique()
+                                                           ? ValidationResult.valid()
+                                                           : ValidationResult.error(languageManager.get("ImportConfigurationDV.validation.defaultAlreadyExists")),
+                                                   defaultCheckBox.selectedProperty());
     }
 
     private void unbindSpinnerTooltips() {
@@ -110,19 +120,31 @@ public class ImportConfigurationDetailView extends EntityBaseDetailView<ImportCo
                                                    () -> fiveDistinctColumnMappingValues()
                                                            ? ValidationResult.valid()
                                                            : ValidationResult.error(languageManager.get("ImportConfigurationDV.validation.columnMappingsNotDistinct")),
-                                                   columnDateSpinner.valueProperty(),
-                                                   columnReceiverSpinner.valueProperty(),
-                                                   columnPostingTextSpinner.valueProperty(),
-                                                   columnReferenceSpinner.valueProperty(),
-                                                   columnAmountSpinner.valueProperty());
+                                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnDate, ImportConfigurationDTO::setColumnDate),
+                                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnReceiver, ImportConfigurationDTO::setColumnReceiver),
+                                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnPostingText, ImportConfigurationDTO::setColumnPostingText),
+                                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnReference, ImportConfigurationDTO::setColumnReference),
+                                                   beanAdapter.getProperty(ImportConfigurationDTO::getColumnAmount, ImportConfigurationDTO::setColumnAmount));
     }
 
     private boolean fiveDistinctColumnMappingValues() {
-        return Stream.of(columnDateSpinner.getValue(),
-                         columnReceiverSpinner.getValue(),
-                         columnPostingTextSpinner.getValue(),
-                         columnReferenceSpinner.getValue(),
-                         columnAmountSpinner.getValue()).distinct().count() == 5;
+        ImportConfigurationDTO bean = getBean();
+        if (bean == null) {
+            return true;
+        }
+        return Stream.of(bean.getColumnDate(),
+                         bean.getColumnReceiver(),
+                         bean.getColumnPostingText(),
+                         bean.getColumnReference(),
+                         bean.getColumnAmount()).distinct().count() == 5;
+    }
+
+    private boolean defaultConfigIsUnique() {
+        ImportConfigurationDTO bean = getBean();
+        if (bean == null || !bean.isDefault()) {
+            return true;
+        }
+        return crudService.readAll().stream().noneMatch(config -> config.isDefault() && config.getId() != bean.getId());
     }
 
     @Override

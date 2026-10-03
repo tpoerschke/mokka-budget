@@ -9,9 +9,10 @@ CREATE TABLE IF NOT EXISTS "ImportConfiguration"
     "columnPostingText"  INTEGER      NOT NULL,
     "columnReference"    INTEGER      NOT NULL,
     "columnAmount"       INTEGER      NOT NULL,
+    "default" BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY ("id")
 );
 
 INSERT INTO "ImportConfiguration"
-(name, skipLines, encoding, columnDate, columnReceiver, columnPostingText, columnReference, columnAmount)
-VALUES ('ING', 14, 'ISO_8859_1', 1, 2, 3, 4, 7);
+(name, skipLines, encoding, columnDate, columnReceiver, columnPostingText, columnReference, columnAmount, "default")
+VALUES ('ING', 14, 'ISO_8859_1', 1, 2, 3, 4, 7, true);

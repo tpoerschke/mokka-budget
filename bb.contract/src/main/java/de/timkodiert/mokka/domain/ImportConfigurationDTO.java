@@ -21,11 +21,12 @@ public class ImportConfigurationDTO {
     @NotNull(message = "{attribute.notNull}")
     private CsvEncoding encoding;
 
-    private int columnDate;
-    private int columnReceiver;
-    private int columnPostingText;
-    private int columnReference;
-    private int columnAmount;
+    private int columnDate = 1;
+    private int columnReceiver = 1;
+    private int columnPostingText = 1;
+    private int columnReference = 1;
+    private int columnAmount = 1;
+    private boolean isDefault;
 
     public boolean isNew() {
         return id <= 0;

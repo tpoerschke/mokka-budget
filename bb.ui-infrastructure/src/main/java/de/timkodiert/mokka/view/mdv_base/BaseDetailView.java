@@ -29,6 +29,7 @@ public abstract class BaseDetailView<B> implements View {
 
     public void setBean(B bean) {
         beanAdapter.setBean(bean);
+        validationWrapper.clearValidation();
         beanSet();
     }
 

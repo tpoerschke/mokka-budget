@@ -55,4 +55,8 @@ public class ImportConfiguration extends BaseEntity {
     @NotNull
     @Column(nullable = false)
     private Integer columnAmount;
+
+    @Setter
+    @Column(name = "default", nullable = false)
+    private boolean isDefault;
 }

@@ -3,10 +3,12 @@ package de.timkodiert.mokka.view.import_configuration;
 import java.util.Optional;
 import javax.inject.Inject;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.jspecify.annotations.Nullable;
 
@@ -21,6 +23,8 @@ public class ImportConfigurationManageView extends BaseListManageView<ImportConf
 
     @FXML
     private TableColumn<ImportConfigurationDTO, String> nameColumn;
+    @FXML
+    private TableColumn<ImportConfigurationDTO, Boolean> defaultColumn;
 
     private final ImportConfigurationCrudService crudService;
 
@@ -41,6 +45,8 @@ public class ImportConfigurationManageView extends BaseListManageView<ImportConf
     @Override
     protected void initControls() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        defaultColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isDefault()));
+        defaultColumn.setCellFactory(CheckBoxTableCell.forTableColumn(defaultColumn));
     }
 
     @Override

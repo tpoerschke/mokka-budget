@@ -31,6 +31,8 @@
                 <columns>
                     <TableColumn fx:id="nameColumn" editable="false" minWidth="-Infinity" prefWidth="200.0" sortable="false"
                                  text="%manageImportConfiguration.column.name"/>
+                    <TableColumn fx:id="defaultColumn" editable="false" minWidth="-Infinity" prefWidth="80.0" sortable="false"
+                                 text="%manageImportConfiguration.column.default"/>
                 </columns>
             </TableView>
         </center>
