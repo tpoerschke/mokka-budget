@@ -2,6 +2,7 @@ package de.timkodiert.mokka.ui.helper;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -10,6 +11,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 
 import de.timkodiert.mokka.converter.Converters;
@@ -42,6 +45,21 @@ public class Bind {
         comboBox.setConverter(Converters.get(type));
         comboBox.getItems().setAll(items);
         comboBox.valueProperty().bindBidirectional(property);
+    }
+
+    public static void spinner(Spinner<Integer> spinner, ObjectProperty<Integer> property) {
+        spinner.getEditor().textProperty().bindBidirectional(property, Converters.get(Integer.class));
+        SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100);
+        spinner.setValueFactory(valueFactory);
+        spinner.setEditable(true);
+        property.addListener((obs, oldVal, newVal) -> {
+            if (newVal != null && !Objects.equals(newVal, spinner.getValue())) {
+                valueFactory.setValue(newVal);
+            }
+        });
+        if (property.getValue() != null) {
+            valueFactory.setValue(property.getValue());
+        }
     }
 
     public <T> void editableTableColumn(TableColumn<T, String> col, Function<T, String> valueGetter, BiConsumer<T, String> valueSetter) {

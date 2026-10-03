@@ -37,6 +37,7 @@
             </Menu>
           <Menu mnemonicParsing="false" text="%menuBar.buttonData">
             <MenuItem mnemonicParsing="false" onAction="#openImportView" text="%menuItem.openImportView"/>
+            <MenuItem mnemonicParsing="false" onAction="#openImportConfigurationsManageView" text="%menuItem.manageImportConfigurationsView"/>
             <SeparatorMenuItem/>
             <MenuItem mnemonicParsing="false" onAction="#openDatabaseEncryptionView" text="%menuItem.databaseEncryptionView"/>
           </Menu>

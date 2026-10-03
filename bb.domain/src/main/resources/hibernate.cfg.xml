@@ -41,6 +41,7 @@
         <mapping class="de.timkodiert.mokka.domain.model.Billing"/>
         <mapping class="de.timkodiert.mokka.domain.model.AccountTurnover"/>
         <mapping class="de.timkodiert.mokka.domain.model.ImportRule"/>
+        <mapping class="de.timkodiert.mokka.domain.model.ImportConfiguration"/>
 
     </session-factory>
 

@@ -8,6 +8,7 @@ import de.timkodiert.mokka.domain.model.Billing;
 import de.timkodiert.mokka.domain.model.Category;
 import de.timkodiert.mokka.domain.model.CategoryGroup;
 import de.timkodiert.mokka.domain.model.FixedTurnover;
+import de.timkodiert.mokka.domain.model.ImportConfiguration;
 import de.timkodiert.mokka.domain.model.ImportRule;
 import de.timkodiert.mokka.domain.model.PaymentInformation;
 import de.timkodiert.mokka.domain.model.UniqueTurnover;
@@ -42,4 +43,7 @@ public interface RepositoryModule {
 
     @Binds
     Repository<Billing> provideBillingRepository(BillingRepository impl);
+
+    @Binds
+    Repository<ImportConfiguration> provideImportConfigurationsRepository(ImportConfigurationsRepository impl);
 }

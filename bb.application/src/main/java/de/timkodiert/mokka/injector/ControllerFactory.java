@@ -22,6 +22,8 @@ import de.timkodiert.mokka.view.category_group.CategoryGroupDetailView;
 import de.timkodiert.mokka.view.category_group.CategoryGroupManageView;
 import de.timkodiert.mokka.view.fixed_turnover.FixedTurnoverDetailView;
 import de.timkodiert.mokka.view.fixed_turnover.FixedTurnoverManageView;
+import de.timkodiert.mokka.view.import_configuration.ImportConfigurationDetailView;
+import de.timkodiert.mokka.view.import_configuration.ImportConfigurationManageView;
 import de.timkodiert.mokka.view.importer.FixedTurnoverWizardView;
 import de.timkodiert.mokka.view.importer.ImportView;
 import de.timkodiert.mokka.view.unique_turnover.UniqueTurnoverDetailView;
@@ -45,6 +47,8 @@ public class ControllerFactory {
         viewControllerMap.put(AnnualOverviewView.class, viewComponent::getAnnualOverviewView);
         viewControllerMap.put(MonthlyOverviewView.class, viewComponent::getMonthlyOverview);
         viewControllerMap.put(BudgetWidget.class, viewComponent::getBudgetWidget);
+        viewControllerMap.put(ImportConfigurationManageView.class, viewComponent::getImportConfigurationManageView);
+        viewControllerMap.put(ImportConfigurationDetailView.class, viewComponent::getImportConfigurationDetailView);
         viewControllerMap.put(ImportView.class, viewComponent::getImportView);
         viewControllerMap.put(FixedTurnoverWizardView.class, viewComponent::getFixedTurnoverWizardView);
         viewControllerMap.put(AnalysisView.class, viewComponent::getAnalysisView);

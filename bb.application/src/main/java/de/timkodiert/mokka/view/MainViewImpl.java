@@ -161,6 +161,11 @@ public class MainViewImpl implements Initializable, MainView {
     }
 
     @FXML
+    private void openImportConfigurationsManageView(ActionEvent event) {
+        loadViewPartial(FxmlResource.IMPORT_CONFIGURATION_MANAGE_VIEW);
+    }
+
+    @FXML
     private void openManageCategoriesView(ActionEvent event) {
         loadViewPartial(FxmlResource.MANAGE_CATEGORY_VIEW);
     }

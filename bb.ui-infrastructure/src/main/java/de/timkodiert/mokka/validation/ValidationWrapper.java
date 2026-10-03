@@ -17,6 +17,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import javafx.application.Platform;
 import javafx.beans.Observable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
@@ -43,16 +44,7 @@ public class ValidationWrapper<T> {
     }
 
     public boolean validate() {
-        propertyNodeMap.values().forEach(control -> {
-            control.getStyleClass().remove(STYLE_CLASS_ERROR);
-            control.pseudoClassStateChanged(Styles.STATE_DANGER, false);
-            control.setTooltip(null);
-        });
-        customValidationMap.values().forEach(customValidation -> {
-            customValidation.control().getStyleClass().remove(STYLE_CLASS_ERROR);
-            customValidation.control().pseudoClassStateChanged(Styles.STATE_DANGER, false);
-            customValidation.control().setTooltip(null);
-        });
+        clearValidation();
 
         Validator validator = Validation.byDefaultProvider().configure().messageInterpolator(messageInterpolator).buildValidatorFactory().getValidator();
         Set<ConstraintViolation<T>> violations = validator.validate(beanAdapter.getBean());
@@ -78,13 +70,24 @@ public class ValidationWrapper<T> {
         });
         controlsWithMessages.forEach((control, messages) -> {
             control.setTooltip(new Tooltip(String.join("\n", messages)));
-            if (control instanceof TableView<?> tv) {
-                tv.getStyleClass().add(STYLE_CLASS_ERROR);
-            } else {
-                control.pseudoClassStateChanged(Styles.STATE_DANGER, true);
+            switch (control) {
+                case TableView<?> tv -> tv.getStyleClass().add(STYLE_CLASS_ERROR);
+                case CheckBox cb -> cb.getStyleClass().add(STYLE_CLASS_ERROR);
+                default -> control.pseudoClassStateChanged(Styles.STATE_DANGER, true);
             }
         });
         return controlsWithMessages.isEmpty();
+    }
+
+    public void clearValidation() {
+        propertyNodeMap.values().forEach(this::clearControlValidation);
+        customValidationMap.values().forEach(customValidation -> clearControlValidation(customValidation.control()));
+    }
+
+    private void clearControlValidation(Control control) {
+        control.getStyleClass().remove(STYLE_CLASS_ERROR);
+        control.pseudoClassStateChanged(Styles.STATE_DANGER, false);
+        control.setTooltip(null);
     }
 
     // TODO: Ggf. sollte man hier (und im Zusammenspiel mit registerCustomValidation) verhindern, dass
