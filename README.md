@@ -1,6 +1,8 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 
+**Language:** English · [Deutsch](README.de.md)
+
 <!-- PROJECT SHIELDS -->
 <!--
 https://www.markdownguide.org/basic-syntax/#reference-style-links
@@ -25,7 +27,7 @@ https://www.markdownguide.org/basic-syntax/#reference-style-links
 <h3 align="center">MOKKA Budget</h3>
 
   <p align="center">
-    Monitoring, Organisierung, Kontrolle, Kategorisierung & Analyse  – Das Haushaltsbuch für volle Finanzkontrolle!
+    Monitoring, Organization, Control, Categorization & Analysis – The household budget app for full financial control!
     <!--
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
@@ -47,7 +49,7 @@ https://www.markdownguide.org/basic-syntax/#reference-style-links
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#über-das-projekt">Über das Projekt</a>
+      <a href="#about-the-project">About the Project</a>
       <ul>
         <li><a href="#screenshots">Screenshots</a></li>
         <li><a href="#built-with">Built With</a></li>
@@ -60,8 +62,8 @@ https://www.markdownguide.org/basic-syntax/#reference-style-links
     <li>
         <a href="#contributing">Contributing</a>
         <ul>
-            <li><a href="#entwickeln">Entwickeln</a></li>
-            <li><a href="#bauen">Bauen</a></li>
+            <li><a href="#development">Development</a></li>
+            <li><a href="#building">Building</a></li>
             <li><a href="#your-feature-or-enhancement">Your feature or enhancement</a></li>
         </ul>
     </li>
@@ -75,22 +77,22 @@ https://www.markdownguide.org/basic-syntax/#reference-style-links
 
 <!-- ABOUT THE PROJECT -->
 
-## Über das Projekt
+## About the Project
 
 [![MOKKA-Budget-MainView][product-screenshot-1]](https://github.com/tpoerschke/mokka-budget)
 
-In Zeiten vieler Abonnements und weitverbreiteter Kartenzahlung kann man schnell die Übersicht über seine Ausgaben verlieren.
-Dabei unterstützt dich dieses Haushaltsbuch, indem es die Nachverfolgung – via Import oder manueller Pflege –, Planung und Analyse deiner Ausgaben ermöglicht.
+With so many subscriptions and widespread card payments, it is easy to lose track of your spending.
+This household budget app helps you stay on top of things by letting you track – via import or manual entry –, plan, and analyze your expenses.
 
 Features:
-- **Planung** von wiederkehrenden Ausgaben (und Einnahmen) (**Fixkosten**)
-- **Nachverfolgung realer Ausgaben** (und Einnahmen) durch Import oder manuelle Pflege
-- **Kategorisierung** von Ausgaben (und Einnahmen)
-- Verwaltung von **Budgets je Kategorie**
-- **Analyse**, die die Entwicklung einer Ausgabenkategorie darstellt
+- **Planning** of recurring expenses (and income) (**fixed costs**)
+- **Tracking of actual expenses** (and income) through import or manual entry
+- **Categorization** of expenses (and income)
+- Management of **budgets per category**
+- **Analysis** showing the development of an expense category over time
 
-Und das Beste: **Keine Cloud** oder Datenkraken. **Deine Daten** werden lokal **auf deinem Rechner** verarbeitet und **verschlüsselt** gespeichert.
-Die Verschlüsselung erfolgt ab Version 1.1.0 und ist deaktivierbar.
+And the best part: **No cloud** or data-hungry services. **Your data** is processed locally **on your computer** and stored **encrypted**.
+Encryption is available from version 1.1.0 and can be disabled.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -118,17 +120,16 @@ Die Verschlüsselung erfolgt ab Version 1.1.0 und ist deaktivierbar.
 
 ## Installation
 
-Die Anwendung steht beim aktuellen Release zum Download bereit: https://github.com/tpoerschke/mokka-budget/releases
+The application is available for download with the latest release: https://github.com/tpoerschke/mokka-budget/releases
 
-Anleitung für Mac:
+Instructions for Mac:
 
-1. Das aktuelle Release (.dmg) herunterladen und entpacken
-2. Die App ins Programme-Verzeichnis verschieben
-3. App starten
+1. Download and extract the latest release (.dmg)
+2. Move the app to your Applications folder
+3. Launch the app
 
-Hinweis: Ggf. muss man die Ausführung explizit erlauben, wenn MacOS meldet, dass es die Anwendung (noch) nicht auf Schadsoftware o. ä. überprüfen kann.
-In den Systemeinstelllungen (Systemeinstellungen > Datenschutz & Sicherheit) kann die Ausführung der App erlaubt werden, sobald ein Versuch unternommen wurde, sie
-auszuführen.
+Note: You may need to explicitly allow execution if macOS reports that it cannot (yet) verify the application for malware or similar.
+In System Settings (System Settings > Privacy & Security), you can allow the app to run after you have attempted to launch it once.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -137,17 +138,17 @@ auszuführen.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Monatsübersicht
-- [x] Jahresübersicht
-- [x] Verwaltung von Umsätzen
-- [x] Kategoriesystem
-- [x] Import von Umsätzen
+- [x] Monthly overview
+- [x] Annual overview
+- [x] Transaction management
+- [x] Category system
+- [x] Transaction import
 - [x] Budgets
-- [x] Grundlegende Analyse (Balkendiagramm pro Kategorie)
-- [ ] Import physischer Kassenbons (bspw. via OCR)
-- [ ] Import digitaler Kassenbons (bspw. Lidl oder Globus)
-- [ ] Burn-Up-Diagramm pro Kategorie / Budget
-- [ ] (Weitere Meilensteine in Planung)
+- [x] Basic analysis (bar chart per category)
+- [ ] Import of physical receipts (e.g. via OCR)
+- [ ] Import of digital receipts (e.g. Lidl or Globus)
+- [ ] Burn-up chart per category / budget
+- [ ] (Further milestones in planning)
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
@@ -160,35 +161,35 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-### Entwickeln
+### Development
 
-Das Projekt kann lokal wie folgt aufgesetzt werden:
+You can set up the project locally as follows:
 
-1. Repo klonen
+1. Clone the repo
    ```sh
    git clone https://github.com/tpoerschke/mokka-budget.git
    ```
-2. Starten
+2. Start the app
 
-   VS Code: `mvn clean javafx:run` oder `mvn clean javafx:run@debug` und per Visual Studio Code attachen (`.vscode/launch.json`)
+   VS Code: `mvn clean javafx:run` or `mvn clean javafx:run@debug` and attach via Visual Studio Code (`.vscode/launch.json`)
 
-   IntelliJ: Run Configuration `Launch`
+   IntelliJ: Run configuration `Launch`
 
-3. Los entwickeln :)
+3. Start developing :)
 
-### Bauen
+### Building
 
-Mithilfe des Shell-Skripts `build_app.sh` kann die Applikation für das vorliegende Betriebssystem gebaut werden. Unterstützt werden Windows, MacOS und Linux.
+Use the shell script `build_app.sh` to build the application for your current operating system. Windows, macOS, and Linux are supported.
 
 #### Windows
 
-Um einen Windows-Installer lokal bauen zu können, werden folgende Packages vorausgesetzt:
+The following packages are required to build a Windows installer locally:
 
-- Wix-Toolset
+- Wix Toolset
 
 #### Linux (RPM)
 
-Um eine rpm-Datei lokal bauen zu können, werden folgende Packages vorausgesetzt:
+The following packages are required to build an RPM file locally:
 
 - `rpmbuild`
 
