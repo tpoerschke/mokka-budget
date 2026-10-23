@@ -13,10 +13,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import com.opencsv.CSVWriterBuilder;
-import com.opencsv.ICSVWriter;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
-import de.timkodiert.mokka.importer.account_turnover.AccountCsvRow;
 import de.timkodiert.mokka.util.IntervalUtils;
 import de.timkodiert.mokka.util.MoneyEssentials;
 
@@ -24,6 +23,8 @@ import static de.timkodiert.mokka.util.MoneyEssentials.ROUNDING_MODE;
 import static de.timkodiert.mokka.util.MoneyEssentials.asBigDecimal;
 
 public class AccountCsvFileGenerator {
+
+    private static final int SKIP_LINES = 10;
 
     private static final Random RANDOM = new Random(42042);
 
@@ -73,10 +74,15 @@ public class AccountCsvFileGenerator {
 
         lines.sort(Comparator.comparing(CsvLine::date).reversed());
 
-        ICSVWriter writer = new CSVWriterBuilder(new FileWriter("_output.csv")).withSeparator(';').build();
-        IntStream.range(0, AccountCsvRow.SKIP_LINES).forEach(i -> writer.writeNext(CsvLine.emptyWritableArray()));
-        lines.stream().map(CsvLine::toWritableArray).forEach(writer::writeNext);
-        writer.close();
+        CSVFormat format = CSVFormat.DEFAULT.builder().setDelimiter(';').get();
+        try (CSVPrinter printer = new CSVPrinter(new FileWriter("_output.csv"), format)) {
+            for (int i = 0; i < SKIP_LINES; i++) {
+                printer.printRecord((Object[]) CsvLine.emptyWritableArray());
+            }
+            for (CsvLine line : lines) {
+                printer.printRecord((Object[]) line.toWritableArray());
+            }
+        }
     }
 
     private static List<CsvLine> generateWeeklyGroceries(YearMonth start, YearMonth end) {
