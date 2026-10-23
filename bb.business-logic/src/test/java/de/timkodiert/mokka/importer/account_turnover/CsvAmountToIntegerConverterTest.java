@@ -11,8 +11,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import de.timkodiert.mokka.exception.TechnicalException;
-
 class CsvAmountToIntegerConverterTest {
 
     @ParameterizedTest
@@ -48,6 +46,6 @@ class CsvAmountToIntegerConverterTest {
     @ParameterizedTest
     @ValueSource(strings = {"abc", "a", "a1", ",", "abc,10"})
     void testInvalidNumbers(String numberStr) {
-        assertThrows(TechnicalException.class, () -> CsvAmountToIntegerConverter.convert(numberStr));
+        assertThrows(ImportFormatException.class, () -> CsvAmountToIntegerConverter.convert(numberStr));
     }
 }
