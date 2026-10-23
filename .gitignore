@@ -23,3 +23,4 @@ pom.xml.*
 !.idea/runConfigurations
 !.idea/misc.xml
 *.iml
+.sonar

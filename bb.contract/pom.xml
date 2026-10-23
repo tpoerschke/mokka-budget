@@ -24,12 +24,6 @@
       <artifactId>commons-lang3</artifactId>
     </dependency>
 
-    <!-- Sollte dem Frontend eigentlich nicht bekannt sein -->
-    <dependency>
-      <groupId>com.opencsv</groupId>
-      <artifactId>opencsv</artifactId>
-    </dependency>
-
     <!-- JavaFX -->
     <!-- Sollte dem Backend eigentlich nicht bekannt sein -->
     <dependency>

@@ -28,7 +28,7 @@ import de.timkodiert.mokka.domain.FixedTurnoverDTO;
 import de.timkodiert.mokka.domain.ImportRuleDTO;
 import de.timkodiert.mokka.domain.Reference;
 import de.timkodiert.mokka.domain.TurnoverDirection;
-import de.timkodiert.mokka.importer.ImportInformation;
+import de.timkodiert.mokka.importer.account_turnover.ImportInformation;
 import de.timkodiert.mokka.ui.control.MoneyTextField;
 import de.timkodiert.mokka.view.View;
 

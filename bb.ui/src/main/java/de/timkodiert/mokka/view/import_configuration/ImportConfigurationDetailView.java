@@ -22,7 +22,7 @@ import javafx.scene.layout.BorderPane;
 import de.timkodiert.mokka.domain.ImportConfigurationCrudService;
 import de.timkodiert.mokka.domain.ImportConfigurationDTO;
 import de.timkodiert.mokka.i18n.LanguageManager;
-import de.timkodiert.mokka.importer.CsvEncoding;
+import de.timkodiert.mokka.importer.account_turnover.CsvEncoding;
 import de.timkodiert.mokka.ui.helper.Bind;
 import de.timkodiert.mokka.validation.ValidationResult;
 import de.timkodiert.mokka.validation.ValidationWrapperFactory;

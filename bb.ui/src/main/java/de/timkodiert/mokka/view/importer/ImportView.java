@@ -12,12 +12,14 @@ import javax.inject.Provider;
 
 import atlantafx.base.controls.Notification;
 import atlantafx.base.theme.Styles;
+import atlantafx.base.util.Animations;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -52,8 +54,10 @@ import de.timkodiert.mokka.domain.FixedTurnoverDTO;
 import de.timkodiert.mokka.domain.Reference;
 import de.timkodiert.mokka.exception.TechnicalException;
 import de.timkodiert.mokka.i18n.LanguageManager;
-import de.timkodiert.mokka.importer.ImportInformation;
-import de.timkodiert.mokka.importer.TurnoverImporter;
+import de.timkodiert.mokka.importer.account_turnover.ImportInformation;
+import de.timkodiert.mokka.importer.account_turnover.ImportResult;
+import de.timkodiert.mokka.importer.account_turnover.ImportStatus;
+import de.timkodiert.mokka.importer.account_turnover.TurnoverImporter;
 import de.timkodiert.mokka.table.cell.CurrencyTableCell;
 import de.timkodiert.mokka.table.cell.DateTableCell;
 import de.timkodiert.mokka.util.StageBuilder;
@@ -76,7 +80,11 @@ public class ImportView implements View, Initializable {
     @FXML
     private TableColumn<ImportInformation, Boolean> selectedCol;
     @FXML
-    private TableColumn<ImportInformation, String> receiverCol, referenceCol, postingTextCol;
+    private TableColumn<ImportInformation, String> receiverCol;
+    @FXML
+    private TableColumn<ImportInformation, String> referenceCol;
+    @FXML
+    private TableColumn<ImportInformation, String> postingTextCol;
     @FXML
     private TableColumn<ImportInformation, LocalDate> dateCol;
     @FXML
@@ -120,7 +128,7 @@ public class ImportView implements View, Initializable {
         selectedCol.setCellFactory(CheckBoxTableCell.forTableColumn(selectedCol));
         selectedCol.setGraphic(selectAll);
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-        dateCol.setCellFactory(cellData -> new DateTableCell<>());
+        dateCol.setCellFactory(col -> new DateTableCell<>());
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
         amountCol.setCellFactory(col -> new CurrencyTableCell<>());
         receiverCol.setCellValueFactory(new PropertyValueFactory<>("receiver"));
@@ -129,7 +137,14 @@ public class ImportView implements View, Initializable {
         referenceCol.setCellValueFactory(new PropertyValueFactory<>("reference"));
         associatedCol.setCellValueFactory(new PropertyValueFactory<>("fixedExpense"));
         associatedCol.setCellFactory(ChoiceBoxTableCell.forTableColumn(new ReferenceStringConverter<>(), fixedTurnovers));
-        annotationCol.setCellValueFactory(new PropertyValueFactory<>("annotation"));
+        annotationCol.setCellValueFactory(cellData -> {
+            String annotationKey = cellData.getValue().annotationProperty().get();
+            String annotationText = "";
+            if (annotationKey != null && !annotationKey.isEmpty()) {
+                annotationText = languageManager.get(annotationKey);
+            }
+            return new SimpleStringProperty(annotationText);
+        });
 
         importTable.getItems().addListener((ListChangeListener<? super ImportInformation>) change -> {
             if (allSelected.isBound()) {
@@ -144,7 +159,7 @@ public class ImportView implements View, Initializable {
                                                            importObservables.toArray(Observable[]::new)));
         });
 
-        MenuItem menuItem = new MenuItem("Wiederkehrenden Umsatz anlegen");
+        MenuItem menuItem = new MenuItem(languageManager.get("importView.contextMenu.addRegularExpense"));
         menuItem.setOnAction(this::openWizard);
         ContextMenu contextMenu = new ContextMenu();
         contextMenu.getItems().add(menuItem);
@@ -188,19 +203,11 @@ public class ImportView implements View, Initializable {
     }
 
     private void readFile() {
+        ImportResult importResult = importer.importFromFile(selectedFile.get());
+        importTable.getItems().setAll(importResult.getImportInformationList());
 
-        try {
-            ObservableList<ImportInformation> importInformation = importer.parse(selectedFile.get())
-                                                                          .linkWithExpenses()
-                                                                          .filterDuplicates()
-                                                                          .getImportInformationList();
-            importTable.setItems(importInformation);
-
-            if (importInformation.isEmpty()) {
-                displayNotification(Styles.WARNING, languageManager.get("alert.noTurnOversFoundInFile_maybeNotCompatible"));
-            }
-        } catch (Exception e) {
-            throw TechnicalException.forProgrammingError(e);
+        if (importResult.getStatus() == ImportStatus.ERROR) {
+            displayNotification(languageManager.get(importResult.getErrorMessageLabel()));
         }
     }
 
@@ -224,17 +231,16 @@ public class ImportView implements View, Initializable {
         importTable.getSelectionModel().getSelectedItem().fixedExpenseProperty().set(turnover);
     }
 
-    private void displayNotification(String style, String text) {
+    private void displayNotification(String text) {
         Notification notification = new Notification(text);
-        notification.setPrefHeight(150.0);
-        notification.setPrefWidth(300.0);
         notification.setMaxHeight(Region.USE_PREF_SIZE);
         notification.setMaxWidth(Region.USE_PREF_SIZE);
-        notification.getStyleClass().add(style);
+        notification.getStyleClass().addAll(Styles.DANGER, Styles.ELEVATED_2);
         notification.setOnClose(event -> root.getChildren().remove(notification));
         StackPane.setAlignment(notification, Pos.TOP_RIGHT);
-        StackPane.setMargin(notification, new Insets(20, 20, 20, 20));
+        StackPane.setMargin(notification, new Insets(10, 10, 10, 10));
         root.getChildren().add(notification);
+        Animations.pulse(notification).playFromStart();
     }
 
     @FXML
@@ -247,7 +253,7 @@ public class ImportView implements View, Initializable {
 
     @FXML
     private void importSelected(ActionEvent e) {
-        importer.doImport();
+        importer.doImport(importTable.getItems());
         DialogFactory.buildInformationDialog(languageManager.get("importView.dialog.expensesImported")).showAndWait();
         mainView.loadViewPartial(MONTHLY_OVERVIEW);
     }

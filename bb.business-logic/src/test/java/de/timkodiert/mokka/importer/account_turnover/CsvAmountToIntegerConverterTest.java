@@ -1,24 +1,24 @@
-package de.timkodiert.mokka.importer;
+package de.timkodiert.mokka.importer.account_turnover;
 
 import java.util.stream.Stream;
 
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import de.timkodiert.mokka.exception.TechnicalException;
 
 class CsvAmountToIntegerConverterTest {
 
     @ParameterizedTest
     @MethodSource("validNumberFormatArguments")
     void testValidNumberFormat(String numberStr, int numberExpected)  {
-        CsvAmountToIntegerConverter converter = new CsvAmountToIntegerConverter();
-        int result = assertDoesNotThrow(() -> converter.convert(numberStr));
+        int result = Assertions.assertDoesNotThrow(() -> CsvAmountToIntegerConverter.convert(numberStr));
         assertEquals(numberExpected, result);
     }
 
@@ -48,7 +48,6 @@ class CsvAmountToIntegerConverterTest {
     @ParameterizedTest
     @ValueSource(strings = {"abc", "a", "a1", ",", "abc,10"})
     void testInvalidNumbers(String numberStr) {
-        CsvAmountToIntegerConverter converter = new CsvAmountToIntegerConverter();
-        assertThrows(CsvDataTypeMismatchException.class, () -> converter.convert(numberStr));
+        assertThrows(TechnicalException.class, () -> CsvAmountToIntegerConverter.convert(numberStr));
     }
 }

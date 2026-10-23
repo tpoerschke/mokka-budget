@@ -1,4 +1,4 @@
-package de.timkodiert.mokka.importer;
+package de.timkodiert.mokka.importer.account_turnover;
 
 import java.time.LocalDate;
 
@@ -18,14 +18,13 @@ import de.timkodiert.mokka.representation.HasRowType;
 import de.timkodiert.mokka.representation.RowType;
 
 
-// TODO: Sollte eigentlich ein reines Client-Objekt sein, ähnliches
-//  gilt für die AccountCsvRow. Dann könnte JavaFX eine reine
-//  Client-Abhängigkeit sein und OpenCSV nur im Backend.
+// TODO: Sollte eigentlich ein reines Client-Objekt sein.
+//  Dann könnte JavaFX eine reine Client-Abhängigkeit sein.
 public class ImportInformation implements HasRowType {
 
     private static final String ANNOTATION_EMPTY = "";
-    public static final String ANNOTATION_UNIQUE_EXPENSE = "Wird zu einzigartiger Ausgabe.";
-    public static final String ANNOTATION_ALREADY_IMPORTED = "Ausgabe wurde bereits importiert.";
+    public static final String ANNOTATION_UNIQUE_EXPENSE = "importInformation.annotation.uniqueTurnover";
+    public static final String ANNOTATION_ALREADY_IMPORTED = "importInformation.annotation.alreadyImported";
 
     private final BooleanProperty selectedForImport = new SimpleBooleanProperty(true);
 

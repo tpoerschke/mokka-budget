@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
 
-import de.timkodiert.mokka.importer.AccountCsvRow;
+import de.timkodiert.mokka.importer.account_turnover.AccountCsvRow;
 import de.timkodiert.mokka.util.IntervalUtils;
 import de.timkodiert.mokka.util.MoneyEssentials;
 

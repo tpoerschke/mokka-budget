@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import de.timkodiert.mokka.importer.CsvEncoding;
+import de.timkodiert.mokka.importer.account_turnover.CsvEncoding;
 
 @Setter
 @Getter

@@ -15,4 +15,4 @@ CREATE TABLE IF NOT EXISTS "ImportConfiguration"
 
 INSERT INTO "ImportConfiguration"
 (name, skipLines, encoding, columnDate, columnReceiver, columnPostingText, columnReference, columnAmount, "default")
-VALUES ('ING', 14, 'ISO_8859_1', 1, 2, 3, 4, 7, true);
+VALUES ('ING', 14, 'ISO_8859_1', 1, 3, 4, 5, 8, true);

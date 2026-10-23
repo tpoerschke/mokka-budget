@@ -1,4 +1,4 @@
-package de.timkodiert.mokka.importer;
+package de.timkodiert.mokka.importer.account_turnover;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

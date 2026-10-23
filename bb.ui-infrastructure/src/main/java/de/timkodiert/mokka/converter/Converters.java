@@ -16,7 +16,7 @@ import de.timkodiert.mokka.domain.CategoryGroupDTO;
 import de.timkodiert.mokka.domain.PaymentType;
 import de.timkodiert.mokka.domain.TurnoverDirection;
 import de.timkodiert.mokka.i18n.LanguageManager;
-import de.timkodiert.mokka.importer.CsvEncoding;
+import de.timkodiert.mokka.importer.account_turnover.CsvEncoding;
 
 @Singleton
 public class Converters {

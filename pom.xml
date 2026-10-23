@@ -40,7 +40,7 @@
     <version.hibernate>6.6.56.Final</version.hibernate>
     <version.flyway>11.20.3</version.flyway>
     <!-- Data Handling -->
-    <version.opencsv>5.12.0</version.opencsv>
+    <version.commons-csv>1.14.1</version.commons-csv>
     <!-- Validation -->
     <version.validation-api>2.0.1.Final</version.validation-api>
     <version.hibernate-validator>7.0.5.Final</version.hibernate-validator>
@@ -236,9 +236,9 @@
         <version>${version.mapstruct}</version>
       </dependency>
       <dependency>
-        <groupId>com.opencsv</groupId>
-        <artifactId>opencsv</artifactId>
-        <version>${version.opencsv}</version>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-csv</artifactId>
+        <version>${version.commons-csv}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>

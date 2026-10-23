@@ -1,39 +1,19 @@
-package de.timkodiert.mokka.importer;
+package de.timkodiert.mokka.importer.account_turnover;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.opencsv.bean.CsvBindByPosition;
-import com.opencsv.bean.CsvCustomBindByPosition;
-import com.opencsv.bean.CsvDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-/**
- * Nutzt die @CsvBindByPosition wegen Encoding-Problemen (s. Auftraggeber/Empfänger)
- */
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 public class AccountCsvRow {
 
-    public static final int SKIP_LINES = 14;
-
-    @CsvBindByPosition(position = 1)
-    @CsvDate("dd.MM.yyyy")
     private LocalDate date;
-
-    @CsvBindByPosition(position = 2)
     private String receiver;
-
-    @CsvBindByPosition(position = 3)
     private String postingText;
-
-    @CsvBindByPosition(position = 4)
     private String reference;
-
-    @CsvCustomBindByPosition(position = 7, converter = CsvAmountToIntegerConverter.class)
     private int amount;
 
     @Override
