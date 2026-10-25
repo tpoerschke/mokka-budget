@@ -3,6 +3,7 @@ package de.timkodiert.mokka.view.billing;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -122,6 +123,8 @@ public class BillingDetailView extends EntityBaseDetailView<BillingDTO> implemen
         billerColumn.setCellValueFactory(new PropertyValueFactory<>("biller"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateColumn.setCellFactory(col -> new DateTableCell<>());
+        dateColumn.setSortType(TableColumn.SortType.ASCENDING);
+        dateColumn.setSortable(true);
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("totalValue"));
         valueColumn.setCellFactory(col -> new CurrencyTableCell<>());
         turnoverTable.getStyleClass().addAll(Styles.BORDERED);
@@ -208,14 +211,17 @@ public class BillingDetailView extends EntityBaseDetailView<BillingDTO> implemen
         }
     }
 
-    private void addSelectedTurnoverToTable(SimplifiedUniqueTurnoverDTO turnover) {
-        boolean alreadyExists = turnoverTable.getItems().stream().anyMatch(t -> Objects.equals(t.getId(), turnover.getId()));
-        if (!alreadyExists) {
+    private void addSelectedTurnoverToTable(List<SimplifiedUniqueTurnoverDTO> turnoverList) {
+        turnoverList.forEach(turnover -> {
+            boolean alreadyExists = turnoverTable.getItems().stream().anyMatch(t -> Objects.equals(t.getId(), turnover.getId()));
+            if (alreadyExists) {
+                return;
+            }
             turnoverTable.getItems().add(turnover);
             beanAdapter.setDirty(true);
             turnoverTable.sort();
             updateTotalTable();
-        }
+        });
     }
 
     private void updateTotalTable() {

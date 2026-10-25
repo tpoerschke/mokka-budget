@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -55,7 +56,7 @@ public class UniqueTurnoverSelectorModalView implements View, Initializable {
 
     private final UniqueTurnoverCrudService crudService;
     @Setter
-    private Consumer<SimplifiedUniqueTurnoverDTO> selectionCallback;
+    private Consumer<List<SimplifiedUniqueTurnoverDTO>> selectionCallback;
     @Setter
     private Stage stage;
 
@@ -75,6 +76,7 @@ public class UniqueTurnoverSelectorModalView implements View, Initializable {
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("totalValue"));
         valueColumn.setCellFactory(col -> new CurrencyTableCell<>());
         turnoverTable.getStyleClass().addAll(Styles.BORDERED);
+        turnoverTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         loadAllTurnovers();
 
@@ -104,7 +106,7 @@ public class UniqueTurnoverSelectorModalView implements View, Initializable {
 
     @FXML
     private void selectTurnover(ActionEvent event) {
-        SimplifiedUniqueTurnoverDTO selected = turnoverTable.getSelectionModel().getSelectedItem();
+        List<SimplifiedUniqueTurnoverDTO> selected = turnoverTable.getSelectionModel().getSelectedItems();
         if (selected != null && selectionCallback != null) {
             selectionCallback.accept(selected);
             if (stage != null) {
