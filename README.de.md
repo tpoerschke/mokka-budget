@@ -146,7 +146,7 @@ auszuführen.
 - [x] Import von Umsätzen
 - [x] Budgets
 - [x] Grundlegende Analyse (Balkendiagramm pro Kategorie)
-- [ ] Import physischer Kassenbons (bspw. via OCR)
+- [ ] Mehrere Bankkonten (mit Umbuchungen)
 - [ ] Import digitaler Kassenbons (bspw. Lidl oder Globus)
 - [ ] Burn-Up-Diagramm pro Kategorie / Budget
 - [ ] (Weitere Meilensteine in Planung)

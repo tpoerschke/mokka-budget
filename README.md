@@ -145,7 +145,7 @@ In System Settings (System Settings > Privacy & Security), you can allow the app
 - [x] Transaction import
 - [x] Budgets
 - [x] Basic analysis (bar chart per category)
-- [ ] Import of physical receipts (e.g. via OCR)
+- [ ] Support of multiple bank accounts (with transfer)
 - [ ] Import of digital receipts (e.g. Lidl or Globus)
 - [ ] Burn-up chart per category / budget
 - [ ] (Further milestones in planning)
