@@ -26,10 +26,10 @@
     <!-- Infrastructure -->
     <version.jfx>21.0.12</version.jfx>
     <version.dagger>2.60.1</version.dagger>
-    <version.lombok>1.18.46</version.lombok>
-    <version.commons-lang>3.20.0</version.commons-lang>
+    <version.lombok>1.18.48</version.lombok>
+    <version.commons-lang>3.21.0</version.commons-lang>
     <version.mapstruct>1.6.3</version.mapstruct>
-    <version.logback>1.6.3</version.logback>
+    <version.logback>1.6.5</version.logback>
     <version.jspecify>1.0.1</version.jspecify>
     <!-- UI -->
     <version.ikonli>12.4.0</version.ikonli>
@@ -37,7 +37,7 @@
     <version.xchart>3.9.0</version.xchart>
     <!-- Database -->
     <version.sqlite-jdbc>3.53.4.0</version.sqlite-jdbc>
-    <version.hibernate>6.6.56.Final</version.hibernate>
+    <version.hibernate>6.6.58.Final</version.hibernate>
     <version.flyway>11.20.3</version.flyway>
     <!-- Data Handling -->
     <version.commons-csv>1.14.1</version.commons-csv>
@@ -48,7 +48,7 @@
     <version.expressly>5.0.0</version.expressly>
     <!-- Testing -->
     <version.junit>5.14.4</version.junit>
-    <version.mockito>5.23.0</version.mockito>
+    <version.mockito>5.24.0</version.mockito>
   </properties>
 
   <modules>
@@ -203,7 +203,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>3.6.3</version>
+            <version>3.6.4</version>
             <executions>
               <execution>
                 <phase>process-resources</phase>
